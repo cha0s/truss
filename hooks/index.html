@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Hooks - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Hooks";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Hooks</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#trussbootstrapmiddleware">trussBootstrapMiddleware</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussconfigserver">trussConfigServer</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussgruntconfig">trussGruntConfig</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussgruntconfigalter">trussGruntConfigAlter</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussprebootstrap">trussPreBootstrap</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussprocessexit">trussProcessExit</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussreplcontext">trussReplContext</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trusstransmittableerrors">trussTransmittableErrors</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/Gruntfile/">Gruntfile.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/">dynamic.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>platform</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/platform/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/platform/native/">native.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Reference &raquo;</li>
+        
+      
+    
+    <li>Hooks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1>Hook reference</h1>
+
+<h2 id="trussbootstrapmiddleware">trussBootstrapMiddleware</h2>
+<p><em>Define middleware to run when the server application is bootstrapping.</em></p>
+<p>This hook is where most of the major initialization work happens on the
+server. You use this to spin up HTTP/sockets/database/whatever.</p>
+<h3>Implementations must return</h3>
+
+<p>A
+<a href="../guide/concepts/#middleware-hook-specification">middleware hook specification</a>.
+The middleware have the following signature:</p>
+<pre><code class="javascript">function(next) {
+  ...
+}
+</code></pre>
+
+<div class="admonition note"><p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even"><td><a href="../source/packages/truss-repl">truss-repl (server)</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussbootstrapmiddleware">implementation</a></td></tr>  </table>
+</div>
+
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/src/main">src/main (server)</a></td><td align="right"><a href="../source/src/main#invoke-hook-trussbootstrapmiddleware">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussconfigserver">trussConfigServer</h2>
+<p><em>Define server-side configuration settings.</em></p>
+<p>Packages may use this hook to define default configuration for server-side
+functionality. These settings can be overridden in the settings file.</p>
+<h3>Implementations must return</h3>
+
+<p>A recursive object which will be folded into the server configuration under
+the package name key. For instance, say we have a package <code>my-package</code> which
+defines the hook like:</p>
+<pre><code class="javascript">registrar.registerHook('trussConfigServer', function() {
+  return {
+    one: 68,
+    two: {
+      three: 419
+    }
+  };
+});
+</code></pre>
+
+<p>You would then find those values in the configuration at:</p>
+<pre><code class="javascript">config.get('packageSettings:my-package:one');
+config.get('packageSettings:my-package:two:three');
+</code></pre>
+
+<p>See <a href="../source/config/default.settings">the default configuration file</a> for
+an example of how settings may be overridden. This should always be preferred
+to actually changing the code in a given package's hook.</p>
+<div class="admonition note"><p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even"><td><a href="../source/packages/truss-repl">truss-repl (server)</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussconfigserver">implementation</a></td></tr>  </table>
+</div>
+
+<div class="admonition note"><p class="admonition-title">2 invocations</p>
+  <table>
+    <tr class="even"><td><a href="../source/Gruntfile">Gruntfile (server)</a></td><td align="right"><a href="../source/Gruntfile#invoke-hook-trussconfigserver">invocation</a></td></tr>    <tr class="odd"><td><a href="../source/src/main">src/main (server)</a></td><td align="right"><a href="../source/src/main#invoke-hook-trussconfigserver">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussgruntconfig">trussGruntConfig</h2>
+<p><em>Hook into the Grunt build process.</em></p>
+<p>This hook allows packages to define Grunt tasks, configure existing tasks, and
+load NPM tasks. This is achieved through the first implementation parameter
+which is an instance of the class
+<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The
+<code>grunt</code> object is passed in through the second parameter in case it's needed.</p>
+<p>One of the most common uses of this hook is to copy any asset files your
+package may include to the <code>app</code> directory, where they can be served to
+clients.</p>
+<div class="admonition note"><p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even"><td><a href="../source/packages/truss-dox">truss-dox (server)</a></td><td align="right"><a href="../source/packages/truss-dox#implements-hook-trussgruntconfig">implementation</a></td></tr>  </table>
+</div>
+
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/Gruntfile">Gruntfile (server)</a></td><td align="right"><a href="../source/Gruntfile#invoke-hook-trussgruntconfig">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussgruntconfigalter">trussGruntConfigAlter</h2>
+<p><em>Alter the Grunt build process.</em></p>
+<p>This hook allows packages to alter Grunt configuration specified through
+<a href="../hooks/#trussgruntconfig"><code>trussGruntConfig</code></a>.</p>
+<p>The first implementation parameter is an instance of the class
+<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The <code>grunt</code>
+object is passed in through the second parameter in case it's needed.</p>
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/Gruntfile">Gruntfile (server)</a></td><td align="right"><a href="../source/Gruntfile#invoke-hook-trussgruntconfigalter">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussprebootstrap">trussPreBootstrap</h2>
+<p><em>Invoked before the application bootstrap phase.</em></p>
+<h3>Mitigate slow build times</h3>
+
+<p>If your package <code>require</code>s heavy modules, you should require them in an
+implementation of hook <code>trussPreBootstrap</code>. For instance, say you have a
+package like:</p>
+<pre><code class="javascript">var someHeavyModule = require('some-heavy-module');
+
+exports.pkgmanRegister = function(registrar) {
+
+  registrar.registerHook('someHook', function() {
+    someHeavyModule.doSomething();
+  });
+};
+</code></pre>
+
+<p>This will slow the build process down, since <code>some-heavy-module</code> must be
+loaded when loading your package. Use this pattern instead:</p>
+<pre><code class="javascript">var someHeavyModule = null;
+
+exports.pkgmanRegister = function(registrar) {
+
+  registrar.registerHook('trussPreBootstrap', function() {
+    someHeavyModule = require('some-heavy-module');
+  });
+
+  registrar.registerHook('someHook', function() {
+    someHeavyModule.doSomething();
+  });
+};
+</code></pre>
+
+<p>So that the heavy module will not be <code>require</code>d until hook
+<code>trussPreBootstrap</code> is invoked.</p>
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/src/main">src/main (server)</a></td><td align="right"><a href="../source/src/main#invoke-hook-trussprebootstrap">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussprocessexit">trussProcessExit</h2>
+<p><em>Final cleanups as the process is exiting.</em></p>
+<p>The application tries its hardest to always invoke this hook, even in the
+event of a raised signal or unhandled exception.</p>
+<p>You should not schedule asynchronous events, as they are not guaranteed to be
+dispatched. See
+<a href="http://nodejs.org/api/process.html#process_event_exit">the Node.js documentation</a>
+for more information.</p>
+<div class="admonition note"><p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even"><td><a href="../source/packages/truss-repl">truss-repl (server)</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussprocessexit">implementation</a></td></tr>  </table>
+</div>
+
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/src/platform/native">src/platform/native (server)</a></td><td align="right"><a href="../source/src/platform/native#invoke-hook-trussprocessexit">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trussreplcontext">trussReplContext</h2>
+<p><em>Add to the REPL context.</em></p>
+<p>Packages may use this hook to provide access to parts of their state to the
+REPL context.</p>
+<p>Implementations accept the following arguments:</p>
+<ul>
+<li>(Object) <code>context</code> - The context object.</li>
+</ul>
+<p>To set context variables, simply set them on the context object.</p>
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/packages/truss-repl">truss-repl (server)</a></td><td align="right"><a href="../source/packages/truss-repl#invoke-hook-trussreplcontext">invocation</a></td></tr>  </table>
+</div>
+
+<h2 id="trusstransmittableerrors">trussTransmittableErrors</h2>
+<p><em>Define errors that can be transmitted easily over the wire.</em></p>
+<p>See <a href="../guide/errors/">the documentation on errors</a> for more information.</p>
+<h3>Implementations must return</h3>
+
+<p>An array of subclasses of
+<a href="../source/src/errors/#transmittableerror">TransmittableError</a>.</p>
+<div class="admonition note"><p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even"><td><a href="../source/src/errors">src/errors (server)</a></td><td align="right"><a href="../source/src/errors#invoke-hook-trusstransmittableerrors">invocation</a></td></tr>  </table>
+</div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../packages/" class="btn btn-neutral float-right" title="Packages"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../guide/concepts/" class="btn btn-neutral" title="Concepts and conventions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../guide/concepts/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../packages/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

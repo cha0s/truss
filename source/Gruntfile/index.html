@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Gruntfile.coffee - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Gruntfile.coffee";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../hooks/">Hooks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Gruntfile.coffee</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#gruntfile">Gruntfile</a></li>
+                
+                    <li><a class="toctree-l4" href="#invoke-hook-trussconfigserver">Invoke hook trussConfigServer</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#spin-up-the-server">Spin up the server.</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfiguration">GruntConfiguration</a></li>
+                
+                    <li><a class="toctree-l4" href="#constructor">constructor</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfigurationconfiguretask">GruntConfiguration#configureTask</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfigurationtaskconfiguration">GruntConfiguration#taskConfiguration</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfigurationloadnpmtasks">GruntConfiguration#loadNpmTasks</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfigurationregistertask">GruntConfiguration#registerTask</a></li>
+                
+                    <li><a class="toctree-l4" href="#gruntconfigurationcopyappfiles">GruntConfiguration#copyAppFiles</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>platform</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/platform/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/platform/native/">native.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Source &raquo;</li>
+        
+      
+    
+    <li>Gruntfile.coffee</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gruntfile">Gruntfile</h1>
+<p><em>Entry point for the Grunt build process.</em></p>
+<pre><code class="coffeescript">{fork} = require &quot;#{__dirname}/src/bootstrap&quot;
+
+module.exports = (grunt) -&gt;
+</code></pre>
+
+<p>Fork so we can bootstrap a Truss environment.</p>
+<pre><code class="coffeescript">  if child = fork()
+    grunt.registerTask 'bootstrap', -&gt;
+
+      done = @async()
+
+      child.on 'close', (code) -&gt;
+
+        return done() if code is 0
+
+        grunt.fail.fatal 'Child process failed', code
+</code></pre>
+
+<p>Forward all tasks.</p>
+<pre><code class="coffeescript">    {tasks} = require 'grunt/lib/grunt/cli'
+    grunt.registerTask tasks[0] ? 'default', ['bootstrap']
+    grunt.registerTask(task, (-&gt;)) for task in tasks.slice 1
+
+    return
+</code></pre>
+
+<p>Load configuration.</p>
+<pre><code class="coffeescript">  config = require 'config'
+
+  Platform = require 'platform'
+  Platform.set 'native'
+  platform = Platform.get()
+</code></pre>
+
+<p>Load configuration.</p>
+<pre><code class="coffeescript">  platform.loadConfig config
+</code></pre>
+
+<p>Register the configured packages.</p>
+<pre><code class="coffeescript">  pkgman = require 'pkgman'
+  pkgman.registerPackageList config.get 'packageList'
+</code></pre>
+
+<p>Load the packages' configuration settings and set into the default config.</p>
+<h4 id="invoke-hook-trussconfigserver">Invoke hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a></h4>
+<pre><code class="coffeescript">  packageConfig = new config.Config()
+  for path, value of pkgman.invoke 'trussConfigServer'
+    packageConfig.set path.replace(/\//g, ':'), value
+
+  config.setDefaults packageConfig: packageConfig.toJSON()
+</code></pre>
+
+<h1 id="spin-up-the-server">Spin up the server.</h1>
+<pre><code class="coffeescript"></code></pre>
+
+<p>require('main').start()</p>
+<pre><code class="coffeescript"></code></pre>
+
+<p>config.load()
+config.loadPackageSettings()</p>
+<pre><code class="coffeescript"></code></pre>
+
+<h2 id="gruntconfiguration">GruntConfiguration</h2>
+<pre><code class="coffeescript">  class GruntConfiguration
+</code></pre>
+
+<h2 id="constructor"><em>constructor</em></h2>
+<pre><code class="coffeescript">    constructor: -&gt;
+
+      @_npmTasks = []
+      @_taskConfig = {}
+      @_tasks = {}
+
+      @pkg = grunt.file.readJSON 'package.json'
+</code></pre>
+
+<h2 id="gruntconfigurationconfiguretask">GruntConfiguration#configureTask</h2>
+<ul>
+<li>
+<p>(String) <code>task</code> - The name of the task to configure.</p>
+</li>
+<li>
+<p>(String) <code>key</code> - The name of the key in the task configuration to set.
+This is generally the name of the package, but can be anything.</p>
+</li>
+<li>
+<p>(Object) <code>config_</code> - The configuration to set. See the documentation
+for the particular grunt task being configured to learn how to configure
+it.</p>
+</li>
+</ul>
+<p><em>Configure a Grunt task.</em></p>
+<pre><code class="coffeescript">    configureTask: (task, key, config_) -&gt;
+
+      (@_taskConfig[task] ?= {})[key] = config_
+
+      return
+</code></pre>
+
+<h2 id="gruntconfigurationtaskconfiguration">GruntConfiguration#taskConfiguration</h2>
+<ul>
+<li>
+<p>(String) <code>task</code> - The name of the task to configure.</p>
+</li>
+<li>
+<p>(String) <code>key</code> - The name of the key in the task configuration to set.
+This is generally the name of the package, but can be anything.</p>
+</li>
+</ul>
+<p><em>Get the configuration for a Grunt task.</em></p>
+<pre><code class="coffeescript">    taskConfiguration: (task, key) -&gt; @_taskConfig[task]?[key]
+</code></pre>
+
+<h2 id="gruntconfigurationloadnpmtasks">GruntConfiguration#loadNpmTasks</h2>
+<ul>
+<li>(String Array) <code>tasks</code> - The list of NPM tasks to load.</li>
+</ul>
+<p><em>Load NPM tasks.</em></p>
+<pre><code class="coffeescript">    loadNpmTasks: (tasks) -&gt;
+
+      @_npmTasks.push task for task in tasks
+
+      return
+</code></pre>
+
+<h2 id="gruntconfigurationregistertask">GruntConfiguration#registerTask</h2>
+<ul>
+<li>
+<p>(String) <code>task</code> - The name of the task to configure.</p>
+</li>
+<li>
+<p>(String Array or Function) <code>subtasksOrFunction</code> - Either an array of
+strings which define the dependencies for the task, or a function which
+will be executed for the task.</p>
+</li>
+</ul>
+<p><em>Register a Grunt task.</em></p>
+<pre><code class="coffeescript">    registerTask: (task, subtasksOrFunction) -&gt;
+
+      if 'function' is typeof subtasksOrFunction
+        @_tasks[task] = subtasksOrFunction
+      else
+        (@_tasks[task] ?= []).push subtasksOrFunction...
+
+      return
+</code></pre>
+
+<h2 id="gruntconfigurationcopyappfiles">GruntConfiguration#copyAppFiles</h2>
+<ul>
+<li>
+<p>(String) <code>path</code> - The path of the files to copy.</p>
+</li>
+<li>
+<p>(String) <code>key</code> - The name of the key in the task configuration to set.
+This is generally the name of the package, but can be anything.</p>
+</li>
+<li>
+<p>(String) <code>dest</code> - The destination where the files will be copied.
+Defaults to <code>'app'</code>.</p>
+</li>
+</ul>
+<p><em>Copy package files to <code>app</code>.</em></p>
+<pre><code class="coffeescript">    copyAppFiles: (path, key, dest = 'app') -&gt;
+      dest ?= 'app'
+
+      gruntConfig.configureTask 'copy', key, files: [
+        src: '**/*'
+        dest: dest
+        expand: true
+        cwd: path
+      ]
+
+      gruntConfig.configureTask(
+        'watch', key
+
+        files: [
+          &quot;#{path}/**/*&quot;
+        ]
+        tasks: [&quot;build:#{key}&quot;]
+      )
+
+  gruntConfig = new GruntConfiguration()
+
+  gruntConfig.registerTask 'production', ['build']
+  gruntConfig.registerTask 'default', ['buildOnce']
+
+  gruntConfig.registerTask 'buildOnce', do -&gt;
+    built = false
+
+    -&gt;
+      return if built
+      built = true
+
+      grunt.task.run 'build'
+</code></pre>
+
+<h4 id="invoke-hook-trussgruntconfig">Invoke hook <a href="../../../hooks#trussgruntconfig"><code>trussGruntConfig</code></a></h4>
+<pre><code class="coffeescript">  pkgman.invoke 'trussGruntConfig', gruntConfig, grunt
+</code></pre>
+
+<h4 id="invoke-hook-trussgruntconfigalter">Invoke hook <a href="../../../hooks#trussgruntconfigalter"><code>trussGruntConfigAlter</code></a></h4>
+<pre><code class="coffeescript">  pkgman.invoke 'trussGruntConfigAlter', gruntConfig, grunt
+</code></pre>
+
+<p>Initialize configuration.</p>
+<pre><code class="coffeescript">  grunt.initConfig gruntConfig._taskConfig
+</code></pre>
+
+<p>Load NPM tasks.</p>
+<pre><code class="coffeescript">  npmTasksLoaded = {}
+  for task in gruntConfig._npmTasks
+    continue if npmTasksLoaded[task]?
+    npmTasksLoaded[task] = true
+    grunt.loadNpmTasks task
+</code></pre>
+
+<p>Register custom tasks.</p>
+<pre><code class="coffeescript">  grunt.registerTask task, actions for task, actions of gruntConfig._tasks
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../packages/truss-dox/dynamic/" class="btn btn-neutral float-right" title="dynamic.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../config/default.settings/" class="btn btn-neutral" title="default.settings.yml"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../config/default.settings/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../packages/truss-dox/dynamic/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

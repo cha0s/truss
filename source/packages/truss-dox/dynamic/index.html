@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dynamic.coffee - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/highlight.css">
+  <link href="../../../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "dynamic.coffee";
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../../js/highlight.pack.js"></script>
+  <script src="../../../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../../..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../hooks/">Hooks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../Gruntfile/">Gruntfile.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">dynamic.coffee</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#grunt-build-process-dynamic-documentation">Grunt build process - Dynamic documentation</a></li>
+                
+                    <li><a class="toctree-l4" href="#todo-hook-belongs-here">TODO: Hook belongs here.</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>platform</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/platform/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/platform/native/">native.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>truss-dox &raquo;</li>
+        
+      
+    
+    <li>dynamic.coffee</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="grunt-build-process-dynamic-documentation">Grunt build process - Dynamic documentation</h1>
+<pre><code class="coffeescript">{exec} = require 'child_process'
+fs = require 'fs'
+path = require 'path'
+{Transform} = require 'stream'
+
+_ = require 'lodash'
+{LineStream} = require 'byline'
+glob = require 'glob'
+Promise = require 'bluebird'
+</code></pre>
+
+<p>Implement a Transform stream to accumulate hook invocations from a source
+file.</p>
+<pre><code class="coffeescript">class HookInvocations extends Transform
+
+  constructor: -&gt;
+    super
+
+    @list = []
+
+  _transform: (chunk, encoding, done) -&gt;
+    line = chunk.toString('utf8')
+    if matches = line.match /^\s*# #### Invoke hook `([^`]+)`/
+      @list.push matches[1]
+
+    done()
+</code></pre>
+
+<p>Implement a Transform stream to accumulate hook implementations from a
+source file.</p>
+<pre><code class="coffeescript">class HookImplementations extends Transform
+
+  constructor: -&gt;
+    super
+
+    @list = []
+
+  _transform: (chunk, encoding, done) -&gt;
+    line = chunk.toString('utf8')
+    if matches = line.match /^\s*# #### Implements hook `([^`]+)`/
+      @list.push matches[1]
+
+    done()
+</code></pre>
+
+<p>Implement a Transform stream to accumulate TODOs from a source file. Also
+caches lines to be able to build context around each TODO item.</p>
+<pre><code class="coffeescript">class Todos extends Transform
+
+  @context = 4
+
+  constructor: -&gt;
+    super
+
+    @lines = []
+    @todos = []
+
+  _transform: (chunk, encoding, done) -&gt;
+    @lines.push line = chunk.toString('utf8')
+    if matches = line.match /^\s*# ###### TODO/
+      @todos.push @lines.length - 1
+
+    done()
+
+  withContext: -&gt;
+
+    for todo in @todos
+
+      start = Math.max 0, todo - Todos.context
+      end = Math.min @lines.length - 1, todo + Todos.context
+
+      index: todo
+      lines: @lines.slice start, end
+</code></pre>
+
+<p>Implement a Transform stream to parse title and description for a file.</p>
+<pre><code class="coffeescript">class TitleAndDescription extends Transform
+
+  constructor: -&gt;
+    super
+
+    @hasFinishedParsing = false
+
+    @title = ''
+    @description = ''
+
+  _transform: (chunk, encoding, done) -&gt;
+
+    return done() if @hasFinishedParsing
+
+    line = chunk.toString('utf8').trim()
+    return done() if line.length is 0
+
+    if 35 is line.charCodeAt(0)
+
+      if 35 is line.charCodeAt(2)
+        @title = line.substr 4
+
+      else if 42 is line.charCodeAt(2)
+        @description = line.substr 2
+
+      else if @description?
+        @description += ' ' + line.substr 2
+
+      if 42 is @description.charCodeAt @description.length - 1
+        @hasFinishedParsing = true
+
+    else
+
+      @hasFinishedParsing = true
+
+    return done()
+</code></pre>
+
+<p>Implement a transform stream to convert a .coffee file to .litcoffee</p>
+<pre><code class="coffeescript">class LitcoffeeConversion extends Transform
+
+  constructor: (@filename) -&gt;
+    super
+
+    @highlight = if @filename.match /\.(?:lit)?coffee$/
+      'coffeescript'
+    else if @filename.match /\.js$/
+      'javascript'
+    else
+      'no-highlight'
+
+    @hanging = []
+    @hasWrittenCode = false
+    @commenting = false
+
+    @on 'finish', =&gt; @unshift &quot;```\n&quot; if @hasWrittenCode and not @commenting
+
+  _transform: (chunk, encoding, done) -&gt;
+
+    line = chunk.toString 'utf8'
+</code></pre>
+
+<p>Comment.</p>
+<pre><code class="coffeescript">    if '#'.charCodeAt(0) is line.trim().charCodeAt(0)
+
+      @push &quot;```\n\n&quot; if @hasWrittenCode and not @commenting
+
+      comment = line.trim().substr 2
+
+      matches = comment.match /^#### (I(?:nvoke|mplements)) hook `([^`]+)`/
+      if matches
+
+        parts = path.dirname(@filename).split('/')
+        parts.push '' if 'index.coffee' isnt path.basename @filename
+        backpath = parts.map(-&gt; '..').join '/'
+
+        @push &quot;#### #{
+          matches[1]
+        } hook [`#{
+          matches[2]
+        }`](#{
+          backpath
+        }/hooks##{
+          matches[2].toLowerCase()
+        })\n&quot;
+
+      else
+
+        @push &quot;#{comment}\n&quot;
+
+      @commenting = true
+
+    else
+
+      @hanging = [] if @commenting
+      @push &quot;\n```#{@highlight}\n&quot; if @commenting or not @hasWrittenCode
+
+      if line.length is 0
+        @hanging.push '' unless @commenting
+      else
+        @push &quot;\n&quot; for blank in @hanging
+        @hanging = []
+        @push &quot;#{line}\n&quot;
+
+      @commenting = false
+      @hasWrittenCode = true
+
+    done()
+</code></pre>
+
+<p>Gather all source files.</p>
+<pre><code class="coffeescript">_allSourceFiles = -&gt;
+  new Promise (resolve, reject) -&gt;
+</code></pre>
+
+<h6 id="todo-hook-belongs-here">TODO: Hook belongs here.</h6>
+<pre><code class="coffeescript">    glob(
+      '{{client,custom,packages,src}/**/*.{coffee,litcoffee},*.{coffee,litcoffee},config/default.settings.yml}'
+      (error, files) -&gt;
+        return reject error if error?
+        resolve files
+    )
+</code></pre>
+
+<p>Generate an HTML ID from a string.</p>
+<pre><code class="coffeescript">_idFromString = (string) -&gt; string.replace(
+  /[/'']/g, ''
+).replace(
+  /\[(.*)\]\(.*\)/g, '$1'
+).replace(
+  /[^0-9A-Za-z-]+/g, '-'
+).replace(
+  /\-+/g, '-'
+).toLowerCase()
+</code></pre>
+
+<p>Get the source path from a filename. This removes the extension and any
+/index portion from the end of the filename.</p>
+<pre><code class="coffeescript">_sourcePath = (filename) -&gt;
+
+    dirname = path.dirname filename
+    if dirname is '.' then dirname = '' else dirname += '/'
+    extname = path.extname filename
+    filename = &quot;#{dirname}#{path.basename filename, extname}&quot;
+
+    parts = filename.split '/'
+    parts.pop() if parts[parts.length - 1] is 'index'
+    return parts.join '/'
+</code></pre>
+
+<p>Collate a list of files by type (client or server).</p>
+<pre><code class="coffeescript">_collateFilesByType = (files) -&gt;
+
+  client = []
+  server = []
+
+  for file in files
+    parts = file.split '/'
+
+    if parts[0] is 'client'
+      client.push file
+    else if parts[0] is 'custom' and parts[2] is 'client'
+      client.push file
+    else if parts[0] is 'packages' and parts[2] is 'client'
+      client.push file
+    else
+      server.push file
+
+  client: client, server: server
+</code></pre>
+
+<p>Add all the source files to a generated mkdocs.yml</p>
+<pre><code class="coffeescript">generatedFilesPromise = _allSourceFiles().then (files) -&gt;
+
+  promises = for file in files
+    parts = file.split '/'
+
+    for i in [0...parts.length]
+      try
+        fs.mkdirSync &quot;docs/source/#{parts.slice(0, i).join '/'}&quot;
+      catch error
+
+    fstream = fs.createReadStream file
+    fstream.pipe lineStream = new LineStream keepEmptyLines: true
+</code></pre>
+
+<p>Convert to litcoffee.</p>
+<pre><code class="coffeescript">    lineStream.pipe litcoffeeConversion = new LitcoffeeConversion file
+    writeStream = fs.createWriteStream &quot;docs/source/#{file}&quot;
+    litcoffeeConversion.pipe writeStream
+
+    new Promise (resolve) -&gt; do (file) -&gt;
+
+      writeStream.on 'close', -&gt; resolve file
+
+  Promise.all promises
+</code></pre>
+
+<p>Gather statistics for all files.</p>
+<pre><code class="coffeescript">fileStatsListPromise = generatedFilesPromise.then (allFiles) -&gt;
+
+  allFilesPromises = for type, files of _collateFilesByType allFiles
+
+    typePromises = for file in files
+
+      do (type, file) -&gt; new Promise (resolve, reject) -&gt;
+
+        fstream = fs.createReadStream file
+        fstream.pipe lineStream = new LineStream keepEmptyLines: true
+</code></pre>
+
+<p>Pass all files through the Transform list to parse out relevant
+information.</p>
+<pre><code class="coffeescript">        lineStream.pipe hookImplementations = new HookImplementations()
+        lineStream.pipe hookInvocations = new HookInvocations()
+        lineStream.pipe todos = new Todos()
+        lineStream.pipe titleAndDescription = new TitleAndDescription()
+
+        fstream.on 'error', reject
+
+        fstream.on 'end', -&gt;
+</code></pre>
+
+<p>Include all information from Transform streams in the statistics.</p>
+<pre><code class="coffeescript">          resolve(
+            type: type
+            file: file
+            implementations: hookImplementations.list
+            invocations: hookInvocations.list
+            todos: todos.withContext()
+            title: titleAndDescription.title
+            description: titleAndDescription.description
+          )
+
+    Promise.all typePromises
+
+  Promise.all(allFilesPromises).then (fileStatsLists) -&gt;
+    _.flatten fileStatsLists
+</code></pre>
+
+<p>Massage the statistics to help rendering the hooks page.</p>
+<pre><code class="coffeescript">fileStatsListPromise.then((fileStatsList) -&gt;
+
+  hooksIndex = {}
+
+  indexes = {}
+  keys = ['implementations', 'invocations']
+
+  for fileStats in fileStatsList
+
+    parts = fileStats.file.split '/'
+    for remove in ['client', 'packages']
+      if ~(index = parts.indexOf remove)
+        parts.splice index, 1
+    mergeFile = parts.join '/'
+
+    for key in keys
+      indexes[key] ?= {}
+
+      for hook in fileStats[key]
+        indexes[key][hook] ?= {}
+
+        indexes[key][hook][mergeFile] ?= fullName: fileStats.file
+        (indexes[key][hook][mergeFile].types ?= []).push fileStats.type
+
+        hooksIndex[hook] = true
+
+  for key in keys
+    for hook, stats of indexes[key]
+      for file of stats
+        stats[file].types = _.sortedUniq stats[file].types.sort() ? []
+
+  hooks = (hook for hook of hooksIndex).sort()
+
+  hookFiles = {}
+  for hook in hooks
+    hookFiles[hook] = try
+      fs.readFileSync &quot;docs/hook/#{hook}.md&quot;, 'utf8'
+    catch error
+      console.error &quot;Missing hook template for #{hook}&quot;
+      ''
+
+  O =
+    hookFiles: hookFiles
+    hooks: hooks
+
+  O[key] = indexes[key] for key in keys
+
+  return O
+</code></pre>
+
+<p>Render the hooks page.</p>
+<pre><code class="coffeescript">).then((O) -&gt;
+
+  {hookFiles, hooks} = O
+
+  keys = ['implementation', 'invocation']
+
+  wordingFor =
+    implementation: 'implements'
+    invocation: 'invoke'
+
+  render = fs.readFileSync 'docs/hooks.template.md', 'utf8'
+
+  for hook in hooks
+
+    render += &quot;## #{hook}\n\n&quot;
+    render += hookFiles[hook] + '\n\n' if hookFiles[hook]
+
+    for key in keys
+      pluralKey = &quot;#{key}s&quot;
+
+      if O[pluralKey][hook]?
+
+        count = 0
+        for file, {types} of O[pluralKey][hook]
+          count += types.length
+
+        render += '&lt;div class=&quot;admonition note&quot;&gt;'
+        render += &quot;&lt;p class=\&quot;admonition-title\&quot;&gt;#{count} #{key}&quot;
+        render += 's' if count &gt; 1
+        render += '&lt;/p&gt;\n'
+        render += '  &lt;table&gt;\n'
+
+        stripe = 0
+        instances = for file, {fullName, types} of O[pluralKey][hook]
+</code></pre>
+
+<p>Remove client path part, only added when necessary.</p>
+<pre><code class="coffeescript">          parts = fullName.split '/'
+          for remove in ['client']
+            if ~(index = parts.indexOf remove)
+              parts.splice index, 1
+          fullName = parts.join '/'
+
+          parts = file.split '/'
+          for remove in ['client']
+            if ~(index = parts.indexOf remove)
+              parts.splice index, 1
+          file = parts.join '/'
+
+          addClientToFullPath = (isClient, path) -&gt;
+
+            return path unless isClient
+            parts = path.split '/'
+            return path if parts[0] isnt 'packages'
+            parts.splice 2, 0, 'client'
+            parts.join '/'
+
+          do (fullName) -&gt; types = types.map (type) -&gt;
+            &quot;    &lt;tr class=\&quot;#{
+              if stripe++ % 2 then 'odd' else 'even'
+            }\&quot;&gt;&lt;td&gt;&lt;a href=\&quot;../source/#{
+              addClientToFullPath type is 'client', _sourcePath fullName
+            }\&quot;&gt;#{
+              _sourcePath file
+            } (#{
+              type
+            })&lt;/a&gt;&lt;/td&gt;&lt;td align=\&quot;right\&quot;&gt;&lt;a href=\&quot;../source/#{
+              addClientToFullPath type is 'client', _sourcePath fullName
+            }##{
+              wordingFor[key]
+            }-hook-#{
+              _idFromString hook
+            }\&quot;&gt;#{
+              key
+            }&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&quot;
+          types.join ''
+
+        render += instances.join ''
+
+        render += '  &lt;/table&gt;\n'
+        render += '&lt;/div&gt;'
+        render += '\n\n'
+
+  new Promise (resolve, reject) -&gt;
+    fs.writeFile 'docs/hooks.md', render, (error) -&gt;
+      return reject error if error?
+      resolve()
+
+).done()
+</code></pre>
+
+<p>Render the TODOs page.</p>
+<pre><code class="coffeescript">fileStatsListPromise.then((fileStatsList) -&gt;
+
+  render = fs.readFileSync 'docs/todos.template.md', 'utf8'
+
+  for fileStats in fileStatsList
+</code></pre>
+
+<p>Keep track of used IDs, it will be necessary to link to the correct
+location hash in the case of multiple TODO items with the same wording.</p>
+<pre><code class="coffeescript">    idMap = {}
+
+    for todo in fileStats.todos
+
+      filename = _sourcePath fileStats.file
+
+      highlight = if fileStats.file.match /\.(?:lit)?coffee$/
+         'coffeescript'
+      else if fileStats.file.match /\.js$/
+        'javascript'
+      else
+        'no-highlight'
+
+      render += &quot;\n---\n\n```#{highlight}\n&quot;
+
+      id = ''
+      for line, index in todo.lines
+</code></pre>
+
+<p>If this is the line with the TODO, parse the ID from the TODO item
+text, and render it as h2 (TODO are h6) to increase visibility.</p>
+<pre><code class="coffeescript">        if index is Todos.context
+          id = _idFromString(line).slice 1, -1
+
+          render += &quot;```\n\n#{line.trim().slice 6}\n\n```#{highlight}&quot;
+        else
+          render += line
+        render += '\n'
+
+      render += '```\n\n'
+</code></pre>
+
+<p>Keep track of ID usage and modify the location hash for subsequent
+uses.</p>
+<pre><code class="coffeescript">      if idMap[id]?
+        idMap[id] += 1
+        id += &quot;_#{idMap[id]}&quot;
+      else
+        idMap[id] = 0
+
+      render += &quot;[the above found in #{
+        fileStats.file
+      }:#{
+        todo.index
+      }](source/#{
+        filename
+      }##{
+        id
+      })\n\n&quot;
+
+  new Promise (resolve, reject) -&gt;
+    fs.writeFile 'docs/todos.md', render, (error) -&gt;
+      return reject error if error?
+      resolve()
+
+).done()
+
+_allSourceFiles().then (files) -&gt;
+
+  yml = fs.readFileSync 'docs/mkdocs.template.yml', 'utf8'
+
+  renderHierarchy = (output, hierarchy) -&gt;
+
+    renderHierarchyInternal = (output, hierarchy, indent) -&gt;
+
+      if _.isString hierarchy
+
+        output[output.length - 1] += &quot; '#{hierarchy}'&quot;
+
+      else
+
+        for k, v of hierarchy
+
+          output.push &quot;#{indent}- #{k}:&quot;
+          renderHierarchyInternal output, v, &quot;#{indent}    &quot;
+
+    renderHierarchyInternal output, hierarchy, ''
+
+  hierarchy = Source: {}
+  for file in files
+    walk = hierarchy.Source
+    parts = file.split '/'
+    for part, i in parts
+      if i is parts.length - 1
+        walk[part] = &quot;source/#{file}&quot;
+      else
+        walk[part] ?= {}
+        walk = walk[part]
+
+  output = []
+  renderHierarchy output, hierarchy
+  fs.writeFileSync 'mkdocs.yml', yml + output.join &quot;\n&quot;
+</code></pre>
+
+<p>Render the packages page.</p>
+<pre><code class="coffeescript">fileStatsListPromise.then((fileStatsList) -&gt;
+</code></pre>
+
+<p>Sort by package name first.</p>
+<pre><code class="coffeescript">  newList = []
+
+  for fileStats in fileStatsList
+
+    parts = fileStats.file.split '/'
+    continue unless ~['custom', 'packages'].indexOf parts[0]
+
+    sourcePath = _sourcePath fileStats.file
+
+    parts = sourcePath.split '/'
+    pkg = parts.join '/'
+    fileStats.pkg = pkg.split('/').slice(1).join '/'
+
+    newList.push fileStats
+
+  newList.sort (l, r) -&gt;
+    return -1 if l.type is 'client' and r.type is 'server'
+    return 1 if l.type is 'server' and r.type is 'client'
+    if l.pkg &lt; r.pkg then -1 else if l.pkg &gt; r.pkg then 1 else 0
+
+).then((fileStatsList) -&gt;
+
+  render = fs.readFileSync 'docs/packages.template.md', 'utf8'
+  render += '\n'
+
+  type = null
+
+  for fileStats in fileStatsList
+
+    if fileStats.type isnt type
+      type = fileStats.type
+
+      render += if type is 'client'
+        '## Client-side'
+      else
+        '## Server-side'
+
+      render += '\n\n'
+
+    pkgParts = fileStats.pkg.split '/'
+    isSubpackage = pkgParts.length isnt 1 and pkgParts.pop() isnt 'client'
+</code></pre>
+
+<p>Link to the package.</p>
+<pre><code class="coffeescript">    sourcePath = _sourcePath fileStats.file
+
+    if isSubpackage
+      render += '&gt; '
+      parts = fileStats.pkg.split '/'
+      parentPkg = parts.shift()
+      subPkg = parts.join '/'
+      render += &quot;## [&lt;small&gt;#{parentPkg}/&lt;/small&gt;#{subPkg}](source/#{sourcePath})&quot;
+    else
+      render += &quot;## [#{fileStats.pkg}](source/#{sourcePath})&quot;
+
+    if fileStats.title?
+      render += '\n\n'
+      render += '&gt; ' if isSubpackage
+      render += &quot;&lt;span class=\&quot;package-title\&quot;&gt;#{fileStats.title}&lt;/span&gt;&quot;
+
+    render += '\n\n'
+
+    if fileStats.description?
+      render += '&gt; ' if isSubpackage
+      render += &quot;#{fileStats.description}\n\n&quot;
+
+    if fileStats.implementations.length &gt; 0
+      render += '&gt; ' if isSubpackage
+      render += '&lt;div class=&quot;admonition note&quot;&gt;'
+      render += '&lt;p class=&quot;admonition-title&quot;&gt;Implements hooks&lt;/p&gt;'
+      render += '  &lt;table&gt;\n'
+      render += fileStats.implementations.map((hook, index) -&gt;
+        &quot;    &lt;tr class=\&quot;#{if index % 2 then 'odd' else 'even'}\&quot;&gt;&lt;td&gt;&lt;a href=\&quot;../hooks/##{_idFromString hook}\&quot;&gt;#{hook}&lt;/a&gt;&lt;/td&gt;&lt;td align=\&quot;right\&quot;&gt;&lt;a href=\&quot;../source/#{sourcePath}#implements-hook-#{hook.toLowerCase()}\&quot;&gt;implementation&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;\n&quot;
+      ).join ''
+      render += '  &lt;/table&gt;\n'
+      render += '&lt;/div&gt;'
+      render += '\n\n'
+</code></pre>
+
+<pre><code>if fileStats.invocations.length &gt; 0
+  render += '&gt; ' if isSubpackage
+  render += '&lt;div class="admonition note"&gt;'
+  render += '&lt;p class="admonition-title"&gt;Invokes hooks&lt;/p&gt;'
+  render += '  &lt;table&gt;\n'
+  render += fileStats.invocations.map((hook, index) -&gt;
+    "    &lt;tr class=\"#{if index % 2 then 'odd' else 'even'}\"&gt;&lt;td&gt;&lt;a href=\"../hooks/##{_idFromString hook}\"&gt;#{hook}&lt;/a&gt;&lt;/td&gt;&lt;td align=\"right\"&gt;&lt;a href=\"../source/#{sourcePath}#invoke-hook-#{hook.toLowerCase()}\"&gt;invocation&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;\n"
+  ).join ''
+  render += '  &lt;/table&gt;\n'
+  render += '&lt;/div&gt;'
+  render += '\n\n'
+</code></pre>
+<p>fs.writeFileSync 'docs/packages.md', render</p>
+<p>)</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../" class="btn btn-neutral float-right" title="index.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../../Gruntfile/" class="btn btn-neutral" title="Gruntfile.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../../Gruntfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

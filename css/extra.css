@@ -1,0 +1,64 @@
+
+h1:target, h2:target, h3:target, h4:target, h5:target, h6:target {
+  background: none repeat scroll 0 0 yellow;
+}
+
+code {
+  color: #B22121;
+}
+
+.wy-nav-content {
+  max-width: 1024px;
+}
+
+.wy-menu-vertical ul {
+  margin-bottom: 2em;
+}
+
+.rst-content .section a {
+  text-decoration: underline;
+}
+
+.rst-content blockquote {
+  border-left: 3px solid #ddd;
+  margin-left: 0;
+  padding-left: 24px;
+}
+
+.rst-content blockquote h3 small {
+  color: #aaa;
+}
+
+.rst-content table {
+  width: 100%;
+}
+
+.rst-content tr.odd {
+  background: none repeat scroll 0 0 #f0fbfe;
+}
+
+.rst-content td {
+  padding: .25em;
+}
+
+.package-title {
+  font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+  font-size: 150%;
+  font-weight: 700;
+}
+
+.rst-content .admonition table {
+  margin-bottom: 0;
+}
+
+.rst-content .admonition table td {
+  border-left: none;
+}
+
+.admonition.note > ul {
+  margin-bottom: 0;
+}
+
+.rst-content .warning .admonition-title {
+  color: #555;
+}

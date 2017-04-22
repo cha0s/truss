@@ -1,0 +1,23 @@
+site_name: Truss
+theme: readthedocs
+site_author: "cha0s"
+repo_url: https://github.com/cha0s/truss
+
+extra_css:
+- css/extra.css
+
+markdown_extensions:
+- admonition
+
+docs_dir: 'docs'
+site_dir: 'gh-pages'
+pages:
+- README: 'index.md'
+- Guide:
+    - Error handling: 'guide/errors.md'
+    - Package system: 'guide/packages.md'
+    - Concepts and conventions: 'guide/concepts.md'
+- Reference:
+    - Hooks: 'hooks.md'
+    - Packages: 'packages.md'
+    - TODO list: 'todos.md'

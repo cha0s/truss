@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>errors.coffee - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../css/highlight.css">
+  <link href="../../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "errors.coffee";
+  </script>
+  
+  <script src="../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../js/highlight.pack.js"></script>
+  <script src="../../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../.." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../hooks/">Hooks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../Gruntfile/">Gruntfile.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">errors.coffee</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#error-handling">Error handling</a></li>
+                
+                    <li><a class="toctree-l4" href="#transmittableerror">TransmittableError</a></li>
+                
+                    <li><a class="toctree-l4" href="#transmittableerrorconstructor">TransmittableError#constructor</a></li>
+                
+                    <li><a class="toctree-l4" href="#transmittableerrorerrortype">TransmittableError#errorType</a></li>
+                
+                    <li><a class="toctree-l4" href="#transmittableerrortemplate">TransmittableError#template</a></li>
+                
+                    <li><a class="toctree-l4" href="#transmittableerrortojson">TransmittableError#toJSON</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorsinstantiate">errors.instantiate</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorsmessage">errors.message</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorsserialize">errors.serialize</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorsstack">errors.stack</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorstransmittableerrors">errors.transmittableErrors</a></li>
+                
+                    <li><a class="toctree-l4" href="#errorsunserialize">errors.unserialize</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>platform</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../platform/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../platform/native/">native.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>src &raquo;</li>
+        
+      
+    
+    <li>errors.coffee</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="error-handling">Error handling</h1>
+<pre><code class="coffeescript">pkgman = require 'pkgman'
+</code></pre>
+
+<h2 id="transmittableerror">TransmittableError</h2>
+<p>Extend this class if you'd like to implement an error.</p>
+<pre><code class="coffeescript">exports.TransmittableError = class TransmittableError extends Error
+</code></pre>
+
+<h2 id="transmittableerrorconstructor">TransmittableError#constructor</h2>
+<p>See:
+<a href="https://github.com/jashkenas/coffee-script/issues/2359">https://github.com/jashkenas/coffee-script/issues/2359</a></p>
+<pre><code class="coffeescript">  constructor: (@message) -&gt;
+</code></pre>
+
+<h2 id="transmittableerrorerrortype">TransmittableError#errorType</h2>
+<p>A unique key for this error.</p>
+<pre><code class="coffeescript">  errorType: 'unknown'
+</code></pre>
+
+<h2 id="transmittableerrortemplate">TransmittableError#template</h2>
+<p>The template used to format the error output.</p>
+<pre><code class="coffeescript">  template: 'Unknown error: :message'
+</code></pre>
+
+<h2 id="transmittableerrortojson">TransmittableError#toJSON</h2>
+<p>Implement this if you need to transmit more than just the error type and
+the message. Truss uses the result from this function to serialize the
+error over the wire.</p>
+<pre><code class="coffeescript">  toJSON: -&gt; [@errorType, @message]
+</code></pre>
+
+<h2 id="errorsinstantiate">errors.instantiate</h2>
+<ul>
+<li>
+<p>(string) <code>errorType</code> - The error type.</p>
+</li>
+<li>
+<p>(any) <code>args...</code> - Additional arguments to pass to the error type's</p>
+</li>
+</ul>
+<p>constructor. <em>Instantiate an error based on error type, passing along args
+to the error's constructor.</em></p>
+<pre><code class="coffeescript">exports.instantiate = (errorType, args...) -&gt;
+</code></pre>
+
+<p>Look up the error type and use it. If it's not registered, fall back to
+the TransmittableError superclass.</p>
+<pre><code class="coffeescript">  Types = exports.transmittableErrors()
+  Type = if Types[errorType]? then Types[errorType] else TransmittableError
+</code></pre>
+
+<p>Trickery to be able to essentially call <code>new</code> with <code>Function::apply</code>.</p>
+<pre><code class="coffeescript">  IType = do (Type) -&gt;
+    F = (args) -&gt; Type.apply this, args
+    F.prototype = Type.prototype
+    (args) -&gt; new F args
+
+  error = IType args
+</code></pre>
+
+<p>Throw so we have a (possibly) meaningful stack.</p>
+<pre><code class="coffeescript">  try
+    throw new Error()
+  catch stackError
+    stackError.message = exports.message error
+    error.stack = stackError.stack
+
+  error
+</code></pre>
+
+<h2 id="errorsmessage">errors.message</h2>
+<ul>
+<li>(Error) <code>error</code> - The error object.</li>
+</ul>
+<p><em>Extract an error message from an error.</em></p>
+<pre><code class="coffeescript">exports.message = (error) -&gt;
+</code></pre>
+
+<p>One of us! One of us!</p>
+<pre><code class="coffeescript">  output = if error instanceof TransmittableError
+    error.template
+</code></pre>
+
+<p>Abstract Error.</p>
+<pre><code class="coffeescript">  else if error instanceof Error
+    TransmittableError::template.replace ':message', error.message
+</code></pre>
+
+<p>Not an instance of <code>Error</code>. This probably shouldn't happen, but we deal
+with it anyway.</p>
+<pre><code class="coffeescript">  else
+    TransmittableError::template.replace ':message', error.toString()
+</code></pre>
+
+<p>Replace placeholders in the template.</p>
+<pre><code class="coffeescript">  output = output.replace &quot;:#{key}&quot;, value for key, value of error
+  output
+</code></pre>
+
+<h2 id="errorsserialize">errors.serialize</h2>
+<ul>
+<li>(Error) <code>error</code> - The error object.</li>
+</ul>
+<p><em>Serialize an error to send over the wire.</em></p>
+<pre><code class="coffeescript">exports.serialize = (error) -&gt;
+</code></pre>
+
+<p>One of us! One of us!</p>
+<pre><code class="coffeescript">  if error instanceof TransmittableError
+    error.toJSON()
+</code></pre>
+
+<p>Abstract Error.</p>
+<pre><code class="coffeescript">  else if error instanceof Error
+    [undefined, error.message]
+</code></pre>
+
+<p>Not an instance of <code>Error</code>. This probably shouldn't happen, but we deal
+with it anyway.</p>
+<pre><code class="coffeescript">  else
+    [undefined, error]
+</code></pre>
+
+<h2 id="errorsstack">errors.stack</h2>
+<ul>
+<li>(Error) <code>error</code> - The error object.</li>
+</ul>
+<p><em>Extract the stack trace from an error.</em></p>
+<pre><code class="coffeescript">exports.stack = (error) -&gt;
+</code></pre>
+
+<p>Does the stack trace exist?</p>
+<pre><code class="coffeescript">  formatStack = if (formatStack = error.stack)?
+</code></pre>
+
+<p>If so, shift off the first line (the message).</p>
+<pre><code class="coffeescript">    formatStack = formatStack.split '\n'
+    formatStack.shift()
+    '\n' + formatStack.join '\n'
+</code></pre>
+
+<p>Otherwise, we don't have much to work with...</p>
+<pre><code class="coffeescript">  else
+    ''
+</code></pre>
+
+<p>Prepend our pretty formatted message before the stack trace.</p>
+<pre><code class="coffeescript">  &quot;#{@message error}#{formatStack}&quot;
+</code></pre>
+
+<h2 id="errorstransmittableerrors">errors.transmittableErrors</h2>
+<p><em>Collect the error types implemented by packages.</em></p>
+<pre><code class="coffeescript">exports.transmittableErrors = -&gt;
+
+  _ = require 'lodash'
+</code></pre>
+
+<h4 id="invoke-hook-trusstransmittableerrors">Invoke hook <a href="../../../hooks#trusstransmittableerrors"><code>trussTransmittableErrors</code></a></h4>
+<p>Allows packages to specify transmittable errors. Implementations should
+return a subclass of <code>TransmittableError</code>.</p>
+<pre><code class="coffeescript">  Types = {}
+
+  Types[Type::errorType] = Type for Type in [TransmittableError].concat(
+    _.flatten pkgman.invokeFlat 'trussTransmittableErrors'
+  )
+
+  Types
+</code></pre>
+
+<h2 id="errorsunserialize">errors.unserialize</h2>
+<p><em>Unserialize an error from over the wire.</em></p>
+<pre><code class="coffeescript">exports.unserialize = (data) -&gt; exports.instantiate.apply null, data
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../main/" class="btn btn-neutral float-right" title="main.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../config/" class="btn btn-neutral" title="config.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../config/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../main/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
