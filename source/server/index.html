@@ -195,6 +195,8 @@
             
                 <li class="toctree-l3"><a href="#native-server-application-entry-point">Native server application entry point.</a></li>
                 
+                    <li><a class="toctree-l4" href="#invoke-hook-trussprocessexit">Invoke hook trussProcessExit</a></li>
+                
             
             </ul>
         
@@ -246,28 +248,6 @@
         <a class="" href="../src/pkgman/">pkgman.coffee</a>
         
     </li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>platform</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../src/platform/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../src/platform/native/">native.coffee</a>
-        
-    </li>
-
-        
-    </ul>
 
         
     </ul>
@@ -322,15 +302,47 @@
 <p>Fork the app to ensure proper environment exists.</p>
 <pre><code class="coffeescript">{fork} = require &quot;#{__dirname}/src/bootstrap&quot;
 unless fork()
+
+  path = require 'path'
+  fs = require 'fs'
+
+  config = require 'config'
+  pkgman = require 'pkgman'
+  yaml = require 'js-yaml'
 </code></pre>
 
-<p>Set platform to native.</p>
-<pre><code class="coffeescript">  Platform = require 'platform'
-  Platform.set 'native'
+<p>Set up exit hooks.</p>
+<h4 id="invoke-hook-trussprocessexit">Invoke hook <a href="../../../hooks#trussprocessexit"><code>trussProcessExit</code></a></h4>
+<pre><code class="coffeescript">  process.on 'exit', -&gt; pkgman.invoke 'trussProcessExit'
+
+  process.on 'SIGINT', -&gt; process.exit()
+  process.on 'SIGTERM', -&gt; process.exit()
+  process.on 'unhandledException', -&gt; process.exit()
+</code></pre>
+
+<p>Set environment variables into config.</p>
+<pre><code class="coffeescript">  config.set 'path', __dirname
+  config.set k, v for k, v of process.env
+</code></pre>
+
+<p>Read configuration file.</p>
+<pre><code class="coffeescript">  settingsFilename = config.get 'path'
+  settingsFilename += '/config/settings.yml'
+
+  throw new Error '
+    Settings file not found!
+    You should copy config/default.settings.yml to config/settings.yml
+  ' unless fs.existsSync settingsFilename
+
+  settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
+  config.set k, v for k, v of settings
 </code></pre>
 
 <p>Spin up the server.</p>
-<pre><code class="coffeescript">  require('main').start()
+<pre><code class="coffeescript">  require('main').start (error) -&gt;
+
+    console.error errors.stack error
+    process.exit 1
 </code></pre>
               
             </div>

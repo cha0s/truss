@@ -133,6 +133,12 @@
             
                 <li class="toctree-l3"><a href="#default-application-configuration">Default application configuration.</a></li>
                 
+                    <li><a class="toctree-l4" href="#package-list">Package list</a></li>
+                
+                    <li><a class="toctree-l4" href="#package-configuration">Package configuration</a></li>
+                
+                    <li><a class="toctree-l4" href="#bootstrap-middleware">Bootstrap middleware</a></li>
+                
             
             </ul>
         
@@ -248,28 +254,6 @@
     </li>
 
         
-            
-    <ul class="subnav">
-    <li><span>platform</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../src/platform/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../src/platform/native/">native.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
     </ul>
 
         
@@ -318,23 +302,38 @@
               
                 <h1 id="default-application-configuration">Default application configuration.</h1>
 <hr />
+<h2 id="package-list">Package list</h2>
 <p>The list of packages active for this application.</p>
-<pre><code class="no-highlight">packageList: [
-]
+<pre><code class="no-highlight">packageList:
 </code></pre>
 
+<h3 id="development">Development</h3>
+<p>Project documentation. Safe to disable on production.</p>
+<pre><code class="no-highlight">  - 'truss-dox'
+</code></pre>
+
+<h3 id="production">Production</h3>
+<p>REPL to control the application.</p>
+<pre><code class="no-highlight">  - 'truss-repl'
+</code></pre>
+
+<h2 id="package-configuration">Package configuration</h2>
 <p>Values for packages which correspond with the values provided by packages'
 implementations of hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a>.</p>
 <pre><code class="no-highlight">packageConfig: {
 }
 </code></pre>
 
+<h2 id="bootstrap-middleware">Bootstrap middleware</h2>
 <p>The list of middleware that run in the bootstrap phase. This is where you
-spin up HTTP/sockets/database/whatever else. The list contains the names of
-packages which have an implementation of hook
+spin up your HTTP/socket server, or whatever else. The list contains the
+names of packages which have an implementation of hook
 <a href="../../../hooks#trussbootstrapmiddleware"><code>trussBootstrapMiddleware</code></a>.</p>
-<pre><code class="no-highlight">bootstrapMiddleware: [
-]
+<pre><code class="no-highlight">bootstrapMiddleware:
+</code></pre>
+
+<p>Spin up the REPL.</p>
+<pre><code class="no-highlight">  - 'truss-repl'
 </code></pre>
               
             </div>

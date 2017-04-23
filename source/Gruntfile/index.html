@@ -267,28 +267,6 @@
     </li>
 
         
-            
-    <ul class="subnav">
-    <li><span>platform</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../src/platform/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../src/platform/native/">native.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
     </ul>
 
         
@@ -364,15 +342,29 @@ module.exports = (grunt) -&gt;
 </code></pre>
 
 <p>Load configuration.</p>
-<pre><code class="coffeescript">  config = require 'config'
+<pre><code class="coffeescript">  fs = require 'fs'
 
-  Platform = require 'platform'
-  Platform.set 'native'
-  platform = Platform.get()
+  yaml = require 'js-yaml'
+
+  config = require 'config'
 </code></pre>
 
-<p>Load configuration.</p>
-<pre><code class="coffeescript">  platform.loadConfig config
+<p>Set environment variables into config.</p>
+<pre><code class="coffeescript">  config.set 'path', __dirname
+  config.set k, v for k, v of process.env
+</code></pre>
+
+<p>Read configuration file.</p>
+<pre><code class="coffeescript">  settingsFilename = config.get 'path'
+  settingsFilename += '/config/settings.yml'
+
+  throw new Error '
+    Settings file not found!
+    You should copy config/default.settings.yml to config/settings.yml
+  ' unless fs.existsSync settingsFilename
+
+  settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
+  config.set k, v for k, v of settings
 </code></pre>
 
 <p>Register the configured packages.</p>

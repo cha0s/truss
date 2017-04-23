@@ -36,17 +36,33 @@ Forward all tasks.
 Load configuration.
 
 ```coffeescript
-  config = require 'config'
+  fs = require 'fs'
 
-  Platform = require 'platform'
-  Platform.set 'native'
-  platform = Platform.get()
+  yaml = require 'js-yaml'
+
+  config = require 'config'
 ```
 
-Load configuration.
+Set environment variables into config.
 
 ```coffeescript
-  platform.loadConfig config
+  config.set 'path', __dirname
+  config.set k, v for k, v of process.env
+```
+
+Read configuration file.
+
+```coffeescript
+  settingsFilename = config.get 'path'
+  settingsFilename += '/config/settings.yml'
+
+  throw new Error '
+    Settings file not found!
+    You should copy config/default.settings.yml to config/settings.yml
+  ' unless fs.existsSync settingsFilename
+
+  settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
+  config.set k, v for k, v of settings
 ```
 
 Register the configured packages.

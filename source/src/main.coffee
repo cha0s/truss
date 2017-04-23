@@ -11,21 +11,7 @@ debug = require('debug') 'truss:main'
 middleware = require 'middleware'
 pkgman = require 'pkgman'
 
-exports.start = ->
-
-  platform = require('platform').get()
-```
-
-Handle exiting the app.
-
-```coffeescript
-  platform.exitHandler()
-```
-
-Load configuration.
-
-```coffeescript
-  platform.loadConfig config
+exports.start = (errorHandler) ->
 ```
 
 Register the configured packages.
@@ -75,6 +61,5 @@ Dispatch the bootstrap middleware and log if everything is okay.
 Log any error and exit.
 
 ```coffeescript
-    console.error errors.stack error
-    platform.exit()
+    errorHandler error
 ```

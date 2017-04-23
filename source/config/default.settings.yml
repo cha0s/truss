@@ -1,11 +1,30 @@
 # Default application configuration.
 ---
+
+## Package list
+
 The list of packages active for this application.
 
 ```no-highlight
-packageList: [
-]
+packageList:
 ```
+
+### Development
+
+Project documentation. Safe to disable on production.
+
+```no-highlight
+  - 'truss-dox'
+```
+
+### Production
+REPL to control the application.
+
+```no-highlight
+  - 'truss-repl'
+```
+
+## Package configuration
 
 Values for packages which correspond with the values provided by packages'
 implementations of hook [`trussConfigServer`](../../hooks#trussconfigserver).
@@ -15,12 +34,19 @@ packageConfig: {
 }
 ```
 
+## Bootstrap middleware
+
 The list of middleware that run in the bootstrap phase. This is where you
-spin up HTTP/sockets/database/whatever else. The list contains the names of
-packages which have an implementation of hook
+spin up your HTTP/socket server, or whatever else. The list contains the
+names of packages which have an implementation of hook
 [`trussBootstrapMiddleware`](../../hooks#trussbootstrapmiddleware).
 
 ```no-highlight
-bootstrapMiddleware: [
-]
+bootstrapMiddleware:
+```
+
+Spin up the REPL.
+
+```no-highlight
+  - 'truss-repl'
 ```

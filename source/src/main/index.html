@@ -254,28 +254,6 @@
     </li>
 
         
-            
-    <ul class="subnav">
-    <li><span>platform</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../platform/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../platform/native/">native.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
     </ul>
 
         
@@ -332,17 +310,7 @@ debug = require('debug') 'truss:main'
 middleware = require 'middleware'
 pkgman = require 'pkgman'
 
-exports.start = -&gt;
-
-  platform = require('platform').get()
-</code></pre>
-
-<p>Handle exiting the app.</p>
-<pre><code class="coffeescript">  platform.exitHandler()
-</code></pre>
-
-<p>Load configuration.</p>
-<pre><code class="coffeescript">  platform.loadConfig config
+exports.start = (errorHandler) -&gt;
 </code></pre>
 
 <p>Register the configured packages.</p>
@@ -380,8 +348,7 @@ exports.start = -&gt;
 </code></pre>
 
 <p>Log any error and exit.</p>
-<pre><code class="coffeescript">    console.error errors.stack error
-    platform.exit()
+<pre><code class="coffeescript">    errorHandler error
 </code></pre>
               
             </div>
