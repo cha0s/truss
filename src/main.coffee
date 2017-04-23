@@ -10,15 +10,7 @@ debug = require('debug') 'truss:main'
 middleware = require 'middleware'
 pkgman = require 'pkgman'
 
-exports.start = ->
-
-  platform = require('platform').get()
-
-  # Handle exiting the app.
-  platform.exitHandler()
-
-  # Load configuration.
-  platform.loadConfig config
+exports.start = (errorHandler) ->
 
   # Register the configured packages.
   pkgman.registerPackageList config.get 'packageList'
@@ -50,5 +42,4 @@ exports.start = ->
     return debug 'Bootstrap complete.' unless error?
 
     # Log any error and exit.
-    console.error errors.stack error
-    platform.exit()
+    errorHandler error
