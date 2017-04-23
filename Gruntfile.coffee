@@ -25,14 +25,27 @@ module.exports = (grunt) ->
     return
 
   # Load configuration.
+  fs = require 'fs'
+
+  yaml = require 'js-yaml'
+
   config = require 'config'
 
-  Platform = require 'platform'
-  Platform.set 'native'
-  platform = Platform.get()
+  # Set environment variables into config.
+  config.set 'path', __dirname
+  config.set k, v for k, v of process.env
 
-  # Load configuration.
-  platform.loadConfig config
+  # Read configuration file.
+  settingsFilename = config.get 'path'
+  settingsFilename += '/config/settings.yml'
+
+  throw new Error '
+    Settings file not found!
+    You should copy config/default.settings.yml to config/settings.yml
+  ' unless fs.existsSync settingsFilename
+
+  settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
+  config.set k, v for k, v of settings
 
   # Register the configured packages.
   pkgman = require 'pkgman'
