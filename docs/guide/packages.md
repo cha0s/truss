@@ -12,14 +12,14 @@ The simplest example of a package would be something like:
 ```javascript
 exports.pkgmanRegister = function(registrar) {
 
-  registrar.registerHook('trussPreBootstrap', function() {
+  registrar.registerHook('trussServerPreBootstrap', function() {
     console.log('I hooked into Truss!');
   });
 };
 ```
 
 This package simply hooks into the
-[`trussPreBootstrap`](../hooks#trussprebootstrap) hook and logs
+[`trussServerPreBootstrap`](../hooks#trussserverprebootstrap) hook and logs
 a message to the console when that hook is invoked. Obviously this particular
 package isn't super useful!
 

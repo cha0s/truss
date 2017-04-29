@@ -3,7 +3,7 @@
 <h3>Mitigate slow build times</h3>
 
 If your package `require`s heavy modules, you should require them in an
-implementation of hook `trussPreBootstrap`. For instance, say you have a
+implementation of hook `trussServerPreBootstrap`. For instance, say you have a
 package like:
 
 ```javascript
@@ -25,7 +25,7 @@ var someHeavyModule = null;
 
 exports.pkgmanRegister = function(registrar) {
 
-  registrar.registerHook('trussPreBootstrap', function() {
+  registrar.registerHook('trussServerPreBootstrap', function() {
     someHeavyModule = require('some-heavy-module');
   });
 
@@ -36,4 +36,4 @@ exports.pkgmanRegister = function(registrar) {
 ```
 
 So that the heavy module will not be `require`d until hook
-`trussPreBootstrap` is invoked.
+`trussServerPreBootstrap` is invoked.

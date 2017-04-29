@@ -18,7 +18,8 @@ packageList:
 # ## Package configuration
 #
 # Values for packages which correspond with the values provided by packages'
-# implementations of hook [`trussConfigServer`](../../hooks#trussconfigserver).
+# implementations of hook
+# [`trussServerPackageConfig`](../../hooks#trussserverpackageconfig).
 packageConfig: {
 }
 
@@ -27,8 +28,8 @@ packageConfig: {
 # The list of middleware that run in the bootstrap phase. This is where you
 # spin up your HTTP/socket server, or whatever else. The list contains the
 # names of packages which have an implementation of hook
-# [`trussBootstrapMiddleware`](../../hooks#trussbootstrapmiddleware).
-bootstrapMiddleware:
+# [`trussServerBootstrapMiddleware`](../../hooks#trussserverbootstrapmiddleware).
+serverBootstrapMiddleware:
 
   # Spin up the REPL.
   - 'truss-repl'

@@ -13,8 +13,8 @@ unless fork()
 
   # Set up exit hooks.
   #
-  # #### Invoke hook `trussProcessExit`.
-  process.on 'exit', -> pkgman.invoke 'trussProcessExit'
+  # #### Invoke hook `trussServerProcessExit`.
+  process.on 'exit', -> pkgman.invoke 'trussServerProcessExit'
 
   process.on 'SIGINT', -> process.exit()
   process.on 'SIGTERM', -> process.exit()

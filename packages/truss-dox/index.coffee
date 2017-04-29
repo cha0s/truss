@@ -5,8 +5,8 @@
 
 exports.pkgmanRegister = (registrar) ->
 
-  # #### Implements hook `trussGruntConfig`.
-  registrar.registerHook 'trussGruntConfig', (gruntConfig, grunt) ->
+  # #### Implements hook `trussServerGruntConfig`.
+  registrar.registerHook 'trussServerGruntConfig', (gruntConfig, grunt) ->
 
     gruntConfig.configureTask 'clean', 'truss-dox', [
       'mkdocs.yml'

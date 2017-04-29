@@ -3,9 +3,9 @@ This page explains various concepts and conventions used in Truss.
 # Middleware hook specification
 
 Truss invokes various hooks
-([`trussBootstrapMiddleware`](../hooks#trussbootstrapmiddleware), and more...)
-which allow packages to define middleware to be dispatched during various
-processes.
+([`trussServerBootstrapMiddleware`](../hooks#trussserverbootstrapmiddleware),
+and more...) which allow packages to define middleware to be dispatched during
+various processes.
 
 Middleware hooks return a specification that looks like:
 

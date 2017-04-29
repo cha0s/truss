@@ -1,7 +1,7 @@
 *Alter the Grunt build process.*
 
 This hook allows packages to alter Grunt configuration specified through
-[`trussGruntConfig`](hooks/#trussgruntconfig).
+[`trussServerGruntConfig`](hooks/#trussservergruntconfig).
 
 The first implementation parameter is an instance of the class
 [`GruntConfiguration`](source/Gruntfile/#gruntconfiguration). The `grunt`

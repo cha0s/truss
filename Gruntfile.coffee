@@ -52,11 +52,10 @@ module.exports = (grunt) ->
   pkgman.registerPackageList config.get 'packageList'
 
   # Load the packages' configuration settings and set into the default config.
-  # #### Invoke hook `trussConfigServer`.
+  # #### Invoke hook `trussServerPackageConfig`.
   packageConfig = new config.Config()
-  for path, value of pkgman.invoke 'trussConfigServer'
+  for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
-
   config.setDefaults packageConfig: packageConfig.toJSON()
 
   # # Spin up the server.
@@ -179,11 +178,11 @@ module.exports = (grunt) ->
 
       grunt.task.run 'build'
 
-  # #### Invoke hook `trussGruntConfig`.
-  pkgman.invoke 'trussGruntConfig', gruntConfig, grunt
+  # #### Invoke hook `trussServerGruntConfig`.
+  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
 
-  # #### Invoke hook `trussGruntConfigAlter`.
-  pkgman.invoke 'trussGruntConfigAlter', gruntConfig, grunt
+  # #### Invoke hook `trussServerGruntConfigAlter`.
+  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
 
   # Initialize configuration.
   grunt.initConfig gruntConfig._taskConfig

@@ -16,8 +16,8 @@ server = null
 
 exports.pkgmanRegister = (registrar) ->
 
-  # #### Implements hook `trussConfigServer`.
-  registrar.registerHook 'trussConfigServer', ->
+  # #### Implements hook `trussServerPackageConfig`.
+  registrar.registerHook 'trussServerPackageConfig', ->
 
     # The prompt display for REPL clients.
     prompt: 'truss> '
@@ -28,11 +28,11 @@ exports.pkgmanRegister = (registrar) ->
     # Use a CoffeeScript REPL?
     useCoffee: true
 
-  # #### Implements hook `trussProcessExit`.
-  registrar.registerHook 'trussProcessExit', -> server?.close()
+  # #### Implements hook `trussServerProcessExit`.
+  registrar.registerHook 'trussServerProcessExit', -> server?.close()
 
-  # #### Implements hook `trussBootstrapMiddleware`.
-  registrar.registerHook 'trussBootstrapMiddleware', ->
+  # #### Implements hook `trussServerBootstrapMiddleware`.
+  registrar.registerHook 'trussServerBootstrapMiddleware', ->
 
     label: 'REPL'
     middleware: [
@@ -43,8 +43,8 @@ exports.pkgmanRegister = (registrar) ->
 
         server = net.createServer (socket) ->
 
-          # #### Invoke hook `trussReplContext`.
-          pkgman.invoke 'trussReplContext', context = {}
+          # #### Invoke hook `trussServerReplContext`.
+          pkgman.invoke 'trussServerReplContext', context = {}
 
           # REPL server options.
           opts =
@@ -77,8 +77,8 @@ exports.pkgmanRegister = (registrar) ->
 
                 callback error
 
-          # Spin up the server, inject the values from `trussReplContext`, and
-          # prepare for later cleanup.
+          # Spin up the server, inject the values from
+          # `trussServerReplContext`, and prepare for later cleanup.
           repl = replServer.start opts
           repl.context[key] = value for key, value of context
           repl.on 'exit', -> socket.end()

@@ -16,25 +16,24 @@ exports.start = (errorHandler) ->
   pkgman.registerPackageList config.get 'packageList'
 
   # Load the packages' configuration settings and set into the default config.
-  # #### Invoke hook `trussConfigServer`.
+  # #### Invoke hook `trussServerPackageConfig`.
   packageConfig = new config.Config()
-  for path, value of pkgman.invoke 'trussConfigServer'
+  for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
-
   config.setDefaults packageConfig: packageConfig.toJSON()
 
   # Run the pre-bootstrap phase.
-  # #### Invoke hook `trussPreBootstrap`.
+  # #### Invoke hook `trussServerPreBootstrap`.
   debug 'Pre bootstrap started...'
-  pkgman.invoke 'trussPreBootstrap'
+  pkgman.invoke 'trussServerPreBootstrap'
   debug 'Pre bootstrap complete.'
 
   # Load the bootstrap middleware.
-  # #### Invoke hook `trussBootstrapMiddleware`.
+  # #### Invoke hook `trussServerBootstrapMiddleware`.
   debug 'Bootstrap started...'
   bootstrapMiddleware = middleware.fromHook(
-    'trussBootstrapMiddleware'
-    config.get 'bootstrapMiddleware'
+    'trussServerBootstrapMiddleware'
+    config.get 'serverBootstrapMiddleware'
   )
 
   # Dispatch the bootstrap middleware and log if everything is okay.
