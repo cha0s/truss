@@ -58,6 +58,7 @@ exports.Middleware = class Middleware extends EventEmitter
         try
           return fn error
         catch error
+          return
 
       current = self._middleware[index++]
 
