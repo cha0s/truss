@@ -39,5 +39,5 @@ unless fork()
   # Spin up the server.
   require('main').start (error) ->
 
-    console.error errors.stack error
+    console.error require('errors').stack error
     process.exit 1
