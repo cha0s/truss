@@ -133,7 +133,7 @@ exports.fromHook = (hook, paths, args...) ->
 # ## middleware.fromConfig
 #
 # *Create a middleware stack from a configuration path.*
-exports.fromConfig = (path, args...) ->
+exports.fromConfig = (path) ->
 
   exports.fromHook(
     pkgman.normalizePath path
