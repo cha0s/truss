@@ -43,8 +43,8 @@ exports.pkgmanRegister = (registrar) ->
 
         server = net.createServer (socket) ->
 
-          # #### Invoke hook `trussServerReplContext`.
-          pkgman.invoke 'trussServerReplContext', context = {}
+          # #### Invoke hook `trussReplServerContext`.
+          pkgman.invoke 'trussReplServerContext', context = {}
 
           # REPL server options.
           opts =
@@ -78,7 +78,7 @@ exports.pkgmanRegister = (registrar) ->
                 callback error
 
           # Spin up the server, inject the values from
-          # `trussServerReplContext`, and prepare for later cleanup.
+          # `trussReplServerContext`, and prepare for later cleanup.
           repl = replServer.start opts
           repl.context[key] = value for key, value of context
           repl.on 'exit', -> socket.end()
