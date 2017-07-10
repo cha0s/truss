@@ -136,6 +136,6 @@ exports.fromHook = (hook, paths, args...) ->
 exports.fromConfig = (path) ->
 
   exports.fromHook(
-    pkgman.normalizePath path
+    pkgman.PackageManager.normalizePath path
     config.get "packageConfig:#{path}"
   )

@@ -41,9 +41,9 @@ module.exports = class TrussHttpServerStub extends TrussHttpServerAbstract
 
     super
 
-    # Invoke the
+    # Invoke the request middleware.
     @_server.on 'request', (req, res) ->
-      self._middleware.dispatch req, res, ->
+      self._requestMiddleware.dispatch req, res, ->
 
   server: -> @_server
 

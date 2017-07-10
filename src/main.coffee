@@ -5,15 +5,14 @@
 # forked copy of the application including require paths to allow core and
 # custom packages to be included without qualification.
 
-config = require 'config'
 debug = require('debug') 'truss:main'
 middleware = require 'middleware'
 pkgman = require 'pkgman'
 
-exports.start = (errorHandler) ->
+exports.start = (config, fn) ->
 
   # Register the configured packages.
-  pkgman.registerPackageList config.get 'packageList'
+  pkgman.registerPackages config.get 'packageList'
 
   # Load the packages' configuration settings and set into the default config.
   # #### Invoke hook `trussServerPackageConfig`.
@@ -38,7 +37,7 @@ exports.start = (errorHandler) ->
 
   # Dispatch the bootstrap middleware and log if everything is okay.
   bootstrapMiddleware.dispatch (error) ->
-    return debug 'Bootstrap complete.' unless error?
+    debug 'Bootstrap complete.' unless error?
 
-    # Log any error and exit.
-    errorHandler error
+    # Finish the bootstrap.
+    fn error

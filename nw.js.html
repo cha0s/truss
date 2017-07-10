@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Hello World!</title>
+
+    <script>
+
+      require('coffee-script/register');
+      require('./src/bootstrap').bootstrap();
+
+      // Spin up the server in a new thread.
+      var serverWorker = new Worker('/server.js');
+
+      // Listen for the server up message to be posted.
+      var httpServerUpListener = function(message) {
+        if ('truss-http-server-start' !== message.data.type) return;
+
+        var listenTarget = message.data.listenTarget;
+        var port = listenTarget[0];
+        if (!Number.isInteger(port)) {
+          throw new Error(
+            "nw.js isn't going to work with an HTTP UNIX socket."
+          );
+        }
+
+        var host = listenTarget.length === 1 ? 'localhost' : listenTarget[1];
+        window.location.replace('http://' + host + ':' + port);
+
+        // Only once.
+        serverWorker.removeEventListener('message', httpServerUpListener);
+      }
+      serverWorker.addEventListener('message', httpServerUpListener);
+
+    </script>
+
+  </head>
+
+  <body>
+  </body>
+
+</html>

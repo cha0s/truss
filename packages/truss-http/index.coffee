@@ -51,6 +51,20 @@ exports.pkgmanRegister = (registrar) ->
     ]
 
   # #### Implements hook `trussHttpServerRequestMiddleware`.
+  registrar.registerHook 'stub/routes', 'trussHttpServerRequestMiddleware', (http) ->
+
+    label: 'HTTP routes'
+    middleware: [
+
+      (req, res, next) ->
+
+        console.log req.url
+
+        next()
+
+    ]
+
+  # #### Implements hook `trussHttpServerRequestMiddleware`.
   registrar.registerHook 'trussHttpServerRequestMiddleware', (http) ->
 
     label: 'Finalize HTTP request'
@@ -59,7 +73,7 @@ exports.pkgmanRegister = (registrar) ->
       (req, res, next) ->
 
         # If there's something to deliver, do it.
-        return res.send res.delivery if res.delivery?
+        return res.end res.delivery if res.delivery?
 
         # Nothing specified for delivery? Return a 'not implemented' error.
         res.writeHead 501

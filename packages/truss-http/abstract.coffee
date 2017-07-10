@@ -73,6 +73,12 @@ module.exports = class TrussHttpServerAbstract
 
       httpDebug "Shrub HTTP server up and running on #{target}!"
 
+      # Post a message about it.
+      global?.postMessage?(
+        type: 'truss-http-server-start'
+        listenTarget: listenTarget
+      )
+
     return promise
 
   # ## TrussHttpServerAbstract#registerMiddleware

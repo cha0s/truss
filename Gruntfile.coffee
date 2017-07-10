@@ -5,24 +5,8 @@
 
 module.exports = (grunt) ->
 
-  # Fork so we can bootstrap a Truss environment.
-  if child = fork()
-    grunt.registerTask 'bootstrap', ->
-
-      done = @async()
-
-      child.on 'close', (code) ->
-
-        return done() if code is 0
-
-        grunt.fail.fatal 'Child process failed', code
-
-    # Forward all tasks.
-    {tasks} = require 'grunt/lib/grunt/cli'
-    grunt.registerTask tasks[0] ? 'default', ['bootstrap']
-    grunt.registerTask(task, (->)) for task in tasks.slice 1
-
-    return
+  # Bootstrap a Truss environment.
+  require("#{__dirname}/src/bootstrap").bootstrap()
 
   # Load configuration.
   fs = require 'fs'
@@ -49,7 +33,7 @@ module.exports = (grunt) ->
 
   # Register the configured packages.
   pkgman = require 'pkgman'
-  pkgman.registerPackageList config.get 'packageList'
+  pkgman.registerPackages config.get 'packageList'
 
   # Load the packages' configuration settings and set into the default config.
   # #### Invoke hook `trussServerPackageConfig`.
@@ -57,13 +41,6 @@ module.exports = (grunt) ->
   for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
   config.setDefaults packageConfig: packageConfig.toJSON()
-
-  # # Spin up the server.
-
-  # require('main').start()
-
-  # config.load()
-  # config.loadPackageSettings()
 
   # ## GruntConfiguration
   class GruntConfiguration

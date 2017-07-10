@@ -1,11 +1,13 @@
 {
   "name": "truss",
+  "main": "nw.js.html",
   "version": "1.0.0",
   "author": "cha0s <cha0s@cha0s.io>",
   "scripts": {
     "debug": "coffee --nodejs debug server.coffee",
     "doc": "mkdir -p gh-pages && coffee generate-docs.coffee && node_modules/groc/bin/groc",
-    "start": "DEBUG=truss:* coffee server.coffee"
+    "start": "DEBUG=truss:* coffee server.coffee",
+    "nw": "DEBUG=truss:* nw.js/nw --enable-node-worker --enable-logging=stderr ."
   },
   "repository": {
     "type": "git",
@@ -13,6 +15,7 @@
   },
   "dependencies": {
     "bluebird": "^3.5.0",
+    "cheerio": "^0.22.0",
     "debug": "^2.6.4",
     "inflection": "^1.12.0",
     "js-yaml": "^3.8.3",
