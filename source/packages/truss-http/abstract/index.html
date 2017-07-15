@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>abstract.coffee - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/highlight.css">
+  <link href="../../../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "abstract.coffee";
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../../js/highlight.pack.js"></script>
+  <script src="../../../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../../..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../hooks/">Hooks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../Gruntfile/">Gruntfile.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-dox/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">abstract.coffee</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#abstract-http-server">Abstract HTTP server</a></li>
+                
+                    <li><a class="toctree-l4" href="#trusshttpserverabstract">TrussHttpServerAbstract</a></li>
+                
+                    <li><a class="toctree-l4" href="#constructor">constructor</a></li>
+                
+                    <li><a class="toctree-l4" href="#trusshttpserverabstractaddroute">TrussHttpServerAbstract#addRoute</a></li>
+                
+                    <li><a class="toctree-l4" href="#trusshttpserverabstractconfig">TrussHttpServerAbstract#config</a></li>
+                
+                    <li><a class="toctree-l4" href="#trusshttpserverabstractlisten">TrussHttpServerAbstract#listen</a></li>
+                
+                    <li><a class="toctree-l4" href="#trusshttpserverabstractregistermiddleware">TrussHttpServerAbstract#registerMiddleware</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/logging/">logging.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../src/pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>truss-http &raquo;</li>
+        
+      
+    
+    <li>abstract.coffee</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="abstract-http-server">Abstract HTTP server</h1>
+<p><em>An abstract HTTP server interface.</em></p>
+<pre><code class="coffeescript">_ = require 'lodash'
+Promise = require 'bluebird'
+
+config = require 'config'
+middleware = require 'middleware'
+pkgman = require 'pkgman'
+
+httpDebug = require('debug') 'truss:http'
+httpMiddlewareDebug = require('debug') 'truss-silly:http:middleware'
+</code></pre>
+
+<h2 id="trusshttpserverabstract">TrussHttpServerAbstract</h2>
+<p>An abstract interface to be implemented by an HTTP server (e.g.
+<a href="../source/packages/truss-http-express">Express</a>).</p>
+<pre><code class="coffeescript">module.exports = class TrussHttpServerAbstract
+</code></pre>
+
+<h2 id="constructor"><em>constructor</em></h2>
+<p><em>Create the server.</em></p>
+<pre><code class="coffeescript">  constructor: -&gt;
+
+    @_requestMiddleware = null
+    @_routes = []
+</code></pre>
+
+<h2 id="trusshttpserverabstractaddroute">TrussHttpServerAbstract#addRoute</h2>
+<p><em>Add HTTP routes.</em></p>
+<pre><code class="coffeescript">  addRoute: (route) -&gt; @_routes.push route
+</code></pre>
+
+<h2 id="trusshttpserverabstractconfig">TrussHttpServerAbstract#config</h2>
+<p><em>Lookup a configuration value.</em></p>
+<pre><code class="coffeescript">  config: (key) -&gt; config.get &quot;packageConfig:truss-http:#{key}&quot;
+</code></pre>
+
+<h2 id="trusshttpserverabstractlisten">TrussHttpServerAbstract#listen</h2>
+<p><em>Listen for HTTP connections.</em></p>
+<pre><code class="coffeescript">  listen: -&gt;
+    self = this
+</code></pre>
+
+<p>Promise to be resolved when listening starts.</p>
+<pre><code class="coffeescript">    promise = new Promise (resolve, reject) -&gt;
+
+      do tryListener = -&gt; self.listener().done(
+        resolve
+
+        (error) -&gt;
+          return reject error unless 'EADDRINUSE' is error.code
+
+          httpDebug 'HTTP listen target in use... retrying in 2 seconds'
+          setTimeout tryListener, 2000
+
+      )
+</code></pre>
+
+<p>Once listening, log about it.</p>
+<pre><code class="coffeescript">    promise.then -&gt;
+
+      listenTarget = self.config 'listenTarget'
+      listenTarget = [listenTarget] unless Array.isArray listenTarget
+
+      if listenTarget.length is 1
+
+        target = listenTarget[0]
+        target = &quot;port #{target}&quot; if _.isNumber listenTarget[0]
+
+      else
+
+        target = &quot;#{listenTarget[1]}:#{listenTarget[0]}&quot;
+
+      httpDebug &quot;Shrub HTTP server up and running on #{target}!&quot;
+</code></pre>
+
+<p>Post a message about it.</p>
+<pre><code class="coffeescript">      global?.postMessage?(
+        type: 'truss-http-server-start'
+        listenTarget: listenTarget
+      )
+
+    return promise
+</code></pre>
+
+<h2 id="trusshttpserverabstractregistermiddleware">TrussHttpServerAbstract#registerMiddleware</h2>
+<p><em>Gather and initialize HTTP middleware.</em></p>
+<pre><code class="coffeescript">  registerMiddleware: -&gt;
+
+    httpMiddlewareDebug '- Loading HTTP middleware...'
+
+    httpMiddleware = @config('requestMiddleware').concat()
+</code></pre>
+
+<p>Make absolutely sure the requests are finalized.</p>
+<pre><code class="coffeescript">    httpMiddleware.push 'truss-http'
+</code></pre>
+
+<h4 id="invoke-hook-trusshttpserverrequestmiddleware">Invoke hook <a href="../../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
+<p>Invoked every time an HTTP connection is established.</p>
+<pre><code class="coffeescript">    @_requestMiddleware = middleware.fromHook(
+      'trussHttpServerRequestMiddleware', httpMiddleware, this
+    )
+
+    httpMiddlewareDebug '- HTTP middleware loaded.'
+</code></pre>
+
+<p>Ensure any subclass implements these "pure virtual" methods.</p>
+<pre><code class="coffeescript">  this::[method] = (-&gt; throw new ReferenceError(
+    &quot;TrussHttpServerAbstract::#{method} is a pure virtual method!&quot;
+  )) for method in [
+    'addRoute', 'listener', 'server', 'trustProxy'
+  ]
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../" class="btn btn-neutral float-right" title="index.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../truss-frontend/" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../truss-frontend/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

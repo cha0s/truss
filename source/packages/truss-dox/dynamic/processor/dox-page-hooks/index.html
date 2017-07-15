@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>dox-page-hooks.coffee - Truss</title>
+  
+
+  <link rel="shortcut icon" href="../../../../../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../../css/highlight.css">
+  <link href="../../../../../../css/extra.css" rel="stylesheet">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "dox-page-hooks.coffee";
+  </script>
+  
+  <script src="../../../../../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../../../../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../../../../../js/highlight.pack.js"></script>
+  <script src="../../../../../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../../../.." class="icon icon-home"> Truss</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../..">README</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../guide/errors/">Error handling</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../guide/packages/">Package system</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../guide/concepts/">Concepts and conventions</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Reference</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../hooks/">Hooks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../packages/">Packages</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../../todos/">TODO list</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Source</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>config</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../config/default.settings/">default.settings.yml</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../Gruntfile/">Gruntfile.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>packages</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-dox</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">dox-page-hooks.coffee</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#hooks-page">Hooks page</a></li>
+                
+                    <li><a class="toctree-l4" href="#todo-dynamic-hook-locations">TODO: Dynamic hook locations.</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-repl</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../server/">server.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>src</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/bootstrap/">bootstrap.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/config/">config.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/logging/">logging.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/main/">main.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/middleware/">middleware.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../../../../src/pkgman/">pkgman.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../../..">Truss</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>processor &raquo;</li>
+        
+      
+    
+    <li>dox-page-hooks.coffee</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="https://github.com/cha0s/truss" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="hooks-page">Hooks page</h1>
+<p><em>Generate the hooks page.</em></p>
+<pre><code class="coffeescript">fs = require 'fs'
+
+{Transform} = require 'stream'
+
+Promise = require 'bluebird'
+
+DoxPage = require './dox-page'
+
+module.exports = class DoxPageHooks extends DoxPage
+</code></pre>
+
+<p>Map hooks to source files.</p>
+<pre><code class="coffeescript">  buildHookMap: (transforms) -&gt;
+
+    hookMap = {}
+
+    for key in ['invocations', 'implementations']
+      for transform in transforms
+        for item in transform[key]
+          ((hookMap[item] ?= {})[key] ?= []).push transform.stream.file
+
+    return hookMap
+</code></pre>
+
+<p>Load hook templates.</p>
+<pre><code class="coffeescript">  hookTemplates: (hooks) -&gt;
+
+    templates = {}
+
+    promises = for hook in hooks
+      do (hook) -&gt; new Promise (resolve, reject) -&gt;
+</code></pre>
+
+<h6 id="todo-dynamic-hook-locations">TODO: Dynamic hook locations.</h6>
+<pre><code class="coffeescript">        fs.readFile &quot;docs/hook/#{hook}.md&quot;, (error, output) -&gt;
+          return reject error if error? and error.code isnt 'ENOENT'
+          templates[hook] = output
+          resolve()
+
+    Promise.all(promises).then -&gt; templates
+
+  transformsOutput: (transforms) -&gt;
+    self = this
+
+    wordingFor =
+      implementation: 'implements'
+      invocation: 'invoke'
+
+    hookMap = @buildHookMap transforms
+    @hookTemplates(hooks = Object.keys hookMap).then (templates) -&gt;
+
+      render = ''
+
+      for hook in hooks
+</code></pre>
+
+<p>Hook name.</p>
+<pre><code class="coffeescript">        render += &quot;## #{hook}\n\n&quot;
+</code></pre>
+
+<p>Hook template description.</p>
+<pre><code class="coffeescript">        render += templates[hook] + '\n\n' if templates[hook]
+</code></pre>
+
+<p>Output the i(mplement|nvoc)ations.</p>
+<pre><code class="coffeescript">        for key in ['implementation', 'invocation']
+          continue unless hookMap[hook][pluralKey = &quot;#{key}s&quot;]?
+
+          render += '&lt;div class=&quot;admonition note&quot;&gt;\n'
+
+          count = hookMap[hook][pluralKey].length
+          render += &quot;  &lt;p class=\&quot;admonition-title\&quot;&gt;#{count} #{key}&quot;
+          render += 's' if count &gt; 1
+
+          render += '&lt;/p&gt;\n'
+          render += '  &lt;table&gt;\n'
+</code></pre>
+
+<p>Output each i(mplement|nvoc)ation.</p>
+<pre><code class="coffeescript">          instances = for file, index in hookMap[hook][pluralKey]
+
+            sourceLink = self.linkToSource file
+
+            &quot;&quot;&quot;
+&lt;tr class=&quot;#{if index % 2 then 'odd' else 'even'}\&quot;&gt;
+  &lt;td&gt;
+    &lt;a href=&quot;../source/#{sourceLink}&quot;&gt;#{file}&lt;/a&gt;
+  &lt;/td&gt;
+  &lt;td align=&quot;right&quot;&gt;
+    &lt;a href=&quot;../source/#{sourceLink}##{wordingFor[key]}-hook-#{self.uniqueId sourceLink, hook}&quot;&gt;#{key}&lt;/a&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&quot;&quot;&quot;.split('\n').map((e) -&gt; &quot;    #{e}&quot;).join('\n')
+
+          render += instances.join '\n'
+
+          render += '\n  &lt;/table&gt;\n'
+          render += '&lt;/div&gt;'
+          render += '\n\n'
+
+      return render
+
+  transformForStream: (stream) -&gt; class HookTransform extends Transform
+
+    constructor: (@processor, @stream) -&gt;
+      super null
+
+      @implementations = []
+      @invocations = []
+
+    _transform: (chunk, encoding, done) -&gt;
+      line = chunk.toString 'utf8'
+
+      if matches = line.match /^\s*# #### Implements hook `([^`]+)`/
+        @implementations.push matches[1]
+
+      if matches = line.match /^\s*# #### Invoke hook `([^`]+)`/
+        @invocations.push matches[1]
+
+      done()
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dox-page-mkdocs/" class="btn btn-neutral float-right" title="dox-page-mkdocs.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../dox-page-mkdocs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
