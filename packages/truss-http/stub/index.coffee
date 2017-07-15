@@ -1,3 +1,6 @@
+# # HTTP server stub implementation
+#
+# *A barebones HT TP server implementation.*
 
 Promise = require 'bluebird'
 

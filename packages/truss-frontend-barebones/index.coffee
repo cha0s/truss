@@ -1,3 +1,6 @@
+# # Barebones front-end implementation
+#
+# *Build a simple HTML response.*
 
 _ = require 'lodash'
 
@@ -5,6 +8,7 @@ pkgman = require 'pkgman'
 
 exports.pkgmanRegister = (registrar) ->
 
+  # #### Implements hook `trussFrontendRenderHtml`.
   registrar.registerHook 'trussFrontendRenderHtml', (req, res) ->
 
     {$} = res

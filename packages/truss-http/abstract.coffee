@@ -1,4 +1,4 @@
-# # Abstract HTTP Server
+# # Abstract HTTP server
 #
 # *An abstract HTTP server interface.*
 

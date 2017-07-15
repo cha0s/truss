@@ -1,6 +1,6 @@
-# # HTTP Server
+# # HTTP server
 #
-# Manage HTTP connections.
+# *Manage HTTP connections.*
 
 _ = require 'lodash'
 

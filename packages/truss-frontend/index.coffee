@@ -1,3 +1,6 @@
+# # Front-end system
+#
+# *Front-end abstraction: respond to client, render response, etc.*
 
 _ = require 'lodash'
 cheerio = require 'cheerio'
@@ -9,10 +12,13 @@ config = require 'config'
 
 exports.pkgmanRegister = (registrar) ->
 
+  # #### Implements hook `trussFrontendPackageConfig`.
   registrar.registerHook 'trussFrontendPackageConfig', ->
 
+  # #### Implements hook `trussFrontendPackageList`.
   registrar.registerHook 'trussFrontendPackageList', (path) ->
 
+  # #### Implements hook `trussHttpServerRequestMiddleware`.
   registrar.registerHook 'config', 'trussHttpServerRequestMiddleware', ->
 
     label: 'Build client configuration for request'
@@ -42,6 +48,7 @@ exports.pkgmanRegister = (registrar) ->
 
     ]
 
+  # #### Implements hook `trussHttpServerRequestMiddleware`.
   registrar.registerHook 'render', 'trussHttpServerRequestMiddleware', ->
 
     label: 'Render delivery for request'
