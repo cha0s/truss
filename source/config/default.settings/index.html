@@ -166,10 +166,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../../packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -177,6 +242,73 @@
         <a class="" href="../../packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -229,6 +361,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../src/logging/">logging.coffee</a>
         
     </li>
 
@@ -304,23 +443,24 @@
 <hr />
 <h2 id="package-list">Package list</h2>
 <p>The list of packages active for this application.</p>
-<pre><code class="no-highlight">packageList:
+<pre><code class="yaml">packageList:
 </code></pre>
 
 <h3 id="development">Development</h3>
 <p>Project documentation. Safe to disable on production.</p>
-<pre><code class="no-highlight">  - 'truss-dox'
+<pre><code class="yaml">  - 'truss-dox'
 </code></pre>
 
 <h3 id="production">Production</h3>
 <p>REPL to control the application.</p>
-<pre><code class="no-highlight">  - 'truss-repl'
+<pre><code class="yaml">  - 'truss-repl'
 </code></pre>
 
 <h2 id="package-configuration">Package configuration</h2>
 <p>Values for packages which correspond with the values provided by packages'
-implementations of hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a>.</p>
-<pre><code class="no-highlight">packageConfig: {
+implementations of hook
+<a href="../../../hooks#trussserverpackageconfig"><code>trussServerPackageConfig</code></a>.</p>
+<pre><code class="yaml">packageConfig: {
 }
 </code></pre>
 
@@ -328,12 +468,12 @@ implementations of hook <a href="../../../hooks#trussconfigserver"><code>trussCo
 <p>The list of middleware that run in the bootstrap phase. This is where you
 spin up your HTTP/socket server, or whatever else. The list contains the
 names of packages which have an implementation of hook
-<a href="../../../hooks#trussbootstrapmiddleware"><code>trussBootstrapMiddleware</code></a>.</p>
-<pre><code class="no-highlight">bootstrapMiddleware:
+<a href="../../../hooks#trussserverbootstrapmiddleware"><code>trussServerBootstrapMiddleware</code></a>.</p>
+<pre><code class="yaml">serverBootstrapMiddleware:
 </code></pre>
 
 <p>Spin up the REPL.</p>
-<pre><code class="no-highlight">  - 'truss-repl'
+<pre><code class="yaml">  - 'truss-repl'
 </code></pre>
               
             </div>

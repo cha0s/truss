@@ -143,10 +143,7 @@
             
                 <li class="toctree-l3"><a href="#gruntfile">Gruntfile</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussconfigserver">Invoke hook trussConfigServer</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#spin-up-the-server">Spin up the server.</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussserverpackageconfig">Invoke hook trussServerPackageConfig</a></li>
                 
                     <li><a class="toctree-l4" href="#gruntconfiguration">GruntConfiguration</a></li>
                 
@@ -179,10 +176,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -190,6 +252,73 @@
         <a class="" href="../packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -242,6 +371,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/logging/">logging.coffee</a>
         
     </li>
 
@@ -320,25 +456,8 @@
 module.exports = (grunt) -&gt;
 </code></pre>
 
-<p>Fork so we can bootstrap a Truss environment.</p>
-<pre><code class="coffeescript">  if child = fork()
-    grunt.registerTask 'bootstrap', -&gt;
-
-      done = @async()
-
-      child.on 'close', (code) -&gt;
-
-        return done() if code is 0
-
-        grunt.fail.fatal 'Child process failed', code
-</code></pre>
-
-<p>Forward all tasks.</p>
-<pre><code class="coffeescript">    {tasks} = require 'grunt/lib/grunt/cli'
-    grunt.registerTask tasks[0] ? 'default', ['bootstrap']
-    grunt.registerTask(task, (-&gt;)) for task in tasks.slice 1
-
-    return
+<p>Bootstrap a Truss environment.</p>
+<pre><code class="coffeescript">  require(&quot;#{__dirname}/src/bootstrap&quot;).bootstrap()
 </code></pre>
 
 <p>Load configuration.</p>
@@ -369,27 +488,16 @@ module.exports = (grunt) -&gt;
 
 <p>Register the configured packages.</p>
 <pre><code class="coffeescript">  pkgman = require 'pkgman'
-  pkgman.registerPackageList config.get 'packageList'
+  pkgman.registerPackages config.get 'packageList'
 </code></pre>
 
 <p>Load the packages' configuration settings and set into the default config.</p>
-<h4 id="invoke-hook-trussconfigserver">Invoke hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a></h4>
+<h4 id="invoke-hook-trussserverpackageconfig">Invoke hook <a href="../../../hooks#trussserverpackageconfig"><code>trussServerPackageConfig</code></a></h4>
 <pre><code class="coffeescript">  packageConfig = new config.Config()
-  for path, value of pkgman.invoke 'trussConfigServer'
+  for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
-
   config.setDefaults packageConfig: packageConfig.toJSON()
 </code></pre>
-
-<h1 id="spin-up-the-server">Spin up the server.</h1>
-<pre><code class="coffeescript"></code></pre>
-
-<p>require('main').start()</p>
-<pre><code class="coffeescript"></code></pre>
-
-<p>config.load()
-config.loadPackageSettings()</p>
-<pre><code class="coffeescript"></code></pre>
 
 <h2 id="gruntconfiguration">GruntConfiguration</h2>
 <pre><code class="coffeescript">  class GruntConfiguration
@@ -525,12 +633,12 @@ Defaults to <code>'app'</code>.</p>
       grunt.task.run 'build'
 </code></pre>
 
-<h4 id="invoke-hook-trussgruntconfig">Invoke hook <a href="../../../hooks#trussgruntconfig"><code>trussGruntConfig</code></a></h4>
-<pre><code class="coffeescript">  pkgman.invoke 'trussGruntConfig', gruntConfig, grunt
+<h4 id="invoke-hook-trussservergruntconfig">Invoke hook <a href="../../../hooks#trussservergruntconfig"><code>trussServerGruntConfig</code></a></h4>
+<pre><code class="coffeescript">  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
 </code></pre>
 
-<h4 id="invoke-hook-trussgruntconfigalter">Invoke hook <a href="../../../hooks#trussgruntconfigalter"><code>trussGruntConfigAlter</code></a></h4>
-<pre><code class="coffeescript">  pkgman.invoke 'trussGruntConfigAlter', gruntConfig, grunt
+<h4 id="invoke-hook-trussservergruntconfigalter">Invoke hook <a href="../../../hooks#trussservergruntconfigalter"><code>trussServerGruntConfigAlter</code></a></h4>
+<pre><code class="coffeescript">  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
 </code></pre>
 
 <p>Initialize configuration.</p>
@@ -555,7 +663,7 @@ Defaults to <code>'app'</code>.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../packages/truss-dox/dynamic/" class="btn btn-neutral float-right" title="dynamic.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../packages/truss-dox/dynamic/" class="btn btn-neutral float-right" title="index.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../config/default.settings/" class="btn btn-neutral" title="default.settings.yml"><span class="icon icon-circle-arrow-left"></span> Previous</a>

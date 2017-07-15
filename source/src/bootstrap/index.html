@@ -153,10 +153,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../../packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -164,6 +229,73 @@
         <a class="" href="../../packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -207,8 +339,6 @@
             
                 <li class="toctree-l3"><a href="#process-bootstrap">Process bootstrap</a></li>
                 
-                    <li><a class="toctree-l4" href="#boostrapfork">boostrap.fork</a></li>
-                
             
             </ul>
         
@@ -225,6 +355,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../logging/">logging.coffee</a>
         
     </li>
 
@@ -297,18 +434,9 @@
             <div class="section">
               
                 <h1 id="process-bootstrap">Process bootstrap</h1>
-<p><em>Bootstrap the server application by forking to ensure require paths are set
+<p><em>Bootstrap the application and ensure require paths are set
 by default.</em></p>
-<pre><code class="coffeescript">{fork} = require 'child_process'
-</code></pre>
-
-<h2 id="boostrapfork">boostrap.fork</h2>
-<p><em>Fork the process in order to inject require paths if necessary.</em></p>
-<pre><code class="coffeescript">exports.fork = -&gt;
-</code></pre>
-
-<p>If we've already forked, our work is done.</p>
-<pre><code class="coffeescript">  return null if process.env.TRUSS_FORKED?
+<pre><code class="coffeescript">exports.bootstrap = -&gt;
 </code></pre>
 
 <p>Ensure we have default require paths.</p>
@@ -318,27 +446,18 @@ by default.</em></p>
     'custom:packages:src'
 </code></pre>
 
-<p>Pass all arguments to the child process.</p>
-<pre><code class="coffeescript">  args = process.argv.slice 2
-</code></pre>
-
-<p>Pass the environment to the child process.</p>
-<pre><code class="coffeescript">  options = env: process.env
-</code></pre>
-
 <p>Integrate any NODE_PATH after the Truss require paths.</p>
 <pre><code class="coffeescript">  if process.env.NODE_PATH?
     TRUSS_REQUIRE_PATH += &quot;:#{process.env.NODE_PATH}&quot;
 </code></pre>
 
-<p>Inject Truss require paths as the new NODE_PATH, and signal that we've
-forked.</p>
-<pre><code class="coffeescript">  options.env.NODE_PATH = TRUSS_REQUIRE_PATH
-  options.env.TRUSS_FORKED = true
-</code></pre>
+<p>HACK ALERT: Use internal node.js structure to modify the require paths
+on-the-fly.</p>
+<pre><code class="coffeescript">  module = require 'module'
+  process.env['NODE_PATH'] = TRUSS_REQUIRE_PATH
+  module._initPaths()
 
-<p>Fork it.</p>
-<pre><code class="coffeescript">  fork process.argv[1], args, options
+  return
 </code></pre>
               
             </div>

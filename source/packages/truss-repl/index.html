@@ -153,10 +153,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -164,6 +229,73 @@
         <a class="" href="../truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -182,13 +314,13 @@
             
                 <li class="toctree-l3"><a href="#repl">REPL</a></li>
                 
-                    <li><a class="toctree-l4" href="#implements-hook-trussconfigserver">Implements hook trussConfigServer</a></li>
+                    <li><a class="toctree-l4" href="#implements-hook-trussserverpackageconfig">Implements hook trussServerPackageConfig</a></li>
                 
-                    <li><a class="toctree-l4" href="#implements-hook-trussprocessexit">Implements hook trussProcessExit</a></li>
+                    <li><a class="toctree-l4" href="#implements-hook-trussserverprocessexit">Implements hook trussServerProcessExit</a></li>
                 
-                    <li><a class="toctree-l4" href="#implements-hook-trussbootstrapmiddleware">Implements hook trussBootstrapMiddleware</a></li>
+                    <li><a class="toctree-l4" href="#implements-hook-trussserverbootstrapmiddleware">Implements hook trussServerBootstrapMiddleware</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussreplcontext">Invoke hook trussReplContext</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussreplservercontext">Invoke hook trussReplServerContext</a></li>
                 
             
             </ul>
@@ -231,6 +363,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../src/logging/">logging.coffee</a>
         
     </li>
 
@@ -321,8 +460,8 @@ debug = require('debug') 'truss:repl'
 exports.pkgmanRegister = (registrar) -&gt;
 </code></pre>
 
-<h4 id="implements-hook-trussconfigserver">Implements hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'trussConfigServer', -&gt;
+<h4 id="implements-hook-trussserverpackageconfig">Implements hook <a href="../../../hooks#trussserverpackageconfig"><code>trussServerPackageConfig</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussServerPackageConfig', -&gt;
 </code></pre>
 
 <p>The prompt display for REPL clients.</p>
@@ -337,12 +476,12 @@ exports.pkgmanRegister = (registrar) -&gt;
 <pre><code class="coffeescript">    useCoffee: true
 </code></pre>
 
-<h4 id="implements-hook-trussprocessexit">Implements hook <a href="../../../hooks#trussprocessexit"><code>trussProcessExit</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'trussProcessExit', -&gt; server?.close()
+<h4 id="implements-hook-trussserverprocessexit">Implements hook <a href="../../../hooks#trussserverprocessexit"><code>trussServerProcessExit</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussServerProcessExit', -&gt; server?.close()
 </code></pre>
 
-<h4 id="implements-hook-trussbootstrapmiddleware">Implements hook <a href="../../../hooks#trussbootstrapmiddleware"><code>trussBootstrapMiddleware</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'trussBootstrapMiddleware', -&gt;
+<h4 id="implements-hook-trussserverbootstrapmiddleware">Implements hook <a href="../../../hooks#trussserverbootstrapmiddleware"><code>trussServerBootstrapMiddleware</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussServerBootstrapMiddleware', -&gt;
 
     label: 'REPL'
     middleware: [
@@ -354,8 +493,8 @@ exports.pkgmanRegister = (registrar) -&gt;
         server = net.createServer (socket) -&gt;
 </code></pre>
 
-<h4 id="invoke-hook-trussreplcontext">Invoke hook <a href="../../../hooks#trussreplcontext"><code>trussReplContext</code></a></h4>
-<pre><code class="coffeescript">          pkgman.invoke 'trussReplContext', context = {}
+<h4 id="invoke-hook-trussreplservercontext">Invoke hook <a href="../../../hooks#trussreplservercontext"><code>trussReplServerContext</code></a></h4>
+<pre><code class="coffeescript">          pkgman.invoke 'trussReplServerContext', context = {}
 </code></pre>
 
 <p>REPL server options.</p>
@@ -394,8 +533,8 @@ exports.pkgmanRegister = (registrar) -&gt;
                 callback error
 </code></pre>
 
-<p>Spin up the server, inject the values from <code>trussReplContext</code>, and
-prepare for later cleanup.</p>
+<p>Spin up the server, inject the values from
+<code>trussReplServerContext</code>, and prepare for later cleanup.</p>
 <pre><code class="coffeescript">          repl = replServer.start opts
           repl.context[key] = value for key, value of context
           repl.on 'exit', -&gt; socket.end()
@@ -427,7 +566,7 @@ prepare for later cleanup.</p>
         <a href="../../server/" class="btn btn-neutral float-right" title="server.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../truss-dox/" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../truss-http/stub/" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -455,7 +594,7 @@ prepare for later cleanup.</p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../truss-dox/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../truss-http/stub/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../../server/" style="color: #fcfcfc">Next &raquo;</a></span>

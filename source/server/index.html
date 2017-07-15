@@ -153,10 +153,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -164,6 +229,73 @@
         <a class="" href="../packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -195,7 +327,7 @@
             
                 <li class="toctree-l3"><a href="#native-server-application-entry-point">Native server application entry point.</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussprocessexit">Invoke hook trussProcessExit</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussserverprocessexit">Invoke hook trussServerProcessExit</a></li>
                 
             
             </ul>
@@ -225,6 +357,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../src/logging/">logging.coffee</a>
         
     </li>
 
@@ -299,50 +438,50 @@
                 <h1 id="native-server-application-entry-point">Native server application entry point.</h1>
 <pre><code class="coffeescript"></code></pre>
 
-<p>Fork the app to ensure proper environment exists.</p>
-<pre><code class="coffeescript">{fork} = require &quot;#{__dirname}/src/bootstrap&quot;
-unless fork()
+<p>Ensure proper environment exists.</p>
+<pre><code class="coffeescript">require(&quot;#{__dirname}/src/bootstrap&quot;).bootstrap()
 
-  path = require 'path'
-  fs = require 'fs'
+path = require 'path'
+fs = require 'fs'
 
-  config = require 'config'
-  pkgman = require 'pkgman'
-  yaml = require 'js-yaml'
+config = require 'config'
+pkgman = require 'pkgman'
+yaml = require 'js-yaml'
 </code></pre>
 
 <p>Set up exit hooks.</p>
-<h4 id="invoke-hook-trussprocessexit">Invoke hook <a href="../../../hooks#trussprocessexit"><code>trussProcessExit</code></a></h4>
-<pre><code class="coffeescript">  process.on 'exit', -&gt; pkgman.invoke 'trussProcessExit'
+<h4 id="invoke-hook-trussserverprocessexit">Invoke hook <a href="../../../hooks#trussserverprocessexit"><code>trussServerProcessExit</code></a></h4>
+<pre><code class="coffeescript">process.on 'exit', -&gt; pkgman.invoke 'trussServerProcessExit'
 
-  process.on 'SIGINT', -&gt; process.exit()
-  process.on 'SIGTERM', -&gt; process.exit()
-  process.on 'unhandledException', -&gt; process.exit()
+process.on 'SIGINT', -&gt; process.exit()
+process.on 'SIGTERM', -&gt; process.exit()
+process.on 'unhandledException', -&gt; process.exit()
 </code></pre>
 
 <p>Set environment variables into config.</p>
-<pre><code class="coffeescript">  config.set 'path', __dirname
-  config.set k, v for k, v of process.env
+<pre><code class="coffeescript">config.set 'path', __dirname
+config.set k, v for k, v of process.env
 </code></pre>
 
 <p>Read configuration file.</p>
-<pre><code class="coffeescript">  settingsFilename = config.get 'path'
-  settingsFilename += '/config/settings.yml'
+<pre><code class="coffeescript">settingsFilename = config.get 'path'
+settingsFilename += '/config/settings.yml'
 
-  throw new Error '
-    Settings file not found!
-    You should copy config/default.settings.yml to config/settings.yml
-  ' unless fs.existsSync settingsFilename
+throw new Error '
+  Settings file not found!
+  You should copy config/default.settings.yml to config/settings.yml
+' unless fs.existsSync settingsFilename
 
-  settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
-  config.set k, v for k, v of settings
+settings = yaml.safeLoad fs.readFileSync settingsFilename, 'utf8'
+config.set k, v for k, v of settings
 </code></pre>
 
 <p>Spin up the server.</p>
-<pre><code class="coffeescript">  require('main').start (error) -&gt;
+<pre><code class="coffeescript">require('main').start config, (error) -&gt;
+  return unless error?
 
-    console.error errors.stack error
-    process.exit 1
+  console.error require('errors').stack error
+  process.exit 1
 </code></pre>
               
             </div>

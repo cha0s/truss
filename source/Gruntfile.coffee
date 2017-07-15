@@ -8,29 +8,10 @@
 module.exports = (grunt) ->
 ```
 
-Fork so we can bootstrap a Truss environment.
+Bootstrap a Truss environment.
 
 ```coffeescript
-  if child = fork()
-    grunt.registerTask 'bootstrap', ->
-
-      done = @async()
-
-      child.on 'close', (code) ->
-
-        return done() if code is 0
-
-        grunt.fail.fatal 'Child process failed', code
-```
-
-Forward all tasks.
-
-```coffeescript
-    {tasks} = require 'grunt/lib/grunt/cli'
-    grunt.registerTask tasks[0] ? 'default', ['bootstrap']
-    grunt.registerTask(task, (->)) for task in tasks.slice 1
-
-    return
+  require("#{__dirname}/src/bootstrap").bootstrap()
 ```
 
 Load configuration.
@@ -69,34 +50,17 @@ Register the configured packages.
 
 ```coffeescript
   pkgman = require 'pkgman'
-  pkgman.registerPackageList config.get 'packageList'
+  pkgman.registerPackages config.get 'packageList'
 ```
 
 Load the packages' configuration settings and set into the default config.
-#### Invoke hook [`trussConfigServer`](../../hooks#trussconfigserver)
+#### Invoke hook [`trussServerPackageConfig`](../../hooks#trussserverpackageconfig)
 
 ```coffeescript
   packageConfig = new config.Config()
-  for path, value of pkgman.invoke 'trussConfigServer'
+  for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
-
   config.setDefaults packageConfig: packageConfig.toJSON()
-```
-
-# Spin up the server.
-
-```coffeescript
-```
-
-require('main').start()
-
-```coffeescript
-```
-
-config.load()
-config.loadPackageSettings()
-
-```coffeescript
 ```
 
 ## GruntConfiguration
@@ -233,16 +197,16 @@ Defaults to `'app'`.
       grunt.task.run 'build'
 ```
 
-#### Invoke hook [`trussGruntConfig`](../../hooks#trussgruntconfig)
+#### Invoke hook [`trussServerGruntConfig`](../../hooks#trussservergruntconfig)
 
 ```coffeescript
-  pkgman.invoke 'trussGruntConfig', gruntConfig, grunt
+  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
 ```
 
-#### Invoke hook [`trussGruntConfigAlter`](../../hooks#trussgruntconfigalter)
+#### Invoke hook [`trussServerGruntConfigAlter`](../../hooks#trussservergruntconfigalter)
 
 ```coffeescript
-  pkgman.invoke 'trussGruntConfigAlter', gruntConfig, grunt
+  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
 ```
 
 Initialize configuration.

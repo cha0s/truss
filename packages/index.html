@@ -104,16 +104,19 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#server-side">Server-side</a></li>
+                <li class="toctree-l3"><a href="#truss-dox-documentation">truss-dox • Documentation</a></li>
                 
             
-                <li class="toctree-l3"><a href="#truss-dox">truss-dox</a></li>
+                <li class="toctree-l3"><a href="#truss-frontend-barebones-barebones-front-end-implementation">truss-frontend-barebones • Barebones front-end implementation</a></li>
                 
             
-                <li class="toctree-l3"><a href="#truss-doxdynamic">truss-dox/dynamic</a></li>
+                <li class="toctree-l3"><a href="#truss-frontend-front-end-system">truss-frontend • Front-end system</a></li>
                 
             
-                <li class="toctree-l3"><a href="#truss-repl">truss-repl</a></li>
+                <li class="toctree-l3"><a href="#truss-http-http-server">truss-http • HTTP server</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#truss-repl-repl">truss-repl • REPL</a></li>
                 
             
             </ul>
@@ -169,10 +172,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -180,6 +248,73 @@
         <a class="" href="../source/packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -232,6 +367,13 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../source/src/errors/">errors.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/src/logging/">logging.coffee</a>
         
     </li>
 
@@ -308,31 +450,351 @@
 <p>Packages are how Truss organizes functionality.</p>
 <p>This page provides a listing of packages in this project, along with a short
 description of the functionality they provide.</p>
-<h2 id="server-side">Server-side</h2>
-<h2 id="truss-dox"><a href="../source/packages/truss-dox">truss-dox</a></h2>
-<p><span class="package-title">Grunt build process - Documentation</span></p>
+<h2 id="truss-dox-documentation"><code>truss-dox</code> • Documentation</h2>
 <p><em>Build the documentation in <code>gh-pages</code>.</em></p>
-<div class="admonition note"><p class="admonition-title">Implements hooks</p>  <table>
-    <tr class="even"><td><a href="../hooks/#trussgruntconfig">trussGruntConfig</a></td><td align="right"><a href="../source/packages/truss-dox#implements-hook-trussgruntconfig">implementation</a></td></tr>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../source/packages/truss-dox">index.coffee</a></td>
+<td>Documentation</td>
+<td><em>Build the documentation in <code>gh-pages</code>.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic">dynamic/index.coffee</a></td>
+<td>Dynamic documentation</td>
+<td><em>Generate all of the dynamic aspects of the project documentation.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks">dynamic/processor/dox-page-hooks.coffee</a></td>
+<td>Hooks page</td>
+<td><em>Generate the hooks page.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs">dynamic/processor/dox-page-mkdocs.coffee</a></td>
+<td>mkdocs "page"</td>
+<td><em>Generate the mkdocs.yml. Not technically a page, but fits well enough within the abstraction...</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-packages">dynamic/processor/dox-page-packages.coffee</a></td>
+<td>Packages page</td>
+<td><em>Generate the packages page.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-todos">dynamic/processor/dox-page-todos.coffee</a></td>
+<td>TODOs page</td>
+<td><em>Generate the TODOs page.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page">dynamic/processor/dox-page.coffee</a></td>
+<td>Abstract documentation page</td>
+<td><em>Abstract class to process a documentation page, using a template and generated information.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/sources-processor">dynamic/processor/sources-processor.coffee</a></td>
+<td>Abstract sources processor</td>
+<td><em>Abstract class to process the project sources, usually by transforming them to a new form.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown">dynamic/processor/sources-to-markdown.coffee</a></td>
+<td>Markdown source pages</td>
+<td><em>Implementation of SourcesProcessor to convert source to markdown for easy reading.</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+  <p class="admonition-title">Hook invocations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown#invoke-hook-trussdoxsourcemarkdowntransform">invocation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussdoxsources">trussDoxSources</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox/dynamic#invoke-hook-trussdoxsources">invocation</a>
+      </td>
+    </tr>
   </table>
 </div>
 
-<blockquote>
-<h2 id="truss-doxdynamic"><a href="../source/packages/truss-dox/dynamic"><small>truss-dox/</small>dynamic</a></h2>
-<p><span class="package-title">Grunt build process - Dynamic documentation</span></p>
-</blockquote>
-<h2 id="truss-repl"><a href="../source/packages/truss-repl">truss-repl</a></h2>
-<p><span class="package-title">REPL</span></p>
+<div class="admonition note">
+  <p class="admonition-title">Hook implementations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussdoxsourcelist">trussDoxSourceList</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcelist">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussdoxsourcemarkdowntransform_1">trussDoxSourceMarkdownTransform</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcemarkdowntransform">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussservergruntconfig">trussServerGruntConfig</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox#implements-hook-trussservergruntconfig">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="truss-frontend-barebones-barebones-front-end-implementation"><code>truss-frontend-barebones</code> • Barebones front-end implementation</h2>
+<p><em>Build a simple HTML response.</em></p>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../source/packages/truss-frontend-barebones">index.coffee</a></td>
+<td>Barebones front-end implementation</td>
+<td><em>Build a simple HTML response.</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+  <p class="admonition-title">Hook implementations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussfrontendrenderhtml">trussFrontendRenderHtml</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend-barebones#implements-hook-trussfrontendrenderhtml">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="truss-frontend-front-end-system"><code>truss-frontend</code> • Front-end system</h2>
+<p><em>Front-end abstraction: respond to client, render response, etc.</em></p>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../source/packages/truss-frontend">index.coffee</a></td>
+<td>Front-end system</td>
+<td><em>Front-end abstraction: respond to client, render response, etc.</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+  <p class="admonition-title">Hook implementations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussfrontendpackageconfig">trussFrontendPackageConfig</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackageconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussfrontendpackagelist">trussFrontendPackageList</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagelist">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverrequestmiddleware">trussHttpServerRequestMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverrequestmiddleware_1">trussHttpServerRequestMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="truss-http-http-server"><code>truss-http</code> • HTTP server</h2>
+<p><em>Manage HTTP connections.</em></p>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../source/packages/truss-http/abstract">abstract.coffee</a></td>
+<td>Abstract HTTP server</td>
+<td><em>An abstract HTTP server interface.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-http">index.coffee</a></td>
+<td>HTTP server</td>
+<td><em>Manage HTTP connections.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-http/stub">stub/index.coffee</a></td>
+<td>HTTP server stub implementation</td>
+<td><em>A barebones HT TP server implementation.</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+  <p class="admonition-title">Hook invocations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverrequestmiddleware_2">trussHttpServerRequestMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http/abstract#invoke-hook-trusshttpserverrequestmiddleware">invocation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverroutes">trussHttpServerRoutes</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#invoke-hook-trusshttpserverroutes">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="admonition note">
+  <p class="admonition-title">Hook implementations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverrequestmiddleware_3">trussHttpServerRequestMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trusshttpserverrequestmiddleware_4">trussHttpServerRequestMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussserverbootstrapmiddleware">trussServerBootstrapMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trussserverbootstrapmiddleware">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussserverpackageconfig">trussServerPackageConfig</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trussserverpackageconfig">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="truss-repl-repl"><code>truss-repl</code> • REPL</h2>
 <p><em>Runs a REPL and allows packages to add values to its context.</em></p>
-<div class="admonition note"><p class="admonition-title">Implements hooks</p>  <table>
-    <tr class="even"><td><a href="../hooks/#trussconfigserver">trussConfigServer</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussconfigserver">implementation</a></td></tr>
-    <tr class="odd"><td><a href="../hooks/#trussprocessexit">trussProcessExit</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussprocessexit">implementation</a></td></tr>
-    <tr class="even"><td><a href="../hooks/#trussbootstrapmiddleware">trussBootstrapMiddleware</a></td><td align="right"><a href="../source/packages/truss-repl#implements-hook-trussbootstrapmiddleware">implementation</a></td></tr>
+<table>
+<thead>
+<tr>
+<th>Filename</th>
+<th>Title</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../source/packages/truss-repl">index.coffee</a></td>
+<td>REPL</td>
+<td><em>Runs a REPL and allows packages to add values to its context.</em></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+  <p class="admonition-title">Hook invocations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussreplservercontext">trussReplServerContext</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-repl#invoke-hook-trussreplservercontext">invocation</a>
+      </td>
+    </tr>
   </table>
 </div>
 
-<div class="admonition note"><p class="admonition-title">Invokes hooks</p>  <table>
-    <tr class="even"><td><a href="../hooks/#trussreplcontext">trussReplContext</a></td><td align="right"><a href="../source/packages/truss-repl#invoke-hook-trussreplcontext">invocation</a></td></tr>
+<div class="admonition note">
+  <p class="admonition-title">Hook implementations</p>
+  <table>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussserverbootstrapmiddleware_1">trussServerBootstrapMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-repl#implements-hook-trussserverbootstrapmiddleware">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussserverpackageconfig_1">trussServerPackageConfig</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../hooks#trussserverprocessexit">trussServerProcessExit</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-repl#implements-hook-trussserverprocessexit">implementation</a>
+      </td>
+    </tr>
   </table>
 </div>
               

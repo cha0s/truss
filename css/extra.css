@@ -62,3 +62,23 @@ code {
 .rst-content .warning .admonition-title {
   color: #555;
 }
+
+.rst-content h1 code,
+.rst-content h2 code,
+.rst-content h3 code,
+.rst-content h4 code,
+.rst-content h5 code,
+.rst-content h6 code {
+  font-size: 100%;
+}
+
+.rst-content p,
+.rst-content h1,
+.rst-content h2,
+.rst-content h3,
+.rst-content h4,
+.rst-content h5,
+.rst-content h6 {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}

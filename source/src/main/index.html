@@ -153,10 +153,75 @@
 
         
             
+    <ul class="subnav">
+    <li><span>dynamic</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../../packages/truss-dox/dynamic/">dynamic.coffee</a>
+        <a class="" href="../../packages/truss-dox/dynamic/">index.coffee</a>
         
     </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>processor</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
 
         
             
@@ -164,6 +229,73 @@
         <a class="" href="../../packages/truss-dox/">index.coffee</a>
         
     </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend-barebones</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend-barebones/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-frontend</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-http</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>stub</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -221,6 +353,13 @@
 
         
             
+    <li class="toctree-l1 ">
+        <a class="" href="../logging/">logging.coffee</a>
+        
+    </li>
+
+        
+            
     <li class="toctree-l1 current">
         <a class="current" href="./">main.coffee</a>
         
@@ -228,11 +367,11 @@
             
                 <li class="toctree-l3"><a href="#server-application-entry-point">Server application entry point</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussconfigserver">Invoke hook trussConfigServer</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussserverpackageconfig">Invoke hook trussServerPackageConfig</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussprebootstrap">Invoke hook trussPreBootstrap</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussserverprebootstrap">Invoke hook trussServerPreBootstrap</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussbootstrapmiddleware">Invoke hook trussBootstrapMiddleware</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussserverbootstrapmiddleware">Invoke hook trussServerBootstrapMiddleware</a></li>
                 
             
             </ul>
@@ -305,50 +444,48 @@
 and process exit.</em> The core bootstrap phase injects environment into a
 forked copy of the application including require paths to allow core and
 custom packages to be included without qualification.</p>
-<pre><code class="coffeescript">config = require 'config'
-debug = require('debug') 'truss:main'
+<pre><code class="coffeescript">debug = require('debug') 'truss:main'
 middleware = require 'middleware'
 pkgman = require 'pkgman'
 
-exports.start = (errorHandler) -&gt;
+exports.start = (config, fn) -&gt;
 </code></pre>
 
 <p>Register the configured packages.</p>
-<pre><code class="coffeescript">  pkgman.registerPackageList config.get 'packageList'
+<pre><code class="coffeescript">  pkgman.registerPackages config.get 'packageList'
 </code></pre>
 
 <p>Load the packages' configuration settings and set into the default config.</p>
-<h4 id="invoke-hook-trussconfigserver">Invoke hook <a href="../../../hooks#trussconfigserver"><code>trussConfigServer</code></a></h4>
+<h4 id="invoke-hook-trussserverpackageconfig">Invoke hook <a href="../../../hooks#trussserverpackageconfig"><code>trussServerPackageConfig</code></a></h4>
 <pre><code class="coffeescript">  packageConfig = new config.Config()
-  for path, value of pkgman.invoke 'trussConfigServer'
+  for path, value of pkgman.invoke 'trussServerPackageConfig'
     packageConfig.set path.replace(/\//g, ':'), value
-
   config.setDefaults packageConfig: packageConfig.toJSON()
 </code></pre>
 
 <p>Run the pre-bootstrap phase.</p>
-<h4 id="invoke-hook-trussprebootstrap">Invoke hook <a href="../../../hooks#trussprebootstrap"><code>trussPreBootstrap</code></a></h4>
+<h4 id="invoke-hook-trussserverprebootstrap">Invoke hook <a href="../../../hooks#trussserverprebootstrap"><code>trussServerPreBootstrap</code></a></h4>
 <pre><code class="coffeescript">  debug 'Pre bootstrap started...'
-  pkgman.invoke 'trussPreBootstrap'
+  pkgman.invoke 'trussServerPreBootstrap'
   debug 'Pre bootstrap complete.'
 </code></pre>
 
 <p>Load the bootstrap middleware.</p>
-<h4 id="invoke-hook-trussbootstrapmiddleware">Invoke hook <a href="../../../hooks#trussbootstrapmiddleware"><code>trussBootstrapMiddleware</code></a></h4>
+<h4 id="invoke-hook-trussserverbootstrapmiddleware">Invoke hook <a href="../../../hooks#trussserverbootstrapmiddleware"><code>trussServerBootstrapMiddleware</code></a></h4>
 <pre><code class="coffeescript">  debug 'Bootstrap started...'
   bootstrapMiddleware = middleware.fromHook(
-    'trussBootstrapMiddleware'
-    config.get 'bootstrapMiddleware'
+    'trussServerBootstrapMiddleware'
+    config.get 'serverBootstrapMiddleware'
   )
 </code></pre>
 
 <p>Dispatch the bootstrap middleware and log if everything is okay.</p>
 <pre><code class="coffeescript">  bootstrapMiddleware.dispatch (error) -&gt;
-    return debug 'Bootstrap complete.' unless error?
+    debug 'Bootstrap complete.' unless error?
 </code></pre>
 
-<p>Log any error and exit.</p>
-<pre><code class="coffeescript">    errorHandler error
+<p>Finish the bootstrap.</p>
+<pre><code class="coffeescript">    fn error
 </code></pre>
               
             </div>
@@ -360,7 +497,7 @@ exports.start = (errorHandler) -&gt;
         <a href="../middleware/" class="btn btn-neutral float-right" title="middleware.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../errors/" class="btn btn-neutral" title="errors.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../logging/" class="btn btn-neutral" title="logging.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -388,7 +525,7 @@ exports.start = (errorHandler) -&gt;
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../errors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../logging/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../middleware/" style="color: #fcfcfc">Next &raquo;</a></span>

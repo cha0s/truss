@@ -78,6 +78,7 @@ recursive invocation path.
         try
           return fn error
         catch error
+          return
 
       current = self._middleware[index++]
 ```
@@ -188,10 +189,10 @@ Invoke the hook and `use` the middleware in the paths configuration order.
 *Create a middleware stack from a configuration path.*
 
 ```coffeescript
-exports.fromConfig = (path, args...) ->
+exports.fromConfig = (path) ->
 
   exports.fromHook(
-    pkgman.normalizePath path
+    pkgman.PackageManager.normalizePath path
     config.get "packageConfig:#{path}"
   )
 ```

@@ -22,10 +22,10 @@ server = null
 exports.pkgmanRegister = (registrar) ->
 ```
 
-#### Implements hook [`trussConfigServer`](../../hooks#trussconfigserver)
+#### Implements hook [`trussServerPackageConfig`](../../hooks#trussserverpackageconfig)
 
 ```coffeescript
-  registrar.registerHook 'trussConfigServer', ->
+  registrar.registerHook 'trussServerPackageConfig', ->
 ```
 
 The prompt display for REPL clients.
@@ -46,16 +46,16 @@ Use a CoffeeScript REPL?
     useCoffee: true
 ```
 
-#### Implements hook [`trussProcessExit`](../../hooks#trussprocessexit)
+#### Implements hook [`trussServerProcessExit`](../../hooks#trussserverprocessexit)
 
 ```coffeescript
-  registrar.registerHook 'trussProcessExit', -> server?.close()
+  registrar.registerHook 'trussServerProcessExit', -> server?.close()
 ```
 
-#### Implements hook [`trussBootstrapMiddleware`](../../hooks#trussbootstrapmiddleware)
+#### Implements hook [`trussServerBootstrapMiddleware`](../../hooks#trussserverbootstrapmiddleware)
 
 ```coffeescript
-  registrar.registerHook 'trussBootstrapMiddleware', ->
+  registrar.registerHook 'trussServerBootstrapMiddleware', ->
 
     label: 'REPL'
     middleware: [
@@ -67,10 +67,10 @@ Use a CoffeeScript REPL?
         server = net.createServer (socket) ->
 ```
 
-#### Invoke hook [`trussReplContext`](../../hooks#trussreplcontext)
+#### Invoke hook [`trussReplServerContext`](../../hooks#trussreplservercontext)
 
 ```coffeescript
-          pkgman.invoke 'trussReplContext', context = {}
+          pkgman.invoke 'trussReplServerContext', context = {}
 ```
 
 REPL server options.
@@ -119,8 +119,8 @@ Forward the input to CoffeeScript for evalulation.
                 callback error
 ```
 
-Spin up the server, inject the values from `trussReplContext`, and
-prepare for later cleanup.
+Spin up the server, inject the values from
+`trussReplServerContext`, and prepare for later cleanup.
 
 ```coffeescript
           repl = replServer.start opts
