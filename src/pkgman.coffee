@@ -34,7 +34,7 @@ class PackageManager
 
     # Suppress missing package errors.
     catch error
-      if error.toString() is "Error: Cannot find module '#{name}'"
+      if error.toString() is "Error: Cannot find module '#{path}'"
         return
 
       throw error
