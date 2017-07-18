@@ -147,7 +147,7 @@
                 
                     <li><a class="toctree-l4" href="#gruntconfiguration">GruntConfiguration</a></li>
                 
-                    <li><a class="toctree-l4" href="#constructor">constructor</a></li>
+                    <li><a class="toctree-l4" href="#gruntconfigurationconstructor">GruntConfiguration#constructor</a></li>
                 
                     <li><a class="toctree-l4" href="#gruntconfigurationconfiguretask">GruntConfiguration#configureTask</a></li>
                 
@@ -263,6 +263,21 @@
 
         
             
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
     <li class="toctree-l1 ">
         <a class="" href="../packages/truss-frontend-barebones/">index.coffee</a>
         
@@ -275,6 +290,21 @@
             
     <ul class="subnav">
     <li><span>truss-frontend</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-frontend/client/require/">require.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
             
@@ -332,6 +362,87 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../packages/truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket-socket.io</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket-socket.io/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket-socket.io/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket-socket.io/server/">server.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket/client/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-websocket/">index.coffee</a>
         
     </li>
 
@@ -477,7 +588,7 @@ module.exports = (grunt) -&gt;
 <pre><code class="coffeescript">  settingsFilename = config.get 'path'
   settingsFilename += '/config/settings.yml'
 
-  throw new Error '
+  grunt.fail.fatal new Error '
     Settings file not found!
     You should copy config/default.settings.yml to config/settings.yml
   ' unless fs.existsSync settingsFilename
@@ -500,10 +611,10 @@ module.exports = (grunt) -&gt;
 </code></pre>
 
 <h2 id="gruntconfiguration">GruntConfiguration</h2>
-<pre><code class="coffeescript">  class GruntConfiguration
+<pre><code class="coffeescript">  gruntConfig = new class GruntConfiguration
 </code></pre>
 
-<h2 id="constructor"><em>constructor</em></h2>
+<h2 id="gruntconfigurationconstructor">GruntConfiguration#constructor</h2>
 <pre><code class="coffeescript">    constructor: -&gt;
 
       @_npmTasks = []
@@ -617,10 +728,11 @@ Defaults to <code>'app'</code>.</p>
         ]
         tasks: [&quot;build:#{key}&quot;]
       )
+</code></pre>
 
-  gruntConfig = new GruntConfiguration()
-
-  gruntConfig.registerTask 'production', ['build']
+<p>Default tasks.</p>
+<pre><code class="coffeescript">  gruntConfig.registerTask 'build', []
+  gruntConfig.registerTask 'production', ['buildOnce']
   gruntConfig.registerTask 'default', ['buildOnce']
 
   gruntConfig.registerTask 'buildOnce', do -&gt;
@@ -634,11 +746,17 @@ Defaults to <code>'app'</code>.</p>
 </code></pre>
 
 <h4 id="invoke-hook-trussservergruntconfig">Invoke hook <a href="../../../hooks#trussservergruntconfig"><code>trussServerGruntConfig</code></a></h4>
-<pre><code class="coffeescript">  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+<pre><code class="coffeescript">  try
+    pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 </code></pre>
 
 <h4 id="invoke-hook-trussservergruntconfigalter">Invoke hook <a href="../../../hooks#trussservergruntconfigalter"><code>trussServerGruntConfigAlter</code></a></h4>
-<pre><code class="coffeescript">  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+<pre><code class="coffeescript">  try
+    pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 </code></pre>
 
 <p>Initialize configuration.</p>

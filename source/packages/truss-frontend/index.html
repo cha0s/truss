@@ -240,6 +240,21 @@
 
         
             
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-frontend-barebones/client/foobar/">foobar.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
     <li class="toctree-l1 ">
         <a class="" href="../truss-frontend-barebones/">index.coffee</a>
         
@@ -255,12 +270,31 @@
 
         
             
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="client/require/">require.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
     <li class="toctree-l1 current">
         <a class="current" href="./">index.coffee</a>
         
             <ul>
             
                 <li class="toctree-l3"><a href="#front-end-system">Front-end system</a></li>
+                
+                    <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackagetasks">Implements hook trussFrontendPackageTasks</a></li>
+                
+                    <li><a class="toctree-l4" href="#implements-hook-trussservergruntconfig">Implements hook trussServerGruntConfig</a></li>
                 
                     <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackageconfig">Implements hook trussFrontendPackageConfig</a></li>
                 
@@ -324,6 +358,87 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket-socket.io</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket-socket.io/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket-socket.io/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket-socket.io/server/">server.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket/client/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-websocket/">index.coffee</a>
         
     </li>
 
@@ -443,7 +558,9 @@
               
                 <h1 id="front-end-system">Front-end system</h1>
 <p><em>Front-end abstraction: respond to client, render response, etc.</em></p>
-<pre><code class="coffeescript">_ = require 'lodash'
+<pre><code class="coffeescript">path = require 'path'
+
+_ = require 'lodash'
 cheerio = require 'cheerio'
 
 pkgman = require 'pkgman'
@@ -452,6 +569,184 @@ config = require 'config'
 {Config} = config
 
 exports.pkgmanRegister = (registrar) -&gt;
+</code></pre>
+
+<h4 id="implements-hook-trussfrontendpackagetasks">Implements hook <a href="../../../hooks#trussfrontendpackagetasks"><code>trussFrontendPackageTasks</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussFrontendPackageTasks', (gruntConfig, grunt) -&gt;
+
+    gruntConfig.configureTask 'coffee', &quot;truss-frontend-truss-frontend&quot;, files: [
+      src: &quot;packages/truss-frontend/client/require.coffee&quot;
+      dest: 'build/js/client/require.js'
+    ]
+
+    gruntConfig.registerTask &quot;truss-frontend-truss-frontend&quot;, [
+      &quot;newer:coffee:truss-frontend-truss-frontend&quot;
+    ]
+
+    return [&quot;truss-frontend-truss-frontend&quot;]
+</code></pre>
+
+<h4 id="implements-hook-trussservergruntconfig">Implements hook <a href="../../../hooks#trussservergruntconfig"><code>trussServerGruntConfig</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussServerGruntConfig', (gruntConfig, grunt) -&gt;
+</code></pre>
+
+<p>Cleaning rules.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'clean', 'truss-frontend', ['build', 'frontend']
+</code></pre>
+
+<p>Build each package's frontend tasks.</p>
+<pre><code class="coffeescript">    packageTasks = []
+    for pkg in pkgman.packageList()
+
+      if pkgman.packageImplements pkg, 'trussFrontendPackageTasks'
+        tasks = pkgman.invokePackage(
+          pkg, 'trussFrontendPackageTasks', gruntConfig, grunt
+        )
+
+      else
+</code></pre>
+
+<p>Watch rules.</p>
+<pre><code class="coffeescript">        gruntConfig.configureTask 'watch', &quot;truss-frontend-#{pkg}&quot;, {
+          files: [&quot;#{pkgman.packagePath pkg}/client/**/*.coffee&quot;]
+          tasks: ['build:truss-frontend']
+          options: livereload: true
+        }
+</code></pre>
+
+<p>Compilation rules.</p>
+<pre><code class="coffeescript">        gruntConfig.configureTask 'coffee', &quot;truss-frontend-#{pkg}&quot;, files: [
+          src: &quot;#{pkgman.packagePath pkg}/client/**/*.coffee&quot;
+          dest: 'build/js/client/raw'
+          expand: true
+          ext: '.js'
+        ]
+
+        tasks = [&quot;newer:coffee:truss-frontend-#{pkg}&quot;]
+
+      gruntConfig.registerTask 'truss-frontend-packages', tasks
+</code></pre>
+
+<p>Browserify modules.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'browserify', 'truss-node-path', {
+      src: ['node_modules/path-browserify/index.js']
+      dest: 'build/js/client/raw/path.js'
+      options: browserifyOptions: standalone: 'path'
+    }
+    gruntConfig.registerTask 'truss-frontend-browserify', [
+      'newer:browserify:truss-node-path'
+    ]
+</code></pre>
+
+<p>Wrap all modules with the require function.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask(
+      'wrap', 'truss-frontend'
+
+      files: [
+        src: [
+          'build/js/client/raw/**/*.js'
+        ]
+        dest: 'build/js/client/modules-raw.js'
+      ]
+      options:
+        indent: '  '
+        wrapper: (filepath) -&gt;
+</code></pre>
+
+<p>Slice past the number of slashes in <code>build/js/client/raw</code>.</p>
+<pre><code class="coffeescript">          modulePath = filepath.split('/').slice(4).join '/'
+</code></pre>
+
+<p>Little acrobatics to handle root-level paths.</p>
+<pre><code class="coffeescript">          dirname = path.dirname modulePath
+          if '.' is dirname = path.dirname modulePath
+            dirname = ''
+          else
+            dirname += '/'
+          basename = path.basename modulePath, path.extname modulePath
+
+          [
+            &quot;&quot;&quot;
+_requires['#{
+  dirname
+}#{
+  basename
+}'] = function(module, exports, require, __dirname, __filename) {
+
+
+&quot;&quot;&quot;
+            &quot;&quot;&quot;
+
+};
+
+
+&quot;&quot;&quot;
+          ]
+
+    )
+</code></pre>
+
+<p>Concatenate the require stub to the bottom of the modules.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'concat', 'truss-frontend', files: [
+      src: [
+        'build/js/client/modules-raw.js'
+        'build/js/client/require.js'
+      ]
+      dest: 'build/js/client/modules-raw-with-require.js'
+    ]
+</code></pre>
+
+<p>Wrap the whole thing in an IIFE and define the _requires object to hold
+all module implementations.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask(
+      'wrap', 'truss-frontend-modules'
+
+      files: [
+        src: [
+          'build/js/client/modules-raw-with-require.js'
+        ]
+        dest: 'frontend/modules.js'
+      ]
+      options:
+        indent: '  '
+        wrapper: [
+          '(function() {\n\n  var _requires = {};\n\n\n'
+          '\n\n})();\n\n'
+        ]
+
+    )
+</code></pre>
+
+<p>Minimize the module sources.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'uglify', 'truss-frontend', files: [
+      src: [
+        'frontend/modules.js'
+      ]
+      dest: 'frontend/modules.min.js'
+    ]
+
+    gruntConfig.registerTask 'production', ['uglify:truss-frontend']
+
+    gruntConfig.registerTask 'build:truss-frontend', [
+      'truss-frontend-packages'
+      'truss-frontend-browserify'
+      'newer:wrap:truss-frontend'
+      'newer:concat:truss-frontend'
+      'newer:wrap:truss-frontend-modules'
+    ]
+
+    gruntConfig.registerTask 'build', ['build:truss-frontend']
+
+    gruntConfig.loadNpmTasks [
+      'grunt-browserify'
+      'grunt-contrib-clean'
+      'grunt-contrib-coffee'
+      'grunt-contrib-concat'
+      'grunt-contrib-uglify'
+      'grunt-contrib-watch'
+      'grunt-newer'
+      'grunt-wrap'
+    ]
 </code></pre>
 
 <h4 id="implements-hook-trussfrontendpackageconfig">Implements hook <a href="../../../hooks#trussfrontendpackageconfig"><code>trussFrontendPackageConfig</code></a></h4>
@@ -525,7 +820,7 @@ exports.pkgmanRegister = (registrar) -&gt;
         <a href="../truss-http/abstract/" class="btn btn-neutral float-right" title="abstract.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../truss-frontend-barebones/" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="client/require/" class="btn btn-neutral" title="require.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -553,7 +848,7 @@ exports.pkgmanRegister = (registrar) -&gt;
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../truss-frontend-barebones/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="client/require/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../truss-http/abstract/" style="color: #fcfcfc">Next &raquo;</a></span>

@@ -1,87 +1,206 @@
 
 ```coffeescript
 
+path = require 'path'
+
+config = require 'config'
+
 class PackageManager
+```
 
-  @normalizePath: (path) ->
+## PackageManager#constructor
 
+```coffeescript
   constructor: ->
 
     @_hookIndex = {}
-    @_pathIndex = {}
+    @_pkgIndex = {}
 
     @_packageList = []
+```
 
+## PackageManager#invoke
+
+* (String) `hook` - The hook to invoke.
+
+* (Array) `args` - The arguments passed to the hook implementations.
+
+*Invoke a hook, heying the results by package implementations.*
+
+```coffeescript
   invoke: (hook, args...) ->
     results = {}
-    for path in @packagesImplementing hook
-      results[path] = @invokePackage path, hook, args...
+    for pkg in @packagesImplementing hook
+      results[pkg] = @invokePackage pkg, hook, args...
     return results
+```
 
+## PackageManager#invokeFlat
+
+* (String) `hook` - The hook to invoke.
+
+* (Array) `args` - The arguments passed to the hook implementations.
+
+*Invoke a hook, returning the results as a flattened array.*
+
+```coffeescript
   invokeFlat: (hook, args...) ->
-    for path in @packagesImplementing hook
-      @invokePackage path, hook, args...
+    for pkg in @packagesImplementing hook
+      @invokePackage pkg, hook, args...
+```
 
-  invokePackage: (path, hook, args...) -> @_pathIndex?[path]?[hook]? args...
+## PackageManager#invokePackage
 
-  isPackageRegistered: (path) -> -1 isnt @_packageList.indexOf path
+* (String) `pkg` - The package.
 
+* (String) `hook` - The hook to invoke.
+
+* (Array) `args` - The arguments passed to the hook implementation.
+
+*Invoke a hook, returning the result.*
+
+```coffeescript
+  invokePackage: (pkg, hook, args...) -> @_pkgIndex?[pkg]?[hook]? args...
+```
+
+## PackageManager#isPackageRegistered
+
+* (String) `pkg` - The package.
+
+*Check whether a package is registered.*
+
+```coffeescript
+  isPackageRegistered: (pkg) -> -1 isnt @_packageList.indexOf pkg
+```
+
+## PackageManager#packageImplements
+
+* (String) `pkg` - The package.
+
+* (String) `hook` - The hook to check.
+
+*Check whether a package implements a hook.*
+
+```coffeescript
+  packageImplements: (pkg, hook) -> @_pkgIndex?[pkg]?[hook]?
+```
+
+## PackageManager#packageList
+
+*Get the list of registered packages.*
+
+```coffeescript
+  packageList: -> @_packageList
+```
+
+## PackageManager#packagePath
+
+* (String) `pkg` - The package.
+
+*Get the filepath of a package.*
+
+```coffeescript
+  packagePath: (pkg) ->
+
+    path_ = config.get 'path'
+    path.relative path_, path.dirname require.resolve pkg
+```
+
+## PackageManager#packagesImplementing
+
+* (String) `hook` - The hook to check.
+
+*Get the list of registered packages implementing a hook.*
+
+```coffeescript
   packagesImplementing: (hook) -> @_hookIndex?[hook] ? []
+```
 
-  registerPackage: (path) ->
-    return if @isPackageRegistered path
+## PackageManager#registerPackage
+
+* (String) `pkg` - The package.
+
+*Register a package.*
+
+```coffeescript
+  registerPackage: (pkg) ->
+    return if @isPackageRegistered pkg
 
     try
-      module_ = require path
+      module_ = require pkg
 ```
 
 Suppress missing package errors.
 
 ```coffeescript
     catch error
-      if error.toString() is "Error: Cannot find module '#{name}'"
+      if error.toString() is "Error: Cannot find module '#{pkg}'"
         return
 
       throw error
 
-    @_packageList.push path
+    @_packageList.push pkg
 
     module_.pkgmanRegister? new PackageManager.Registrar(
-      @_hookIndex, @_pathIndex, path
+      @_hookIndex, @_pkgIndex, pkg
     )
+```
 
-  registerPackages: (paths) -> @registerPackage path for path in paths
+## PackageManager#registerPackages
 
-  unregisterPackage: (path) ->
-    return unless @isPackageRegistered path
+* (Array of String) `pkgs` - The packages.
 
-    for hook of @_pathIndex[path]
+*Register packages.*
 
-      if -1 isnt index = @_hookIndex[hook].indexOf path
+```coffeescript
+  registerPackages: (pkgs) -> @registerPackage pkg for pkg in pkgs
+```
+
+## PackageManager#unregisterPackage
+
+* (String) `pkg` - The package.
+
+*Unregister a package.*
+
+```coffeescript
+  unregisterPackage: (pkg) ->
+    return unless @isPackageRegistered pkg
+
+    for hook of @_pkgIndex[pkg]
+
+      if -1 isnt index = @_hookIndex[hook].indexOf pkg
         @_hookIndex[hook].splice index, 1
         delete @_hookIndex[hook] if @_hookIndex[hook].length is 0
 
-    delete @_pathIndex[path]
+    delete @_pkgIndex[pkg]
 
-    index = @_packageList.indexOf path
+    index = @_packageList.indexOf pkg
     @_packageList.splice index, 1
 
     return
+```
 
-  unregisterPackages: (paths) -> @unregisterPackage path for path in paths
+## PackageManager#unregisterPackages
+
+* (Array of String) `pkgs` - The packages.
+
+*Unregister a list of packages.*
+
+```coffeescript
+  unregisterPackages: (pkgs) -> @unregisterPackage pkg for pkg in pkgs
 
 class PackageManager.Registrar
 
-  constructor: (@_hookIndex, @_pathIndex, @_path) ->
+  constructor: (@_hookIndex, @_pkgIndex, @_path) ->
 
   path: -> @_path
 
   recur: (paths) ->
-    for path in paths
-      subpath = "#{@_path}/#{path}"
+    for path_ in paths
+      subpath = "#{@_path}/#{path_}"
       submodule = require subpath
       submodule.pkgmanRegister? new PackageManager.Registrar(
-        @_hookIndex, @_pathIndex, subpath
+        @_hookIndex, @_pkgIndex, subpath
       )
 
   registerHook: (submodule, hook, impl) ->
@@ -93,7 +212,7 @@ against.
 ```coffeescript
     if impl?
 
-      path = "#{@_path}/#{submodule}"
+      path_ = "#{@_path}/#{submodule}"
 ```
 
 Otherwise, fix up the args.
@@ -101,12 +220,12 @@ Otherwise, fix up the args.
 ```coffeescript
     else
 
-      path = @_path
+      path_ = @_path
       impl = hook
       hook = submodule
 
-    (@_hookIndex[hook] ?= []).push path
-    (@_pathIndex[path] ?= {})[hook] = impl
+    (@_hookIndex[hook] ?= []).push path_
+    (@_pkgIndex[path_] ?= {})[hook] = impl
 
 module.exports = new PackageManager()
 module.exports.PackageManager = PackageManager

@@ -240,6 +240,21 @@
 
         
             
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
     <li class="toctree-l1 ">
         <a class="" href="../../packages/truss-frontend-barebones/">index.coffee</a>
         
@@ -252,6 +267,21 @@
             
     <ul class="subnav">
     <li><span>truss-frontend</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-frontend/client/require/">require.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
             
@@ -309,6 +339,87 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../packages/truss-repl/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket-socket.io</span></li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket-socket.io/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket-socket.io/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket-socket.io/server/">server.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>truss-websocket</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>client</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket/client/abstract/">abstract.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket/client/">index.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-websocket/">index.coffee</a>
         
     </li>
 
@@ -379,6 +490,45 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#packagemanagerconstructor">PackageManager#constructor</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerinvoke">PackageManager#invoke</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerinvokeflat">PackageManager#invokeFlat</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerinvokepackage">PackageManager#invokePackage</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerispackageregistered">PackageManager#isPackageRegistered</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerpackageimplements">PackageManager#packageImplements</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerpackagelist">PackageManager#packageList</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerpackagepath">PackageManager#packagePath</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerpackagesimplementing">PackageManager#packagesImplementing</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerregisterpackage">PackageManager#registerPackage</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerregisterpackages">PackageManager#registerPackages</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerunregisterpackage">PackageManager#unregisterPackage</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#packagemanagerunregisterpackages">PackageManager#unregisterPackages</a></li>
+                
+            
             </ul>
         
     </li>
@@ -431,85 +581,190 @@
             <div class="section">
               
                 <pre><code class="coffeescript">
+path = require 'path'
+
+config = require 'config'
+
 class PackageManager
+</code></pre>
 
-  @normalizePath: (path) -&gt;
-
-  constructor: -&gt;
+<h2 id="packagemanagerconstructor">PackageManager#constructor</h2>
+<pre><code class="coffeescript">  constructor: -&gt;
 
     @_hookIndex = {}
-    @_pathIndex = {}
+    @_pkgIndex = {}
 
     @_packageList = []
+</code></pre>
 
-  invoke: (hook, args...) -&gt;
+<h2 id="packagemanagerinvoke">PackageManager#invoke</h2>
+<ul>
+<li>
+<p>(String) <code>hook</code> - The hook to invoke.</p>
+</li>
+<li>
+<p>(Array) <code>args</code> - The arguments passed to the hook implementations.</p>
+</li>
+</ul>
+<p><em>Invoke a hook, heying the results by package implementations.</em></p>
+<pre><code class="coffeescript">  invoke: (hook, args...) -&gt;
     results = {}
-    for path in @packagesImplementing hook
-      results[path] = @invokePackage path, hook, args...
+    for pkg in @packagesImplementing hook
+      results[pkg] = @invokePackage pkg, hook, args...
     return results
+</code></pre>
 
-  invokeFlat: (hook, args...) -&gt;
-    for path in @packagesImplementing hook
-      @invokePackage path, hook, args...
+<h2 id="packagemanagerinvokeflat">PackageManager#invokeFlat</h2>
+<ul>
+<li>
+<p>(String) <code>hook</code> - The hook to invoke.</p>
+</li>
+<li>
+<p>(Array) <code>args</code> - The arguments passed to the hook implementations.</p>
+</li>
+</ul>
+<p><em>Invoke a hook, returning the results as a flattened array.</em></p>
+<pre><code class="coffeescript">  invokeFlat: (hook, args...) -&gt;
+    for pkg in @packagesImplementing hook
+      @invokePackage pkg, hook, args...
+</code></pre>
 
-  invokePackage: (path, hook, args...) -&gt; @_pathIndex?[path]?[hook]? args...
+<h2 id="packagemanagerinvokepackage">PackageManager#invokePackage</h2>
+<ul>
+<li>
+<p>(String) <code>pkg</code> - The package.</p>
+</li>
+<li>
+<p>(String) <code>hook</code> - The hook to invoke.</p>
+</li>
+<li>
+<p>(Array) <code>args</code> - The arguments passed to the hook implementation.</p>
+</li>
+</ul>
+<p><em>Invoke a hook, returning the result.</em></p>
+<pre><code class="coffeescript">  invokePackage: (pkg, hook, args...) -&gt; @_pkgIndex?[pkg]?[hook]? args...
+</code></pre>
 
-  isPackageRegistered: (path) -&gt; -1 isnt @_packageList.indexOf path
+<h2 id="packagemanagerispackageregistered">PackageManager#isPackageRegistered</h2>
+<ul>
+<li>(String) <code>pkg</code> - The package.</li>
+</ul>
+<p><em>Check whether a package is registered.</em></p>
+<pre><code class="coffeescript">  isPackageRegistered: (pkg) -&gt; -1 isnt @_packageList.indexOf pkg
+</code></pre>
 
-  packagesImplementing: (hook) -&gt; @_hookIndex?[hook] ? []
+<h2 id="packagemanagerpackageimplements">PackageManager#packageImplements</h2>
+<ul>
+<li>
+<p>(String) <code>pkg</code> - The package.</p>
+</li>
+<li>
+<p>(String) <code>hook</code> - The hook to check.</p>
+</li>
+</ul>
+<p><em>Check whether a package implements a hook.</em></p>
+<pre><code class="coffeescript">  packageImplements: (pkg, hook) -&gt; @_pkgIndex?[pkg]?[hook]?
+</code></pre>
 
-  registerPackage: (path) -&gt;
-    return if @isPackageRegistered path
+<h2 id="packagemanagerpackagelist">PackageManager#packageList</h2>
+<p><em>Get the list of registered packages.</em></p>
+<pre><code class="coffeescript">  packageList: -&gt; @_packageList
+</code></pre>
+
+<h2 id="packagemanagerpackagepath">PackageManager#packagePath</h2>
+<ul>
+<li>(String) <code>pkg</code> - The package.</li>
+</ul>
+<p><em>Get the filepath of a package.</em></p>
+<pre><code class="coffeescript">  packagePath: (pkg) -&gt;
+
+    path_ = config.get 'path'
+    path.relative path_, path.dirname require.resolve pkg
+</code></pre>
+
+<h2 id="packagemanagerpackagesimplementing">PackageManager#packagesImplementing</h2>
+<ul>
+<li>(String) <code>hook</code> - The hook to check.</li>
+</ul>
+<p><em>Get the list of registered packages implementing a hook.</em></p>
+<pre><code class="coffeescript">  packagesImplementing: (hook) -&gt; @_hookIndex?[hook] ? []
+</code></pre>
+
+<h2 id="packagemanagerregisterpackage">PackageManager#registerPackage</h2>
+<ul>
+<li>(String) <code>pkg</code> - The package.</li>
+</ul>
+<p><em>Register a package.</em></p>
+<pre><code class="coffeescript">  registerPackage: (pkg) -&gt;
+    return if @isPackageRegistered pkg
 
     try
-      module_ = require path
+      module_ = require pkg
 </code></pre>
 
 <p>Suppress missing package errors.</p>
 <pre><code class="coffeescript">    catch error
-      if error.toString() is &quot;Error: Cannot find module '#{name}'&quot;
+      if error.toString() is &quot;Error: Cannot find module '#{pkg}'&quot;
         return
 
       throw error
 
-    @_packageList.push path
+    @_packageList.push pkg
 
     module_.pkgmanRegister? new PackageManager.Registrar(
-      @_hookIndex, @_pathIndex, path
+      @_hookIndex, @_pkgIndex, pkg
     )
+</code></pre>
 
-  registerPackages: (paths) -&gt; @registerPackage path for path in paths
+<h2 id="packagemanagerregisterpackages">PackageManager#registerPackages</h2>
+<ul>
+<li>(Array of String) <code>pkgs</code> - The packages.</li>
+</ul>
+<p><em>Register packages.</em></p>
+<pre><code class="coffeescript">  registerPackages: (pkgs) -&gt; @registerPackage pkg for pkg in pkgs
+</code></pre>
 
-  unregisterPackage: (path) -&gt;
-    return unless @isPackageRegistered path
+<h2 id="packagemanagerunregisterpackage">PackageManager#unregisterPackage</h2>
+<ul>
+<li>(String) <code>pkg</code> - The package.</li>
+</ul>
+<p><em>Unregister a package.</em></p>
+<pre><code class="coffeescript">  unregisterPackage: (pkg) -&gt;
+    return unless @isPackageRegistered pkg
 
-    for hook of @_pathIndex[path]
+    for hook of @_pkgIndex[pkg]
 
-      if -1 isnt index = @_hookIndex[hook].indexOf path
+      if -1 isnt index = @_hookIndex[hook].indexOf pkg
         @_hookIndex[hook].splice index, 1
         delete @_hookIndex[hook] if @_hookIndex[hook].length is 0
 
-    delete @_pathIndex[path]
+    delete @_pkgIndex[pkg]
 
-    index = @_packageList.indexOf path
+    index = @_packageList.indexOf pkg
     @_packageList.splice index, 1
 
     return
+</code></pre>
 
-  unregisterPackages: (paths) -&gt; @unregisterPackage path for path in paths
+<h2 id="packagemanagerunregisterpackages">PackageManager#unregisterPackages</h2>
+<ul>
+<li>(Array of String) <code>pkgs</code> - The packages.</li>
+</ul>
+<p><em>Unregister a list of packages.</em></p>
+<pre><code class="coffeescript">  unregisterPackages: (pkgs) -&gt; @unregisterPackage pkg for pkg in pkgs
 
 class PackageManager.Registrar
 
-  constructor: (@_hookIndex, @_pathIndex, @_path) -&gt;
+  constructor: (@_hookIndex, @_pkgIndex, @_path) -&gt;
 
   path: -&gt; @_path
 
   recur: (paths) -&gt;
-    for path in paths
-      subpath = &quot;#{@_path}/#{path}&quot;
+    for path_ in paths
+      subpath = &quot;#{@_path}/#{path_}&quot;
       submodule = require subpath
       submodule.pkgmanRegister? new PackageManager.Registrar(
-        @_hookIndex, @_pathIndex, subpath
+        @_hookIndex, @_pkgIndex, subpath
       )
 
   registerHook: (submodule, hook, impl) -&gt;
@@ -519,18 +774,18 @@ class PackageManager.Registrar
 against.</p>
 <pre><code class="coffeescript">    if impl?
 
-      path = &quot;#{@_path}/#{submodule}&quot;
+      path_ = &quot;#{@_path}/#{submodule}&quot;
 </code></pre>
 
 <p>Otherwise, fix up the args.</p>
 <pre><code class="coffeescript">    else
 
-      path = @_path
+      path_ = @_path
       impl = hook
       hook = submodule
 
-    (@_hookIndex[hook] ?= []).push path
-    (@_pathIndex[path] ?= {})[hook] = impl
+    (@_hookIndex[hook] ?= []).push path_
+    (@_pkgIndex[path_] ?= {})[hook] = impl
 
 module.exports = new PackageManager()
 module.exports.PackageManager = PackageManager

@@ -37,7 +37,7 @@ Read configuration file.
   settingsFilename = config.get 'path'
   settingsFilename += '/config/settings.yml'
 
-  throw new Error '
+  grunt.fail.fatal new Error '
     Settings file not found!
     You should copy config/default.settings.yml to config/settings.yml
   ' unless fs.existsSync settingsFilename
@@ -66,10 +66,10 @@ Load the packages' configuration settings and set into the default config.
 ## GruntConfiguration
 
 ```coffeescript
-  class GruntConfiguration
+  gruntConfig = new class GruntConfiguration
 ```
 
-## *constructor*
+## GruntConfiguration#constructor
 
 ```coffeescript
     constructor: ->
@@ -181,10 +181,13 @@ Defaults to `'app'`.
         ]
         tasks: ["build:#{key}"]
       )
+```
 
-  gruntConfig = new GruntConfiguration()
+Default tasks.
 
-  gruntConfig.registerTask 'production', ['build']
+```coffeescript
+  gruntConfig.registerTask 'build', []
+  gruntConfig.registerTask 'production', ['buildOnce']
   gruntConfig.registerTask 'default', ['buildOnce']
 
   gruntConfig.registerTask 'buildOnce', do ->
@@ -200,13 +203,19 @@ Defaults to `'app'`.
 #### Invoke hook [`trussServerGruntConfig`](../../hooks#trussservergruntconfig)
 
 ```coffeescript
-  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+  try
+    pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 ```
 
 #### Invoke hook [`trussServerGruntConfigAlter`](../../hooks#trussservergruntconfigalter)
 
 ```coffeescript
-  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+  try
+    pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 ```
 
 Initialize configuration.
