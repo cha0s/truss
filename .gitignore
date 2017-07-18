@@ -1,4 +1,6 @@
 /node_modules
 
+/build
+/frontend
 /gh-pages
 mkdocs.yml
