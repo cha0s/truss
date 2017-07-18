@@ -23,7 +23,7 @@ module.exports = (grunt) ->
   settingsFilename = config.get 'path'
   settingsFilename += '/config/settings.yml'
 
-  throw new Error '
+  grunt.fail.fatal new Error '
     Settings file not found!
     You should copy config/default.settings.yml to config/settings.yml
   ' unless fs.existsSync settingsFilename
@@ -43,9 +43,9 @@ module.exports = (grunt) ->
   config.setDefaults packageConfig: packageConfig.toJSON()
 
   # ## GruntConfiguration
-  class GruntConfiguration
+  gruntConfig = new class GruntConfiguration
 
-    # ## *constructor*
+    # ## GruntConfiguration#constructor
     constructor: ->
 
       @_npmTasks = []
@@ -141,9 +141,9 @@ module.exports = (grunt) ->
         tasks: ["build:#{key}"]
       )
 
-  gruntConfig = new GruntConfiguration()
-
-  gruntConfig.registerTask 'production', ['build']
+  # Default tasks.
+  gruntConfig.registerTask 'build', []
+  gruntConfig.registerTask 'production', ['buildOnce']
   gruntConfig.registerTask 'default', ['buildOnce']
 
   gruntConfig.registerTask 'buildOnce', do ->
@@ -156,10 +156,16 @@ module.exports = (grunt) ->
       grunt.task.run 'build'
 
   # #### Invoke hook `trussServerGruntConfig`.
-  pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+  try
+    pkgman.invoke 'trussServerGruntConfig', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 
   # #### Invoke hook `trussServerGruntConfigAlter`.
-  pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+  try
+    pkgman.invoke 'trussServerGruntConfigAlter', gruntConfig, grunt
+  catch error
+    grunt.fail.fatal error
 
   # Initialize configuration.
   grunt.initConfig gruntConfig._taskConfig
