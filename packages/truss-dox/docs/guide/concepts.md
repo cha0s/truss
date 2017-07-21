@@ -38,3 +38,15 @@ is dispatched first, followed by the second, etc.
 See the
 [middleware module](../source/src/middleware#defining-middleware)
 for even more information about defining middleware.
+
+# Glob patterns
+
+Truss uses glob patterns to define path specifications for various purposes
+(see:
+[`trussDoxSourceList`](../source/packages/truss-dox#implements-hook-trussdoxsourcelist)'s
+implementation for instance). Glob patterns can be as simple as e.g. `*.html`
+to match all HTML files.
+
+Read more about glob patterns and how they are used by `node-glob` &mdash; the
+module providing this API to Truss &mdash; here:
+[https://github.com/isaacs/node-glob#glob-primer](https://github.com/isaacs/node-glob#glob-primer)

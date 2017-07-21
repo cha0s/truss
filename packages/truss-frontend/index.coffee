@@ -27,10 +27,6 @@ exports.pkgmanRegister = (registrar) ->
         # Config script.
         clientConfig = new Config()
 
-        # Gather client-side packages
-        packagesLists = pkgman.invokeFlat 'trussFrontendPackageList', req
-        packageList = _.flatten packagesLists
-
         # Use package list to build client package configuration.
         clientPackageConfig = new Config()
         for path in pkgman.packagesImplementing 'trussFrontendPackageConfig'
@@ -233,12 +229,6 @@ _requires['#{
       'grunt-newer'
       'grunt-wrap'
     ]
-
-  # #### Implements hook `trussFrontendPackageConfig`.
-  registrar.registerHook 'trussFrontendPackageConfig', ->
-
-  # #### Implements hook `trussFrontendPackageList`.
-  registrar.registerHook 'trussFrontendPackageList', (path) ->
 
   # #### Implements hook `trussHttpServerRoutes`.
   registrar.registerHook 'config', 'trussHttpServerRoutes', -> [
