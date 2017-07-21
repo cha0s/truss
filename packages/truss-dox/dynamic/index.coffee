@@ -22,7 +22,13 @@ sourceFilesPromise = new Promise (resolve, reject) ->
 
   # #### Invoke hook `trussDoxSourceList`.
   sourceFiles = _.flatten pkgman.invokeFlat 'trussDoxSourceList'
-  glob "{#{sourceFiles.join ','}}", (error, files) ->
+
+  # ###### TODO: Worth to generalize this?
+  positive = sourceFiles.filter (f) -> f.charCodeAt(0) isnt '!'.charCodeAt(0)
+  negative = sourceFiles.filter (f) -> f.charCodeAt(0) is '!'.charCodeAt(0)
+  negative = negative.map (f) -> f.substr 1
+
+  glob "{#{sourceFiles.join ','}}", ignore: negative, (error, files) ->
     return reject error if error?
     resolve files
 

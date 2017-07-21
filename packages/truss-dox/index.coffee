@@ -16,6 +16,7 @@ exports.pkgmanRegister = (registrar) ->
     'src/**/*.coffee'
     'config/default.settings.yml'
     'packages/**/*.coffee'
+    '!packages/truss-dox/docs/**/*.*'
   ]
 
   # #### Implements hook `trussDoxSourceMarkdownTransform`.
