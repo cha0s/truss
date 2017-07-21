@@ -51,20 +51,6 @@ exports.pkgmanRegister = (registrar) ->
     ]
 
   # #### Implements hook `trussHttpServerRequestMiddleware`.
-  registrar.registerHook 'stub/routes', 'trussHttpServerRequestMiddleware', (http) ->
-
-    label: 'HTTP routes'
-    middleware: [
-
-      (req, res, next) ->
-
-        console.log req.url
-
-        next()
-
-    ]
-
-  # #### Implements hook `trussHttpServerRequestMiddleware`.
   registrar.registerHook 'trussHttpServerRequestMiddleware', (http) ->
 
     label: 'Finalize HTTP request'
@@ -95,7 +81,7 @@ exports.pkgmanRegister = (registrar) ->
   registrar.registerHook 'trussServerPackageConfig', ->
 
     # Module implementing the HTTP server.
-    module: 'truss-http/stub'
+    module: 'truss-http/stub/instance'
 
     # Middleware stack run for every request.
     requestMiddleware: []
@@ -119,5 +105,9 @@ exports.pkgmanRegister = (registrar) ->
       '127.0.0.1'
       '::ffff:127.0.0.1'
     ]
+
+  registrar.recur [
+    'stub'
+  ]
 
 exports.server = -> httpServer
