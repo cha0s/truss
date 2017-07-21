@@ -97,17 +97,18 @@ module.exports = (grunt) ->
     #
     # * (String) `task` - The name of the task to configure.
     #
-    # * (String Array or Function) `subtasksOrFunction` - Either an array of
-    # strings which define the dependencies for the task, or a function which
-    # will be executed for the task.
+    # * (String or String Array or Function) `subtasks` - Either a string or an
+    # array of strings which define the dependencies for the task, or a
+    # function which will be executed for the task.
     #
     # *Register a Grunt task.*
-    registerTask: (task, subtasksOrFunction) ->
+    registerTask: (task, subtasks) ->
 
-      if 'function' is typeof subtasksOrFunction
-        @_tasks[task] = subtasksOrFunction
+      if 'function' is typeof subtasks
+        @_tasks[task] = subtasks
       else
-        (@_tasks[task] ?= []).push subtasksOrFunction...
+        subtasks = [subtasks] unless Array.isArray subtasks
+        (@_tasks[task] ?= []).push subtasks...
 
       return
 
