@@ -1,8 +1,5 @@
 # Native server application entry point.
 
-```coffeescript
-```
-
 Ensure proper environment exists.
 
 ```coffeescript

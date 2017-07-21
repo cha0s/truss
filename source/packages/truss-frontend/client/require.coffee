@@ -1,13 +1,6 @@
-
-```coffeescript
-```
-
 # Require system for browser.
 
 *Implement require in the spirit of NodeJS.*
-
-```coffeescript
-```
 
 Resolve the module name.
 
@@ -15,6 +8,7 @@ Resolve the module name.
 _resolveModuleName = (name, parentFilename) ->
 ```
 
+###### TODO: `NODE_PATH` implementation.
 Strip `/index` from the end, if necessary.
 
 ```coffeescript

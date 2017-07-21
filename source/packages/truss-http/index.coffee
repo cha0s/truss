@@ -2,6 +2,7 @@
 
 *Manage HTTP connections.*
 
+
 ```coffeescript
 _ = require 'lodash'
 

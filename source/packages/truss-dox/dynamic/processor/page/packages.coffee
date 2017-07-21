@@ -2,6 +2,7 @@
 
 *Generate the packages page.*
 
+
 ```coffeescript
 path = require 'path'
 

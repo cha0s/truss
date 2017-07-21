@@ -5,6 +5,7 @@ and process exit.* The core bootstrap phase injects environment into a
 forked copy of the application including require paths to allow core and
 custom packages to be included without qualification.
 
+
 ```coffeescript
 debug = require('debug') 'truss:main'
 middleware = require 'middleware'

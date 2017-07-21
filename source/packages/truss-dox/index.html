@@ -564,17 +564,19 @@ markdown. This applies to coffee and yaml files.</p>
 <pre><code class="coffeescript">        else
 
           @hanging = [] if @commenting
-          @push &quot;\n```#{@fencing}\n&quot; if @commenting or not @hasWrittenCode
+          @push '\n' if @commenting or not @hasWrittenCode
 
           if line.length is 0
             @hanging.push '' unless @commenting
           else
+            @push &quot;```#{@fencing}\n&quot; if @commenting or not @hasWrittenCode
+
             @push &quot;\n&quot; for blank in @hanging
             @hanging = []
-            @push &quot;#{line}\n&quot;
 
-          @commenting = false
-          @hasWrittenCode = true
+            @push &quot;#{line}\n&quot;
+            @commenting = false
+            @hasWrittenCode = true
 
         done()
 </code></pre>

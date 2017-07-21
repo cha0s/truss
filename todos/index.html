@@ -126,6 +126,9 @@
                 <li class="toctree-l3"><a href="#todo-dynamic">TODO: Dynamic...</a></li>
                 
             
+                <li class="toctree-l3"><a href="#todo-node_path-implementation">TODO: NODE_PATH implementation.</a></li>
+                
+            
             </ul>
         
     </li>
@@ -549,6 +552,20 @@ DoxPage = require '.'
 </code></pre>
 
 <p><a href="../source/packages/truss-dox/dynamic/processor/page/todos#todo-dynamic">the above found in packages/truss-dox/dynamic/processor/page/todos.coffee:46</a></p>
+<hr />
+<pre><code class="coffeescript">
+# Resolve the module name.
+_resolveModuleName = (name, parentFilename) -&gt;
+
+</code></pre>
+
+<h2 id="todo-node_path-implementation">TODO: <code>NODE_PATH</code> implementation.</h2>
+<pre><code class="coffeescript">  # Strip `/index` from the end, if necessary.
+  checkModuleName = (name) -&gt;
+    return name if _requires[name]?
+</code></pre>
+
+<p><a href="../source/packages/truss-frontend/client/require#todo-node-path-implementation">the above found in packages/truss-frontend/client/require.coffee:7</a></p>
               
             </div>
           </div>

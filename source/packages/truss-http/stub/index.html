@@ -310,6 +310,9 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#http-server-stub">HTTP server stub</a></li>
+                
+            
             </ul>
         
     </li>
@@ -460,8 +463,9 @@
           <div role="main">
             <div class="section">
               
-                <pre><code class="coffeescript">
-exports.pkgmanRegister = (registrar) -&gt;
+                <h1 id="http-server-stub">HTTP server stub</h1>
+<p><em>A barebones HTTP server.</em></p>
+<pre><code class="coffeescript">exports.pkgmanRegister = (registrar) -&gt;
 
   registrar.recur [
     'router'

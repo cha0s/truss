@@ -2,6 +2,7 @@
 
 *Generate all of the dynamic aspects of the project documentation.*
 
+
 ```coffeescript
 fs = require 'fs'
 

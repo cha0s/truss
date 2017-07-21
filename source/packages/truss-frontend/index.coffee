@@ -2,6 +2,7 @@
 
 *Front-end abstraction: respond to client, render response, etc.*
 
+
 ```coffeescript
 path = require 'path'
 

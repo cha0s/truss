@@ -268,6 +268,8 @@
             
                 <li class="toctree-l3"><a href="#require-system-for-browser">Require system for browser.</a></li>
                 
+                    <li><a class="toctree-l4" href="#todo-node_path-implementation">TODO: NODE_PATH implementation.</a></li>
+                
             
             </ul>
         
@@ -463,16 +465,13 @@
           <div role="main">
             <div class="section">
               
-                <pre><code class="coffeescript"></code></pre>
-
-<h1 id="require-system-for-browser">Require system for browser.</h1>
+                <h1 id="require-system-for-browser">Require system for browser.</h1>
 <p><em>Implement require in the spirit of NodeJS.</em></p>
-<pre><code class="coffeescript"></code></pre>
-
 <p>Resolve the module name.</p>
 <pre><code class="coffeescript">_resolveModuleName = (name, parentFilename) -&gt;
 </code></pre>
 
+<h6 id="todo-node_path-implementation">TODO: <code>NODE_PATH</code> implementation.</h6>
 <p>Strip <code>/index</code> from the end, if necessary.</p>
 <pre><code class="coffeescript">  checkModuleName = (name) -&gt;
     return name if _requires[name]?

@@ -2,6 +2,7 @@
 
 *Generate the hooks page.*
 
+
 ```coffeescript
 fs = require 'fs'
 

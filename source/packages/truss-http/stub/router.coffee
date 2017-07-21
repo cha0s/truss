@@ -1,6 +1,9 @@
+# HTTP server stub - Router
+
+*Extremely simple and naive routing*
+
 
 ```coffeescript
-
 exports.pkgmanRegister = (registrar) ->
 ```
 

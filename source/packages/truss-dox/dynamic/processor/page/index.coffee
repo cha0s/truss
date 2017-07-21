@@ -3,6 +3,7 @@
 *Abstract class to process a documentation page, using a template and
 generated information.*
 
+
 ```coffeescript
 path = require 'path'
 fs = require 'fs'

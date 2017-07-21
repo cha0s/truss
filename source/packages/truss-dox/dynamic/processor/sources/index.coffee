@@ -3,6 +3,7 @@
 *Abstract class to process the project sources, usually by transforming them
 to a new form.*
 
+
 ```coffeescript
 Promise = require 'bluebird'
 

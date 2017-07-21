@@ -2,6 +2,7 @@
 
 *Provide a unified interface for logging messages.*
 
+
 ```coffeescript
 _ = require 'lodash'
 
