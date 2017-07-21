@@ -345,87 +345,6 @@
     </ul>
 
         
-            
-    <ul class="subnav">
-    <li><span>truss-websocket-socket.io</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket-socket.io/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket-socket.io/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket-socket.io/server/">server.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
-    <li><span>truss-websocket</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket/client/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-websocket/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
     </ul>
 
         
@@ -569,8 +488,28 @@ exports.pkgmanRegister = (registrar) -&gt;
         httpServer = new Server()
 </code></pre>
 
+<p>Compute the hostname if it isn't explicitly set.</p>
+<pre><code class="coffeescript">        unless config.get 'packageConfig:truss-http:hostname'
+
+          listenTarget = config.get 'packageConfig:truss-http:listenTarget'
+          listenTarget = [listenTarget] unless Array.isArray listenTarget
+
+          if listenTarget.length is 1
+
+            hostname = listenTarget[0]
+            hostname = &quot;localhost:#{hostname}&quot; if _.isNumber hostname
+
+          else
+
+            hostname = &quot;#{listenTarget[1]}:#{listenTarget[0]}&quot;
+
+          config.set 'packageConfig:truss-http:hostname', hostname
+</code></pre>
+
 <p>Mark proxies as trusted addresses.</p>
-<pre><code class="coffeescript">        httpServer.trustProxy httpServer.config 'trustedProxies'
+<pre><code class="coffeescript">        httpServer.trustProxy(
+          config.get 'packageConfig:truss-http:trustedProxies'
+        )
 </code></pre>
 
 <h4 id="invoke-hook-trusshttpserverroutes">Invoke hook <a href="../../../hooks#trusshttpserverroutes"><code>trussHttpServerRoutes</code></a></h4>
@@ -632,6 +571,10 @@ exports.pkgmanRegister = (registrar) -&gt;
 <pre><code class="coffeescript">    module: 'truss-http/stub/instance'
 </code></pre>
 
+<p>The server hostname. Derived from <code>listenTarget</code> if not explicitly set.</p>
+<pre><code class="coffeescript">    hostname: ''
+</code></pre>
+
 <p>Middleware stack run for every request.</p>
 <pre><code class="coffeescript">    requestMiddleware: []
 </code></pre>
@@ -642,8 +585,6 @@ exports.pkgmanRegister = (registrar) -&gt;
   <code>listenTarget: 4201</code></li>
 <li>An array where the port is the first element, and the host is the
   second element: <code>listenTarget: [4201, '0.0.0.0']</code></li>
-<li>A UNIX socket path:
-  <code>listenTarget: '/lib/run/truss/socket/http/or/whatever/path'</code></li>
 </ul>
 <pre><code class="coffeescript">    listenTarget: 4201
 </code></pre>

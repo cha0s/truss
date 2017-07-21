@@ -124,12 +124,6 @@
                 <li class="toctree-l3"><a href="#trussreplservercontext">trussReplServerContext</a></li>
                 
             
-                <li class="toctree-l3"><a href="#trusswebsocketserverconnectionmiddleware">trussWebsocketServerConnectionMiddleware</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trusswebsocketserverdisconnectionmiddleware">trussWebsocketServerDisconnectionMiddleware</a></li>
-                
-            
                 <li class="toctree-l3"><a href="#trussserverprocessexit">trussServerProcessExit</a></li>
                 
             
@@ -152,18 +146,6 @@
                 
             
                 <li class="toctree-l3"><a href="#trussfrontendpackagelist">trussFrontendPackageList</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#shrubassetsmiddleware">shrubAssetsMiddleware</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#shrubgruntconfig">shrubGruntConfig</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussclientbootstrapmiddleware">trussClientBootstrapMiddleware</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#shrubreplservercontext">shrubReplServerContext</a></li>
                 
             
             </ul>
@@ -403,87 +385,6 @@
     </ul>
 
         
-            
-    <ul class="subnav">
-    <li><span>truss-websocket-socket.io</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket-socket.io/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket-socket.io/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket-socket.io/server/">server.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
-    <li><span>truss-websocket</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket/client/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-websocket/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
     </ul>
 
         
@@ -624,7 +525,7 @@ config.get('packageSettings:my-package:two:three');
 an example of how settings may be overridden. This should always be preferred
 to actually changing the code in a given package's hook.</p>
 <div class="admonition note">
-  <p class="admonition-title">4 implementations</p>
+  <p class="admonition-title">3 implementations</p>
   <table>
     <tr class="even">
       <td>
@@ -648,14 +549,6 @@ to actually changing the code in a given package's hook.</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>
-        <a href="../source/packages/truss-websocket">packages/truss-websocket/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket#implements-hook-trussserverpackageconfig">implementation</a>
       </td>
     </tr>
   </table>
@@ -954,36 +847,6 @@ REPL context.</p>
   </table>
 </div>
 
-<h2 id="trusswebsocketserverconnectionmiddleware">trussWebsocketServerConnectionMiddleware</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket/abstract">packages/truss-websocket/abstract.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket/abstract#invoke-hook-trusswebsocketserverconnectionmiddleware">invocation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trusswebsocketserverdisconnectionmiddleware">trussWebsocketServerDisconnectionMiddleware</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket/abstract">packages/truss-websocket/abstract.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket/abstract#invoke-hook-trusswebsocketserverdisconnectionmiddleware">invocation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
 <h2 id="trussserverprocessexit">trussServerProcessExit</h2>
 <p><em>Final cleanups as the process is exiting.</em></p>
 <p>The application tries its hardest to always invoke this hook, even in the
@@ -1105,7 +968,7 @@ The middleware have the following signature:</p>
 </code></pre>
 
 <div class="admonition note">
-  <p class="admonition-title">3 implementations</p>
+  <p class="admonition-title">2 implementations</p>
   <table>
     <tr class="even">
       <td>
@@ -1121,14 +984,6 @@ The middleware have the following signature:</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-repl#implements-hook-trussserverbootstrapmiddleware">implementation</a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket">packages/truss-websocket/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket#implements-hook-trussserverbootstrapmiddleware">implementation</a>
       </td>
     </tr>
   </table>
@@ -1203,66 +1058,6 @@ The middleware have the following signature:</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagelist">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="shrubassetsmiddleware">shrubAssetsMiddleware</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket-socket.io">packages/truss-websocket-socket.io/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket-socket.io#implements-hook-shrubassetsmiddleware">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="shrubgruntconfig">shrubGruntConfig</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket-socket.io">packages/truss-websocket-socket.io/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket-socket.io#implements-hook-shrubgruntconfig">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussclientbootstrapmiddleware">trussClientBootstrapMiddleware</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket/client">packages/truss-websocket/client/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket/client#implements-hook-trussclientbootstrapmiddleware">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="shrubreplservercontext">shrubReplServerContext</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-websocket">packages/truss-websocket/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-websocket#implements-hook-shrubreplservercontext">implementation</a>
       </td>
     </tr>
   </table>

@@ -3,9 +3,11 @@
 *A barebones HT TP server implementation.*
 
 ```coffeescript
+http = require 'http'
+
 Promise = require 'bluebird'
 
-http = require 'http'
+config = require 'config'
 
 TrussHttpServerAbstract = require '../abstract'
 ```
@@ -48,7 +50,7 @@ module.exports = class TrussHttpServerStub extends TrussHttpServerAbstract
 Bind to the listen target.
 
 ```coffeescript
-      listenTarget = self.config 'listenTarget'
+      listenTarget = config.get 'packageConfig:truss-http:listenTarget'
       listenTarget = [listenTarget] unless Array.isArray listenTarget
       self._server.listen listenTarget...
 

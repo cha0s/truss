@@ -283,8 +283,6 @@
                 
                     <li><a class="toctree-l4" href="#trusshttpserverabstractaddroute">TrussHttpServerAbstract#addRoute</a></li>
                 
-                    <li><a class="toctree-l4" href="#trusshttpserverabstractconfig">TrussHttpServerAbstract#config</a></li>
-                
                     <li><a class="toctree-l4" href="#trusshttpserverabstractlisten">TrussHttpServerAbstract#listen</a></li>
                 
                     <li><a class="toctree-l4" href="#trusshttpserverabstractregistermiddleware">TrussHttpServerAbstract#registerMiddleware</a></li>
@@ -342,87 +340,6 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../truss-repl/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
-    <li><span>truss-websocket-socket.io</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket-socket.io/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket-socket.io/">index.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket-socket.io/server/">server.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
-    <li><span>truss-websocket</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket/client/abstract/">abstract.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket/client/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-websocket/">index.coffee</a>
         
     </li>
 
@@ -572,11 +489,6 @@ httpMiddlewareDebug = require('debug') 'truss-silly:http:middleware'
 <pre><code class="coffeescript">  addRoute: (route) -&gt; @_routes.push route
 </code></pre>
 
-<h2 id="trusshttpserverabstractconfig">TrussHttpServerAbstract#config</h2>
-<p><em>Lookup a configuration value.</em></p>
-<pre><code class="coffeescript">  config: (key) -&gt; config.get &quot;packageConfig:truss-http:#{key}&quot;
-</code></pre>
-
 <h2 id="trusshttpserverabstractlisten">TrussHttpServerAbstract#listen</h2>
 <p><em>Listen for HTTP connections.</em></p>
 <pre><code class="coffeescript">  listen: -&gt;
@@ -601,13 +513,13 @@ httpMiddlewareDebug = require('debug') 'truss-silly:http:middleware'
 <p>Once listening, log about it.</p>
 <pre><code class="coffeescript">    promise.then -&gt;
 
-      listenTarget = self.config 'listenTarget'
+      listenTarget = config.get 'packageConfig:truss-http:listenTarget'
       listenTarget = [listenTarget] unless Array.isArray listenTarget
 
       if listenTarget.length is 1
 
         target = listenTarget[0]
-        target = &quot;port #{target}&quot; if _.isNumber listenTarget[0]
+        target = &quot;port #{target}&quot; if _.isNumber target
 
       else
 
@@ -631,7 +543,9 @@ httpMiddlewareDebug = require('debug') 'truss-silly:http:middleware'
 
     httpMiddlewareDebug '- Loading HTTP middleware...'
 
-    httpMiddleware = @config('requestMiddleware').concat()
+    httpMiddleware = config.get(
+      'packageConfig:truss-http:requestMiddleware'
+    ).concat()
 </code></pre>
 
 <p>Make absolutely sure the requests are finalized.</p>

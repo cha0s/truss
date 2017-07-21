@@ -38,10 +38,32 @@ Spin up the HTTP server, and initialize it.
         httpServer = new Server()
 ```
 
+Compute the hostname if it isn't explicitly set.
+
+```coffeescript
+        unless config.get 'packageConfig:truss-http:hostname'
+
+          listenTarget = config.get 'packageConfig:truss-http:listenTarget'
+          listenTarget = [listenTarget] unless Array.isArray listenTarget
+
+          if listenTarget.length is 1
+
+            hostname = listenTarget[0]
+            hostname = "localhost:#{hostname}" if _.isNumber hostname
+
+          else
+
+            hostname = "#{listenTarget[1]}:#{listenTarget[0]}"
+
+          config.set 'packageConfig:truss-http:hostname', hostname
+```
+
 Mark proxies as trusted addresses.
 
 ```coffeescript
-        httpServer.trustProxy httpServer.config 'trustedProxies'
+        httpServer.trustProxy(
+          config.get 'packageConfig:truss-http:trustedProxies'
+        )
 ```
 
 #### Invoke hook [`trussHttpServerRoutes`](../../hooks#trusshttpserverroutes)
@@ -121,6 +143,12 @@ Module implementing the HTTP server.
     module: 'truss-http/stub/instance'
 ```
 
+The server hostname. Derived from `listenTarget` if not explicitly set.
+
+```coffeescript
+    hostname: ''
+```
+
 Middleware stack run for every request.
 
 ```coffeescript
@@ -133,8 +161,6 @@ Where the server will be listening. This can be:
   `listenTarget: 4201`
 - An array where the port is the first element, and the host is the
   second element: `listenTarget: [4201, '0.0.0.0']`
-- A UNIX socket path:
-  `listenTarget: '/lib/run/truss/socket/http/or/whatever/path'`
 
 ```coffeescript
     listenTarget: 4201
