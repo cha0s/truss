@@ -33,8 +33,13 @@ module.exports = class DoxPageHooks extends DoxPage
       do (hook) -> new Promise (resolve, reject) ->
 
         # ###### TODO: Dynamic hook locations.
-        fs.readFile "docs/hook/#{hook}.md", (error, output) ->
-          return reject error if error? and error.code isnt 'ENOENT'
+        fs.readFile "packages/truss-dox/docs/hook/#{
+          hook
+        }.md", (error, output) ->
+          if error?
+            return reject error if error.code isnt 'ENOENT'
+            console.warn "Missing template for #{hook}..."
+
           templates[hook] = output
           resolve()
 
