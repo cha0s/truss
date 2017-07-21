@@ -236,36 +236,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -320,8 +290,6 @@
                 
                     <li><a class="toctree-l4" href="#implements-hook-trusshttpserverrequestmiddleware">Implements hook trussHttpServerRequestMiddleware</a></li>
                 
-                    <li><a class="toctree-l4" href="#implements-hook-trusshttpserverrequestmiddleware_1">Implements hook trussHttpServerRequestMiddleware</a></li>
-                
                     <li><a class="toctree-l4" href="#implements-hook-trussserverpackageconfig">Implements hook trussServerPackageConfig</a></li>
                 
             
@@ -338,6 +306,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="stub/router/">router.coffee</a>
         
     </li>
 
@@ -612,21 +594,6 @@ exports.pkgmanRegister = (registrar) -&gt;
 </code></pre>
 
 <h4 id="implements-hook-trusshttpserverrequestmiddleware">Implements hook <a href="../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'stub/routes', 'trussHttpServerRequestMiddleware', (http) -&gt;
-
-    label: 'HTTP routes'
-    middleware: [
-
-      (req, res, next) -&gt;
-
-        console.log req.url
-
-        next()
-
-    ]
-</code></pre>
-
-<h4 id="implements-hook-trusshttpserverrequestmiddleware_1">Implements hook <a href="../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
 <pre><code class="coffeescript">  registrar.registerHook 'trussHttpServerRequestMiddleware', (http) -&gt;
 
     label: 'Finalize HTTP request'
@@ -662,7 +629,7 @@ exports.pkgmanRegister = (registrar) -&gt;
 </code></pre>
 
 <p>Module implementing the HTTP server.</p>
-<pre><code class="coffeescript">    module: 'truss-http/stub'
+<pre><code class="coffeescript">    module: 'truss-http/stub/instance'
 </code></pre>
 
 <p>Middleware stack run for every request.</p>
@@ -690,6 +657,10 @@ which is provided to HTTP requests.</p>
       '127.0.0.1'
       '::ffff:127.0.0.1'
     ]
+
+  registrar.recur [
+    'stub'
+  ]
 
 exports.server = -&gt; httpServer
 </code></pre>

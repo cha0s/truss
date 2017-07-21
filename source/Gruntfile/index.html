@@ -259,36 +259,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../packages/truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -344,6 +314,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../packages/truss-http/stub/router/">router.coffee</a>
         
     </li>
 
@@ -679,18 +663,19 @@ This is generally the name of the package, but can be anything.</p>
 <p>(String) <code>task</code> - The name of the task to configure.</p>
 </li>
 <li>
-<p>(String Array or Function) <code>subtasksOrFunction</code> - Either an array of
-strings which define the dependencies for the task, or a function which
-will be executed for the task.</p>
+<p>(String or String Array or Function) <code>subtasks</code> - Either a string or an
+array of strings which define the dependencies for the task, or a
+function which will be executed for the task.</p>
 </li>
 </ul>
 <p><em>Register a Grunt task.</em></p>
-<pre><code class="coffeescript">    registerTask: (task, subtasksOrFunction) -&gt;
+<pre><code class="coffeescript">    registerTask: (task, subtasks) -&gt;
 
-      if 'function' is typeof subtasksOrFunction
-        @_tasks[task] = subtasksOrFunction
+      if 'function' is typeof subtasks
+        @_tasks[task] = subtasks
       else
-        (@_tasks[task] ?= []).push subtasksOrFunction...
+        subtasks = [subtasks] unless Array.isArray subtasks
+        (@_tasks[task] ?= []).push subtasks...
 
       return
 </code></pre>

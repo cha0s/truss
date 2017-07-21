@@ -236,36 +236,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -292,6 +262,8 @@
             
                 <li class="toctree-l3"><a href="#front-end-system">Front-end system</a></li>
                 
+                    <li><a class="toctree-l4" href="#implements-hook-trussfrontendassetsmiddleware">Implements hook trussFrontendAssetsMiddleware</a></li>
+                
                     <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackagetasks">Implements hook trussFrontendPackageTasks</a></li>
                 
                     <li><a class="toctree-l4" href="#implements-hook-trussservergruntconfig">Implements hook trussServerGruntConfig</a></li>
@@ -300,9 +272,13 @@
                 
                     <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackagelist">Implements hook trussFrontendPackageList</a></li>
                 
+                    <li><a class="toctree-l4" href="#implements-hook-trusshttpserverroutes">Implements hook trussHttpServerRoutes</a></li>
+                
                     <li><a class="toctree-l4" href="#implements-hook-trusshttpserverrequestmiddleware">Implements hook trussHttpServerRequestMiddleware</a></li>
                 
-                    <li><a class="toctree-l4" href="#implements-hook-trusshttpserverrequestmiddleware_1">Implements hook trussHttpServerRequestMiddleware</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussfrontendassetsmiddleware">Invoke hook trussFrontendAssetsMiddleware</a></li>
+                
+                    <li><a class="toctree-l4" href="#implements-hook-trussserverpackageconfig">Implements hook trussServerPackageConfig</a></li>
                 
             
             </ul>
@@ -340,6 +316,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-http/stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-http/stub/router/">router.coffee</a>
         
     </li>
 
@@ -568,22 +558,80 @@ pkgman = require 'pkgman'
 config = require 'config'
 {Config} = config
 
+assets = null
+
 exports.pkgmanRegister = (registrar) -&gt;
+</code></pre>
+
+<h4 id="implements-hook-trussfrontendassetsmiddleware">Implements hook <a href="../../../hooks#trussfrontendassetsmiddleware"><code>trussFrontendAssetsMiddleware</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussFrontendAssetsMiddleware', -&gt;
+
+    label: 'Modules'
+    middleware: [
+
+      (req, assets, next) -&gt;
+</code></pre>
+
+<p>Config script.</p>
+<pre><code class="coffeescript">        clientConfig = new Config()
+</code></pre>
+
+<p>Gather client-side packages</p>
+<pre><code class="coffeescript">        packagesLists = pkgman.invokeFlat 'trussFrontendPackageList', req
+        packageList = _.flatten packagesLists
+</code></pre>
+
+<p>Use package list to build client package configuration.</p>
+<pre><code class="coffeescript">        clientPackageConfig = new Config()
+        for path in pkgman.packagesImplementing 'trussFrontendPackageConfig'
+          clientPackageConfig.set(
+            path.replace /\//g, ':'
+            pkgman.invokePackage path, 'trussFrontendPackageConfig', req
+          )
+
+        clientConfig.set 'packageList', config.get 'packageList'
+        clientConfig.set 'packageConfig', clientPackageConfig.toJSON()
+</code></pre>
+
+<p>Assign the config variable.</p>
+<pre><code class="coffeescript">        assets.scripts.push
+          type: 'inline'
+          data: &quot;window.__trussConfig = #{
+            JSON.stringify clientConfig
+          }&quot;
+</code></pre>
+
+<p>Modules.</p>
+<pre><code class="coffeescript">        if 'production' is config.get 'NODE_ENV'
+          assets.scripts.push '/frontend/modules.min.js'
+        else
+          assets.scripts.push '/frontend/modules.js'
+
+        next()
+
+    ]
 </code></pre>
 
 <h4 id="implements-hook-trussfrontendpackagetasks">Implements hook <a href="../../../hooks#trussfrontendpackagetasks"><code>trussFrontendPackageTasks</code></a></h4>
 <pre><code class="coffeescript">  registrar.registerHook 'trussFrontendPackageTasks', (gruntConfig, grunt) -&gt;
+</code></pre>
 
-    gruntConfig.configureTask 'coffee', &quot;truss-frontend-truss-frontend&quot;, files: [
+<p>Watch rule.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'watch', 'truss-frontend-truss-frontend', {
+      files: [&quot;packages/truss-frontend/client/require.coffee&quot;]
+      tasks: ['build:truss-frontend']
+      options: livereload: true
+    }
+</code></pre>
+
+<p>Build the require stub out-of-band, it shouldn't be included as a
+regular client module.</p>
+<pre><code class="coffeescript">    gruntConfig.configureTask 'coffee', &quot;truss-frontend-truss-frontend&quot;, files: [
       src: &quot;packages/truss-frontend/client/require.coffee&quot;
       dest: 'build/js/client/require.js'
     ]
 
-    gruntConfig.registerTask &quot;truss-frontend-truss-frontend&quot;, [
-      &quot;newer:coffee:truss-frontend-truss-frontend&quot;
-    ]
-
-    return [&quot;truss-frontend-truss-frontend&quot;]
+    return 'newer:coffee:truss-frontend-truss-frontend'
 </code></pre>
 
 <h4 id="implements-hook-trussservergruntconfig">Implements hook <a href="../../../hooks#trussservergruntconfig"><code>trussServerGruntConfig</code></a></h4>
@@ -598,8 +646,8 @@ exports.pkgmanRegister = (registrar) -&gt;
 <pre><code class="coffeescript">    packageTasks = []
     for pkg in pkgman.packageList()
 
-      if pkgman.packageImplements pkg, 'trussFrontendPackageTasks'
-        tasks = pkgman.invokePackage(
+      tasks = if pkgman.packageImplements pkg, 'trussFrontendPackageTasks'
+        pkgman.invokePackage(
           pkg, 'trussFrontendPackageTasks', gruntConfig, grunt
         )
 
@@ -622,7 +670,7 @@ exports.pkgmanRegister = (registrar) -&gt;
           ext: '.js'
         ]
 
-        tasks = [&quot;newer:coffee:truss-frontend-#{pkg}&quot;]
+        &quot;newer:coffee:truss-frontend-#{pkg}&quot;
 
       gruntConfig.registerTask 'truss-frontend-packages', tasks
 </code></pre>
@@ -757,57 +805,93 @@ all module implementations.</p>
 <pre><code class="coffeescript">  registrar.registerHook 'trussFrontendPackageList', (path) -&gt;
 </code></pre>
 
-<h4 id="implements-hook-trusshttpserverrequestmiddleware">Implements hook <a href="../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'config', 'trussHttpServerRequestMiddleware', -&gt;
+<h4 id="implements-hook-trusshttpserverroutes">Implements hook <a href="../../../hooks#trusshttpserverroutes"><code>trussHttpServerRoutes</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'config', 'trussHttpServerRoutes', -&gt; [
+    path: '/frontend/modules.js'
+    receiver: (req, res, next) -&gt; require('fs').createReadStream(
+      &quot;#{config.get 'path'}/frontend/modules.js&quot;
+    ).pipe res
+  ]
+</code></pre>
 
-    label: 'Build client configuration for request'
+<h4 id="implements-hook-trusshttpserverrequestmiddleware">Implements hook <a href="../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussHttpServerRequestMiddleware', -&gt;
+
+    debug = require('debug') 'truss-silly:assets:middleware'
+
+    middleware = require 'middleware'
+</code></pre>
+
+<h4 id="invoke-hook-trussfrontendassetsmiddleware">Invoke hook <a href="../../../hooks#trussfrontendassetsmiddleware"><code>trussFrontendAssetsMiddleware</code></a></h4>
+<pre><code class="coffeescript">    debug '- Loading asset middleware...'
+
+    assetsMiddleware = middleware.fromConfig 'truss-frontend:assetsMiddleware'
+
+    debug '- Asset middleware loaded.'
+
+    label: 'Serve frontend'
 
     middleware: [
 
       (req, res, next) -&gt;
 
-        res.clientConfig = clientConfig = new Config()
+        $ = res.$ = cheerio.load '''
+&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;
+'''
 </code></pre>
 
-<p>Gather client-side packages</p>
-<pre><code class="coffeescript">        packagesLists = pkgman.invokeFlat 'trussFrontendPackageList', req, res
-        packageList = _.flatten packagesLists
+<p>Add mobile-first tags.</p>
+<pre><code class="coffeescript">        head = $('head')
+        head.append $('&lt;meta&gt;').attr 'charset', 'utf-8'
+        head.append $('&lt;meta&gt;').attr(
+          name: 'viewport'
+          content: 'width=device-width, initial-scale=1.0'
+        )
 </code></pre>
 
-<p>Use package list to build client package configuration.</p>
-<pre><code class="coffeescript">        clientPackageConfig = new Config()
-        for path in pkgman.packagesImplementing 'trussFrontendPackageConfig'
-          clientPackageConfig.set(
-            path.replace /\//g, ':'
-            pkgman.invokePackage path, 'trussFrontendPackageConfig', req
-          )
+<p>Gather assets.</p>
+<pre><code class="coffeescript">        body = $('body')
+        assets = scripts: [], styleSheets: []
+        assetsMiddleware.dispatch req, assets, (error) -&gt;
+          return next error if error?
+</code></pre>
 
-        clientConfig.set 'packageList', config.get 'packageList'
-        clientConfig.set 'packageConfig', clientPackageConfig.toJSON()
+<p>Inject scripts.</p>
+<pre><code class="coffeescript">          for script in assets.scripts
+            script = type: 'src', data: script if _.isString script
 
-        next()
+            switch script.type
+
+              when 'src'
+                body.append $('&lt;script&gt;').attr(
+                  'src', script.data
+                  type: 'text/javascript'
+                )
+
+              when 'inline'
+                body.append $('&lt;script&gt;').html script.data
+</code></pre>
+
+<p>Inject CSS.</p>
+<pre><code class="coffeescript">          for styleSheet in assets.styleSheets
+            body.append $('&lt;style&gt;').attr(
+              href: styleSheet
+              rel: 'stylesheet'
+            )
+</code></pre>
+
+<p>Build the HTML and serve it.</p>
+<pre><code class="coffeescript">          res.delivery = res.$.html()
+          next()
 
     ]
 </code></pre>
 
-<h4 id="implements-hook-trusshttpserverrequestmiddleware_1">Implements hook <a href="../../../hooks#trusshttpserverrequestmiddleware"><code>trussHttpServerRequestMiddleware</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'render', 'trussHttpServerRequestMiddleware', -&gt;
+<h4 id="implements-hook-trussserverpackageconfig">Implements hook <a href="../../../hooks#trussserverpackageconfig"><code>trussServerPackageConfig</code></a></h4>
+<pre><code class="coffeescript">  registrar.registerHook 'trussServerPackageConfig', -&gt;
 
-    label: 'Render delivery for request'
-
-    middleware: [
-
-      (req, res, next) -&gt;
-
-        res.$ = cheerio.load '''
-&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;
-'''
-
-        pkgman.invoke 'trussFrontendRenderHtml', req, res
-        res.delivery = res.$.html()
-
-        next()
-
+    assetsMiddleware: [
+      'truss-frontend'
     ]
 </code></pre>
               

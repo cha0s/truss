@@ -73,23 +73,6 @@ Listen...
 #### Implements hook [`trussHttpServerRequestMiddleware`](../../hooks#trusshttpserverrequestmiddleware)
 
 ```coffeescript
-  registrar.registerHook 'stub/routes', 'trussHttpServerRequestMiddleware', (http) ->
-
-    label: 'HTTP routes'
-    middleware: [
-
-      (req, res, next) ->
-
-        console.log req.url
-
-        next()
-
-    ]
-```
-
-#### Implements hook [`trussHttpServerRequestMiddleware`](../../hooks#trusshttpserverrequestmiddleware)
-
-```coffeescript
   registrar.registerHook 'trussHttpServerRequestMiddleware', (http) ->
 
     label: 'Finalize HTTP request'
@@ -135,7 +118,7 @@ Emit error.
 Module implementing the HTTP server.
 
 ```coffeescript
-    module: 'truss-http/stub'
+    module: 'truss-http/stub/instance'
 ```
 
 Middleware stack run for every request.
@@ -168,6 +151,10 @@ which is provided to HTTP requests.
       '127.0.0.1'
       '::ffff:127.0.0.1'
     ]
+
+  registrar.recur [
+    'stub'
+  ]
 
 exports.server = -> httpServer
 ```

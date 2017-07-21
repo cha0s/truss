@@ -236,36 +236,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -324,16 +294,21 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#http-server-stub-implementation">HTTP server stub implementation</a></li>
-                
-                    <li><a class="toctree-l4" href="#trusshttpserverstub">TrussHttpServerStub</a></li>
-                
-                    <li><a class="toctree-l4" href="#trusshttpserverstubconstructor">TrussHttpServerStub#constructor</a></li>
-                
-                    <li><a class="toctree-l4" href="#trusshttpserverstublistener">TrussHttpServerStub#listener</a></li>
-                
-            
             </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="router/">router.coffee</a>
         
     </li>
 
@@ -550,60 +525,12 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="http-server-stub-implementation">HTTP server stub implementation</h1>
-<p><em>A barebones HT TP server implementation.</em></p>
-<pre><code class="coffeescript">Promise = require 'bluebird'
+                <pre><code class="coffeescript">
+exports.pkgmanRegister = (registrar) -&gt;
 
-http = require 'http'
-
-TrussHttpServerAbstract = require '../abstract'
-</code></pre>
-
-<h2 id="trusshttpserverstub">TrussHttpServerStub</h2>
-<p>A little HTTP stub. Just barely implementing the abstract Truss HTTP
-server API.</p>
-<pre><code class="coffeescript">module.exports = class TrussHttpServerStub extends TrussHttpServerAbstract
-</code></pre>
-
-<h2 id="trusshttpserverstubconstructor">TrussHttpServerStub#constructor</h2>
-<pre><code class="coffeescript">  constructor: -&gt;
-    super
-
-    @_server = http.createServer()
-</code></pre>
-
-<h2 id="trusshttpserverstublistener">TrussHttpServerStub#listener</h2>
-<p><em>Listen for HTTP connections.</em></p>
-<pre><code class="coffeescript">  listener: -&gt;
-    self = this
-
-    new Promise (resolve, reject) -&gt;
-
-      self._server.on 'error', reject
-
-      self._server.once 'listening', -&gt;
-        self._server.removeListener 'error', reject
-        resolve()
-</code></pre>
-
-<p>Bind to the listen target.</p>
-<pre><code class="coffeescript">      listenTarget = self.config 'listenTarget'
-      listenTarget = [listenTarget] unless Array.isArray listenTarget
-      self._server.listen listenTarget...
-
-  registerMiddleware: -&gt;
-    self = this
-
-    super
-</code></pre>
-
-<p>Invoke the request middleware.</p>
-<pre><code class="coffeescript">    @_server.on 'request', (req, res) -&gt;
-      self._requestMiddleware.dispatch req, res, -&gt;
-
-  server: -&gt; @_server
-
-  trustProxy: (proxyList) -&gt;
+  registrar.recur [
+    'router'
+  ]
 </code></pre>
               
             </div>
@@ -612,7 +539,7 @@ server API.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../truss-repl/" class="btn btn-neutral float-right" title="index.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="instance/" class="btn btn-neutral float-right" title="instance.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../" class="btn btn-neutral" title="index.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -646,7 +573,7 @@ server API.</p>
         <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../truss-repl/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="instance/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

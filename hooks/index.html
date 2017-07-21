@@ -112,6 +112,9 @@
                 <li class="toctree-l3"><a href="#trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</a></li>
                 
             
+                <li class="toctree-l3"><a href="#trussfrontendassetsmiddleware">trussFrontendAssetsMiddleware</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#trusshttpserverrequestmiddleware">trussHttpServerRequestMiddleware</a></li>
                 
             
@@ -140,9 +143,6 @@
                 
             
                 <li class="toctree-l3"><a href="#trussdoxsourcelist">trussDoxSourceList</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussfrontendrenderhtml">trussFrontendRenderHtml</a></li>
                 
             
                 <li class="toctree-l3"><a href="#trussfrontendpackagetasks">trussFrontendPackageTasks</a></li>
@@ -309,36 +309,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -394,6 +364,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../source/packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/stub/router/">router.coffee</a>
         
     </li>
 
@@ -640,9 +624,17 @@ config.get('packageSettings:my-package:two:three');
 an example of how settings may be overridden. This should always be preferred
 to actually changing the code in a given package's hook.</p>
 <div class="admonition note">
-  <p class="admonition-title">3 implementations</p>
+  <p class="admonition-title">4 implementations</p>
   <table>
     <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussserverpackageconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
       <td>
         <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
       </td>
@@ -650,7 +642,7 @@ to actually changing the code in a given package's hook.</p>
         <a href="../source/packages/truss-http#implements-hook-trussserverpackageconfig">implementation</a>
       </td>
     </tr>
-    <tr class="odd">
+    <tr class="even">
       <td>
         <a href="../source/packages/truss-repl">packages/truss-repl/index.coffee</a>
       </td>
@@ -658,7 +650,7 @@ to actually changing the code in a given package's hook.</p>
         <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
       </td>
     </tr>
-    <tr class="even">
+    <tr class="odd">
       <td>
         <a href="../source/packages/truss-websocket">packages/truss-websocket/index.coffee</a>
       </td>
@@ -802,6 +794,35 @@ object is passed in through the second parameter in case it's needed.</p>
   </table>
 </div>
 
+<h2 id="trussfrontendassetsmiddleware">trussFrontendAssetsMiddleware</h2>
+<div class="admonition note">
+  <p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendassetsmiddleware">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="admonition note">
+  <p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#invoke-hook-trussfrontendassetsmiddleware_1">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
 <h2 id="trusshttpserverrequestmiddleware">trussHttpServerRequestMiddleware</h2>
 <p><em>Define middleware to run for every HTTP request.</em></p>
 <p>The <code>req</code> parameter to the middleware is an instance of
@@ -821,7 +842,7 @@ The middleware have the following signature:</p>
 </code></pre>
 
 <div class="admonition note">
-  <p class="admonition-title">4 implementations</p>
+  <p class="admonition-title">3 implementations</p>
   <table>
     <tr class="even">
       <td>
@@ -833,26 +854,18 @@ The middleware have the following signature:</p>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>
         <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
       </td>
     </tr>
-    <tr class="odd">
+    <tr class="even">
       <td>
-        <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
+        <a href="../source/packages/truss-http/stub/router">packages/truss-http/stub/router.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
+        <a href="../source/packages/truss-http/stub/router#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
       </td>
     </tr>
   </table>
@@ -890,6 +903,20 @@ The middleware have the following signature:</p>
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+  <p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverroutes">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
 <div class="admonition note">
   <p class="admonition-title">1 invocation</p>
   <table>
@@ -1131,21 +1158,6 @@ The middleware have the following signature:</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcelist">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussfrontendrenderhtml">trussFrontendRenderHtml</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-frontend-barebones">packages/truss-frontend-barebones/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend-barebones#implements-hook-trussfrontendrenderhtml">implementation</a>
       </td>
     </tr>
   </table>

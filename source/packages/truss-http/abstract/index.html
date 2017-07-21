@@ -236,36 +236,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -340,6 +310,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../stub/router/">router.coffee</a>
         
     </li>
 
@@ -664,11 +648,12 @@ httpMiddlewareDebug = require('debug') 'truss-silly:http:middleware'
 </code></pre>
 
 <p>Ensure any subclass implements these "pure virtual" methods.</p>
-<pre><code class="coffeescript">  this::[method] = (-&gt; throw new ReferenceError(
-    &quot;TrussHttpServerAbstract::#{method} is a pure virtual method!&quot;
-  )) for method in [
-    'addRoute', 'listener', 'server', 'trustProxy'
-  ]
+<pre><code class="coffeescript">  [
+    'listener', 'server', 'trustProxy'
+  ].forEach (method) -&gt; TrussHttpServerAbstract::[method] = -&gt;
+    throw new ReferenceError(
+      &quot;TrussHttpServerAbstract::#{method} is a pure virtual method!&quot;
+    )
 </code></pre>
               
             </div>

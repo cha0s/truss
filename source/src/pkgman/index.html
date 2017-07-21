@@ -236,36 +236,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../packages/truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -321,6 +291,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../../packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../packages/truss-http/stub/router/">router.coffee</a>
         
     </li>
 
@@ -586,6 +570,18 @@ path = require 'path'
 config = require 'config'
 
 class PackageManager
+
+  @normalizePath: (path, capitalize = false) -&gt;
+
+    i8n = require 'inflection'
+
+    parts = for part, i in path.split '/'
+      i8n.camelize i8n.underscore(
+        part.replace /[^\w]/g, '_'
+        0 is i
+      )
+
+    i8n.camelize (i8n.underscore parts.join ''), not capitalize
 </code></pre>
 
 <h2 id="packagemanagerconstructor">PackageManager#constructor</h2>

@@ -133,19 +133,20 @@ This is generally the name of the package, but can be anything.
 
 * (String) `task` - The name of the task to configure.
 
-* (String Array or Function) `subtasksOrFunction` - Either an array of
-strings which define the dependencies for the task, or a function which
-will be executed for the task.
+* (String or String Array or Function) `subtasks` - Either a string or an
+array of strings which define the dependencies for the task, or a
+function which will be executed for the task.
 
 *Register a Grunt task.*
 
 ```coffeescript
-    registerTask: (task, subtasksOrFunction) ->
+    registerTask: (task, subtasks) ->
 
-      if 'function' is typeof subtasksOrFunction
-        @_tasks[task] = subtasksOrFunction
+      if 'function' is typeof subtasks
+        @_tasks[task] = subtasks
       else
-        (@_tasks[task] ?= []).push subtasksOrFunction...
+        subtasks = [subtasks] unless Array.isArray subtasks
+        (@_tasks[task] ?= []).push subtasks...
 
       return
 ```

@@ -107,9 +107,6 @@
                 <li class="toctree-l3"><a href="#truss-dox-documentation">truss-dox • Documentation</a></li>
                 
             
-                <li class="toctree-l3"><a href="#truss-frontend-barebones-barebones-front-end-implementation">truss-frontend-barebones • Barebones front-end implementation</a></li>
-                
-            
                 <li class="toctree-l3"><a href="#truss-frontend-front-end-system">truss-frontend • Front-end system</a></li>
                 
             
@@ -261,36 +258,6 @@
         
             
     <ul class="subnav">
-    <li><span>truss-frontend-barebones</span></li>
-
-        
-            
-    <ul class="subnav">
-    <li><span>client</span></li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-frontend-barebones/client/foobar/">foobar.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-frontend-barebones/">index.coffee</a>
-        
-    </li>
-
-        
-    </ul>
-
-        
-            
-    <ul class="subnav">
     <li><span>truss-frontend</span></li>
 
         
@@ -346,6 +313,20 @@
             
     <li class="toctree-l1 ">
         <a class="" href="../source/packages/truss-http/stub/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/stub/instance/">instance.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-http/stub/router/">router.coffee</a>
         
     </li>
 
@@ -677,43 +658,6 @@ description of the functionality they provide.</p>
   </table>
 </div>
 
-<h2 id="truss-frontend-barebones-barebones-front-end-implementation"><code>truss-frontend-barebones</code> • Barebones front-end implementation</h2>
-<p><em>Build a simple HTML response.</em></p>
-<table>
-<thead>
-<tr>
-<th>Filename</th>
-<th>Title</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../source/packages/truss-frontend-barebones">index.coffee</a></td>
-<td>Barebones front-end implementation</td>
-<td><em>Build a simple HTML response.</em></td>
-</tr>
-<tr>
-<td><a href="../source/packages/truss-frontend-barebones/client/foobar">client/foobar.coffee</a></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-  <p class="admonition-title">Hook implementations</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../hooks#trussfrontendrenderhtml">trussFrontendRenderHtml</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend-barebones#implements-hook-trussfrontendrenderhtml">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
 <h2 id="truss-frontend-front-end-system"><code>truss-frontend</code> • Front-end system</h2>
 <p><em>Front-end abstraction: respond to client, render response, etc.</em></p>
 <table>
@@ -738,8 +682,30 @@ description of the functionality they provide.</p>
 </tbody>
 </table>
 <div class="admonition note">
+  <p class="admonition-title">Hook invocations</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../hooks#trussfrontendassetsmiddleware">trussFrontendAssetsMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#invoke-hook-trussfrontendassetsmiddleware">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="admonition note">
   <p class="admonition-title">Hook implementations</p>
   <table>
+    <tr class="even">
+      <td>
+        <a href="../hooks#trussfrontendassetsmiddleware_1">trussFrontendAssetsMiddleware</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendassetsmiddleware_1">implementation</a>
+      </td>
+    </tr>
     <tr class="even">
       <td>
         <a href="../hooks#trussfrontendpackageconfig">trussFrontendPackageConfig</a>
@@ -774,10 +740,10 @@ description of the functionality they provide.</p>
     </tr>
     <tr class="even">
       <td>
-        <a href="../hooks#trusshttpserverrequestmiddleware_1">trussHttpServerRequestMiddleware</a>
+        <a href="../hooks#trusshttpserverroutes">trussHttpServerRoutes</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
+        <a href="../source/packages/truss-frontend#implements-hook-trusshttpserverroutes">implementation</a>
       </td>
     </tr>
     <tr class="even">
@@ -786,6 +752,14 @@ description of the functionality they provide.</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-frontend#implements-hook-trussservergruntconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="even">
+      <td>
+        <a href="../hooks#trussserverpackageconfig">trussServerPackageConfig</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussserverpackageconfig">implementation</a>
       </td>
     </tr>
   </table>
@@ -814,8 +788,18 @@ description of the functionality they provide.</p>
 </tr>
 <tr>
 <td><a href="../source/packages/truss-http/stub">stub/index.coffee</a></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-http/stub/instance">stub/instance.coffee</a></td>
 <td>HTTP server stub implementation</td>
 <td><em>A barebones HT TP server implementation.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-http/stub/router">stub/router.coffee</a></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -824,7 +808,7 @@ description of the functionality they provide.</p>
   <table>
     <tr class="odd">
       <td>
-        <a href="../hooks#trusshttpserverrequestmiddleware_2">trussHttpServerRequestMiddleware</a>
+        <a href="../hooks#trusshttpserverrequestmiddleware_1">trussHttpServerRequestMiddleware</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-http/abstract#invoke-hook-trusshttpserverrequestmiddleware">invocation</a>
@@ -832,7 +816,7 @@ description of the functionality they provide.</p>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../hooks#trusshttpserverroutes">trussHttpServerRoutes</a>
+        <a href="../hooks#trusshttpserverroutes_1">trussHttpServerRoutes</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-http#invoke-hook-trusshttpserverroutes">invocation</a>
@@ -846,18 +830,18 @@ description of the functionality they provide.</p>
   <table>
     <tr class="odd">
       <td>
-        <a href="../hooks#trusshttpserverrequestmiddleware_3">trussHttpServerRequestMiddleware</a>
+        <a href="../hooks#trusshttpserverrequestmiddleware_2">trussHttpServerRequestMiddleware</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
+        <a href="../source/packages/truss-http/stub/router#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
       </td>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../hooks#trusshttpserverrequestmiddleware_4">trussHttpServerRequestMiddleware</a>
+        <a href="../hooks#trusshttpserverrequestmiddleware_3">trussHttpServerRequestMiddleware</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware_1">implementation</a>
+        <a href="../source/packages/truss-http#implements-hook-trusshttpserverrequestmiddleware">implementation</a>
       </td>
     </tr>
     <tr class="odd">
@@ -870,7 +854,7 @@ description of the functionality they provide.</p>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../hooks#trussserverpackageconfig">trussServerPackageConfig</a>
+        <a href="../hooks#trussserverpackageconfig_1">trussServerPackageConfig</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-http#implements-hook-trussserverpackageconfig">implementation</a>
@@ -924,7 +908,7 @@ description of the functionality they provide.</p>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../hooks#trussserverpackageconfig_1">trussServerPackageConfig</a>
+        <a href="../hooks#trussserverpackageconfig_2">trussServerPackageConfig</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
@@ -1075,7 +1059,7 @@ description of the functionality they provide.</p>
     </tr>
     <tr class="even">
       <td>
-        <a href="../hooks#trussserverpackageconfig_2">trussServerPackageConfig</a>
+        <a href="../hooks#trussserverpackageconfig_3">trussServerPackageConfig</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-websocket#implements-hook-trussserverpackageconfig">implementation</a>
