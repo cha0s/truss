@@ -86,17 +86,19 @@ exports.pkgmanRegister = (registrar) ->
         else
 
           @hanging = [] if @commenting
-          @push "\n```#{@fencing}\n" if @commenting or not @hasWrittenCode
+          @push '\n' if @commenting or not @hasWrittenCode
 
           if line.length is 0
             @hanging.push '' unless @commenting
           else
+            @push "```#{@fencing}\n" if @commenting or not @hasWrittenCode
+
             @push "\n" for blank in @hanging
             @hanging = []
-            @push "#{line}\n"
 
-          @commenting = false
-          @hasWrittenCode = true
+            @push "#{line}\n"
+            @commenting = false
+            @hasWrittenCode = true
 
         done()
 
