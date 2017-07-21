@@ -52,7 +52,7 @@ module.exports = class DoxPageHooks extends DoxPage
 
       render = ''
 
-      for hook in hooks
+      for hook in hooks.sort((l, r) -> if l < r then -1 else 1)
 
         # Hook name.
         render += "## #{hook}\n\n"
