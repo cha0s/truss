@@ -92,8 +92,6 @@ exports.pkgmanRegister = (registrar) ->
     #   `listenTarget: 4201`
     # - An array where the port is the first element, and the host is the
     #   second element: `listenTarget: [4201, '0.0.0.0']`
-    # - A UNIX socket path:
-    #   `listenTarget: '/lib/run/truss/socket/http/or/whatever/path'`
     listenTarget: 4201
 
     # It's not uncommon to run your HTTP application behind a reverse proxy.
