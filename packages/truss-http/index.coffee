@@ -31,7 +31,9 @@ exports.pkgmanRegister = (registrar) ->
         httpServer = new Server()
 
         # Mark proxies as trusted addresses.
-        httpServer.trustProxy httpServer.config 'trustedProxies'
+        httpServer.trustProxy(
+          config.get 'packageConfig:truss-http:trustedProxies'
+        )
 
         # #### Invoke hook `trussHttpServerRoutes`.
         httpDebugSilly '- Registering routes...'

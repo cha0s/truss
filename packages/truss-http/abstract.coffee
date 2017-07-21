@@ -31,11 +31,6 @@ module.exports = class TrussHttpServerAbstract
   # *Add HTTP routes.*
   addRoute: (route) -> @_routes.push route
 
-  # ## TrussHttpServerAbstract#config
-  #
-  # *Lookup a configuration value.*
-  config: (key) -> config.get "packageConfig:truss-http:#{key}"
-
   # ## TrussHttpServerAbstract#listen
   #
   # *Listen for HTTP connections.*
@@ -59,13 +54,13 @@ module.exports = class TrussHttpServerAbstract
     # Once listening, log about it.
     promise.then ->
 
-      listenTarget = self.config 'listenTarget'
+      listenTarget = config.get 'packageConfig:truss-http:listenTarget'
       listenTarget = [listenTarget] unless Array.isArray listenTarget
 
       if listenTarget.length is 1
 
         target = listenTarget[0]
-        target = "port #{target}" if _.isNumber listenTarget[0]
+        target = "port #{target}" if _.isNumber target
 
       else
 
@@ -88,7 +83,9 @@ module.exports = class TrussHttpServerAbstract
 
     httpMiddlewareDebug '- Loading HTTP middleware...'
 
-    httpMiddleware = @config('requestMiddleware').concat()
+    httpMiddleware = config.get(
+      'packageConfig:truss-http:requestMiddleware'
+    ).concat()
 
     # Make absolutely sure the requests are finalized.
     httpMiddleware.push 'truss-http'
