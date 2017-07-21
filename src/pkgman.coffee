@@ -5,6 +5,18 @@ config = require 'config'
 
 class PackageManager
 
+  @normalizePath: (path, capitalize = false) ->
+
+    i8n = require 'inflection'
+
+    parts = for part, i in path.split '/'
+      i8n.camelize i8n.underscore(
+        part.replace /[^\w]/g, '_'
+        0 is i
+      )
+
+    i8n.camelize (i8n.underscore parts.join ''), not capitalize
+
   # ## PackageManager#constructor
   constructor: ->
 
