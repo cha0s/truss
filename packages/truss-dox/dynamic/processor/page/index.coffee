@@ -8,7 +8,7 @@ fs = require 'fs'
 
 Promise = require 'bluebird'
 
-SourcesProcessor = require './sources-processor'
+SourcesProcessor = require '../sources'
 
 module.exports = class DoxPage extends SourcesProcessor
 

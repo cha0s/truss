@@ -8,7 +8,7 @@ fs = require 'fs'
 
 Promise = require 'bluebird'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 
 module.exports = class DoxPageHooks extends DoxPage
 

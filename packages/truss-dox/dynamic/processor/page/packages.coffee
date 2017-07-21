@@ -6,7 +6,7 @@ path = require 'path'
 
 {Transform} = require 'stream'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 
 module.exports = class DoxPagePackages extends DoxPage
 

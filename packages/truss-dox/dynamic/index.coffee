@@ -40,12 +40,12 @@ sourceStreamsPromise = sourceFilesPromise.then (files) ->
 processorsPromise = sourceStreamsPromise.then (streams) ->
 
   # ###### TODO: This should be dynamic/hook-based
-  SourcesToMarkdown = require './processor/sources-to-markdown'
+  SourcesToMarkdown = require './processor/sources/to-markdown'
 
-  DoxPageTodos = require './processor/dox-page-todos'
-  DoxPageHooks = require './processor/dox-page-hooks'
-  DoxPagePackages = require './processor/dox-page-packages'
-  DoxPageMkdocs = require './processor/dox-page-mkdocs'
+  DoxPageTodos = require './processor/page/todos'
+  DoxPageHooks = require './processor/page/hooks'
+  DoxPagePackages = require './processor/page/packages'
+  DoxPageMkdocs = require './processor/page/mkdocs'
 
   processors = [
     new SourcesToMarkdown streams

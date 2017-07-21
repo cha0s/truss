@@ -12,7 +12,7 @@ Promise = require 'bluebird'
 
 pkgman = require 'pkgman'
 
-SourcesProcessor = require './sources-processor'
+SourcesProcessor = require '.'
 
 promiseForStream = (stream) ->
   new Promise (resolve, reject) ->
