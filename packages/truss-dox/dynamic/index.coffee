@@ -20,7 +20,7 @@ promiseForStream = (stream) ->
 # Gather all source files.
 sourceFilesPromise = new Promise (resolve, reject) ->
 
-  # #### Invoke hook `trussDoxSources`.
+  # #### Invoke hook `trussDoxSourceList`.
   sourceFiles = _.flatten pkgman.invokeFlat 'trussDoxSourceList'
   glob "{#{sourceFiles.join ','}}", (error, files) ->
     return reject error if error?
