@@ -33,7 +33,9 @@ module.exports = class SourcesToMarkdown extends SourcesProcessor
     for {file} in @streams
       parts = file.split '/'
       for i in [0...parts.length]
-        pathMap["docs/source/#{parts.slice(0, i).join '/'}"] = true
+        pathMap["packages/truss-dox/docs/source/#{
+          parts.slice(0, i).join '/'
+        }"] = true
 
     # This could be made async...
     for path_ of pathMap
@@ -55,7 +57,9 @@ module.exports = class SourcesToMarkdown extends SourcesProcessor
     # Convert to markdown.
     transforms = @streamsToTransforms @streams
     promises = for stream, i in @streams
-      destination = fs.createWriteStream "docs/source/#{stream.file}"
+      destination = fs.createWriteStream "packages/truss-dox/docs/source/#{
+        stream.file
+      }"
       transforms[i].pipe destination
       promiseForStream destination
 

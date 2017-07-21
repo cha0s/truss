@@ -47,12 +47,23 @@ processorsPromise = sourceStreamsPromise.then (streams) ->
   DoxPagePackages = require './processor/page/packages'
   DoxPageMkdocs = require './processor/page/mkdocs'
 
+  docs = 'packages/truss-dox/docs'
+
   processors = [
     new SourcesToMarkdown streams
-    new DoxPageTodos streams, 'docs/todos.template.md', 'docs/todos.md'
-    new DoxPageHooks streams, 'docs/hooks.template.md', 'docs/hooks.md'
-    new DoxPagePackages streams, 'docs/packages.template.md', 'docs/packages.md'
-    new DoxPageMkdocs streams, 'docs/mkdocs.template.yml', 'mkdocs.yml'
+
+    new DoxPageTodos(
+      streams, "#{docs}/todos.template.md", "#{docs}/todos.md"
+    )
+    new DoxPageHooks(
+      streams, "#{docs}/hooks.template.md", "#{docs}/hooks.md"
+    )
+    new DoxPagePackages(
+      streams, "#{docs}/packages.template.md", "#{docs}/packages.md"
+    )
+    new DoxPageMkdocs(
+      streams, "#{docs}/mkdocs.template.yml", 'mkdocs.yml'
+    )
   ]
 
   Promise.all(processor.process() for processor in processors)
