@@ -1,4 +1,3 @@
-
 # # Require system for browser.
 #
 # *Implement require in the spirit of NodeJS.*
@@ -6,6 +5,7 @@
 # Resolve the module name.
 _resolveModuleName = (name, parentFilename) ->
 
+  # ###### TODO: `NODE_PATH` implementation.
   # Strip `/index` from the end, if necessary.
   checkModuleName = (name) ->
     return name if _requires[name]?

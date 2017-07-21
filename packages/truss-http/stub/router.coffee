@@ -1,3 +1,6 @@
+# # HTTP server stub - Router
+#
+# *Extremely simple and naive routing*
 
 exports.pkgmanRegister = (registrar) ->
 

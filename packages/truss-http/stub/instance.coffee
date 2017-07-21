@@ -1,6 +1,6 @@
-# # HTTP server stub implementation
+# # HTTP server stub - Implementation
 #
-# *A barebones HT TP server implementation.*
+# *Implement TrussHttpServerAbstract.*
 
 http = require 'http'
 
