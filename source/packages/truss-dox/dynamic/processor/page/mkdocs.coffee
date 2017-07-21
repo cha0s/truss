@@ -8,7 +8,7 @@ within the abstraction...*
 
 _ = require 'lodash'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 ```
 
 ###### TODO: I think this should be done centrally, using an interface on each processor

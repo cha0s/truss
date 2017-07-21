@@ -20,6 +20,7 @@ exports.pkgmanRegister = (registrar) ->
     'src/**/*.coffee'
     'config/default.settings.yml'
     'packages/**/*.coffee'
+    '!packages/truss-dox/docs/**/*.*'
   ]
 ```
 
@@ -139,8 +140,8 @@ Clean task.
 ```coffeescript
     gruntConfig.configureTask 'clean', 'truss-dox', [
       'mkdocs.yml'
-      'docs/source'
-      'docs/{hooks,packages,todos}.md'
+      'packages/truss-dox/docs/source'
+      'packages/truss-dox/docs/{hooks,packages,todos}.md'
       'gh-pages/*'
       '!gh-pages/.git'
       '!gh-pages/.gitignore'

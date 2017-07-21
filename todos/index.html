@@ -111,6 +111,9 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#todo-worth-to-generalize-this">TODO: Worth to generalize this?</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#todo-this-should-be-dynamichook-based">TODO: This should be dynamic/hook-based</a></li>
                 
             
@@ -186,52 +189,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -461,6 +480,20 @@
 <p>Truss &mdash; like any project &mdash; always presents a path for improvement.
 This is a dynamically generated list of TODO items, each with context.</p>
 <hr />
+<pre><code class="coffeescript">
+  # #### Invoke hook `trussDoxSourceList`.
+  sourceFiles = _.flatten pkgman.invokeFlat 'trussDoxSourceList'
+
+</code></pre>
+
+<h2 id="todo-worth-to-generalize-this">TODO: Worth to generalize this?</h2>
+<pre><code class="coffeescript">  positive = sourceFiles.filter (f) -&gt; f.charCodeAt(0) isnt '!'.charCodeAt(0)
+  negative = sourceFiles.filter (f) -&gt; f.charCodeAt(0) is '!'.charCodeAt(0)
+  negative = negative.map (f) -&gt; f.substr 1
+</code></pre>
+
+<p><a href="../source/packages/truss-dox/dynamic#todo-worth-to-generalize-this">the above found in packages/truss-dox/dynamic/index.coffee:25</a></p>
+<hr />
 <pre><code class="coffeescript">    lineStream
 
 processorsPromise = sourceStreamsPromise.then (streams) -&gt;
@@ -468,12 +501,12 @@ processorsPromise = sourceStreamsPromise.then (streams) -&gt;
 </code></pre>
 
 <h2 id="todo-this-should-be-dynamichook-based">TODO: This should be dynamic/hook-based</h2>
-<pre><code class="coffeescript">  SourcesToMarkdown = require './processor/sources-to-markdown'
+<pre><code class="coffeescript">  SourcesToMarkdown = require './processor/sources/to-markdown'
 
-  DoxPageTodos = require './processor/dox-page-todos'
+  DoxPageTodos = require './processor/page/todos'
 </code></pre>
 
-<p><a href="../source/packages/truss-dox/dynamic#todo-this-should-be-dynamichook-based">the above found in packages/truss-dox/dynamic/index.coffee:41</a></p>
+<p><a href="../source/packages/truss-dox/dynamic#todo-this-should-be-dynamichook-based">the above found in packages/truss-dox/dynamic/index.coffee:47</a></p>
 <hr />
 <pre><code class="coffeescript">
     promises = for hook in hooks
@@ -482,16 +515,16 @@ processorsPromise = sourceStreamsPromise.then (streams) -&gt;
 </code></pre>
 
 <h2 id="todo-dynamic-hook-locations">TODO: Dynamic hook locations.</h2>
-<pre><code class="coffeescript">        fs.readFile &quot;docs/hook/#{hook}.md&quot;, (error, output) -&gt;
-          return reject error if error? and error.code isnt 'ENOENT'
-          templates[hook] = output
+<pre><code class="coffeescript">        fs.readFile &quot;packages/truss-dox/docs/hook/#{
+          hook
+        }.md&quot;, (error, output) -&gt;
 </code></pre>
 
-<p><a href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks#todo-dynamic-hook-locations">the above found in packages/truss-dox/dynamic/processor/dox-page-hooks.coffee:34</a></p>
+<p><a href="../source/packages/truss-dox/dynamic/processor/page/hooks#todo-dynamic-hook-locations">the above found in packages/truss-dox/dynamic/processor/page/hooks.coffee:34</a></p>
 <hr />
 <pre><code class="coffeescript">_ = require 'lodash'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 
 </code></pre>
 
@@ -501,7 +534,7 @@ DoxPage = require './dox-page'
   # Build the source hierarchy.
 </code></pre>
 
-<p><a href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs#todo-i-think-this-should-be-done-centrally-using-an-interface-on-each-processor">the above found in packages/truss-dox/dynamic/processor/dox-page-mkdocs.coffee:11</a></p>
+<p><a href="../source/packages/truss-dox/dynamic/processor/page/mkdocs#todo-i-think-this-should-be-done-centrally-using-an-interface-on-each-processor">the above found in packages/truss-dox/dynamic/processor/page/mkdocs.coffee:11</a></p>
 <hr />
 <pre><code class="coffeescript">    output: -&gt;
 
@@ -515,7 +548,7 @@ DoxPage = require './dox-page'
         else if @stream.file.match /\.js$/
 </code></pre>
 
-<p><a href="../source/packages/truss-dox/dynamic/processor/dox-page-todos#todo-dynamic">the above found in packages/truss-dox/dynamic/processor/dox-page-todos.coffee:46</a></p>
+<p><a href="../source/packages/truss-dox/dynamic/processor/page/todos#todo-dynamic">the above found in packages/truss-dox/dynamic/processor/page/todos.coffee:46</a></p>
               
             </div>
           </div>

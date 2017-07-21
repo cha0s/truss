@@ -25,11 +25,20 @@ Gather all source files.
 sourceFilesPromise = new Promise (resolve, reject) ->
 ```
 
-#### Invoke hook [`trussDoxSources`](../../../hooks#trussdoxsources)
+#### Invoke hook [`trussDoxSourceList`](../../../hooks#trussdoxsourcelist)
 
 ```coffeescript
   sourceFiles = _.flatten pkgman.invokeFlat 'trussDoxSourceList'
-  glob "{#{sourceFiles.join ','}}", (error, files) ->
+```
+
+###### TODO: Worth to generalize this?
+
+```coffeescript
+  positive = sourceFiles.filter (f) -> f.charCodeAt(0) isnt '!'.charCodeAt(0)
+  negative = sourceFiles.filter (f) -> f.charCodeAt(0) is '!'.charCodeAt(0)
+  negative = negative.map (f) -> f.substr 1
+
+  glob "{#{sourceFiles.join ','}}", ignore: negative, (error, files) ->
     return reject error if error?
     resolve files
 ```
@@ -53,19 +62,30 @@ processorsPromise = sourceStreamsPromise.then (streams) ->
 ###### TODO: This should be dynamic/hook-based
 
 ```coffeescript
-  SourcesToMarkdown = require './processor/sources-to-markdown'
+  SourcesToMarkdown = require './processor/sources/to-markdown'
 
-  DoxPageTodos = require './processor/dox-page-todos'
-  DoxPageHooks = require './processor/dox-page-hooks'
-  DoxPagePackages = require './processor/dox-page-packages'
-  DoxPageMkdocs = require './processor/dox-page-mkdocs'
+  DoxPageTodos = require './processor/page/todos'
+  DoxPageHooks = require './processor/page/hooks'
+  DoxPagePackages = require './processor/page/packages'
+  DoxPageMkdocs = require './processor/page/mkdocs'
+
+  docs = 'packages/truss-dox/docs'
 
   processors = [
     new SourcesToMarkdown streams
-    new DoxPageTodos streams, 'docs/todos.template.md', 'docs/todos.md'
-    new DoxPageHooks streams, 'docs/hooks.template.md', 'docs/hooks.md'
-    new DoxPagePackages streams, 'docs/packages.template.md', 'docs/packages.md'
-    new DoxPageMkdocs streams, 'docs/mkdocs.template.yml', 'mkdocs.yml'
+
+    new DoxPageTodos(
+      streams, "#{docs}/todos.template.md", "#{docs}/todos.md"
+    )
+    new DoxPageHooks(
+      streams, "#{docs}/hooks.template.md", "#{docs}/hooks.md"
+    )
+    new DoxPagePackages(
+      streams, "#{docs}/packages.template.md", "#{docs}/packages.md"
+    )
+    new DoxPageMkdocs(
+      streams, "#{docs}/mkdocs.template.yml", 'mkdocs.yml'
+    )
   ]
 
   Promise.all(processor.process() for processor in processors)

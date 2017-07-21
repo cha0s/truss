@@ -5,7 +5,7 @@
 ```coffeescript
 {Transform} = require 'stream'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 
 module.exports = class DoxPageTodos extends DoxPage
 ```

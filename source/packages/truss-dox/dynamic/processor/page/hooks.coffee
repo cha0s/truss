@@ -9,7 +9,7 @@ fs = require 'fs'
 
 Promise = require 'bluebird'
 
-DoxPage = require './dox-page'
+DoxPage = require '.'
 
 module.exports = class DoxPageHooks extends DoxPage
 ```
@@ -43,8 +43,13 @@ Load hook templates.
 ###### TODO: Dynamic hook locations.
 
 ```coffeescript
-        fs.readFile "docs/hook/#{hook}.md", (error, output) ->
-          return reject error if error? and error.code isnt 'ENOENT'
+        fs.readFile "packages/truss-dox/docs/hook/#{
+          hook
+        }.md", (error, output) ->
+          if error?
+            return reject error if error.code isnt 'ENOENT'
+            console.warn "Missing template for #{hook}..."
+
           templates[hook] = output
           resolve()
 
@@ -62,7 +67,7 @@ Load hook templates.
 
       render = ''
 
-      for hook in hooks
+      for hook in hooks.sort((l, r) -> if l < r then -1 else 1)
 ```
 
 Hook name.

@@ -170,52 +170,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -470,6 +486,7 @@ exports.pkgmanRegister = (registrar) -&gt;
     'src/**/*.coffee'
     'config/default.settings.yml'
     'packages/**/*.coffee'
+    '!packages/truss-dox/docs/**/*.*'
   ]
 </code></pre>
 
@@ -569,8 +586,8 @@ markdown. This applies to coffee and yaml files.</p>
 <p>Clean task.</p>
 <pre><code class="coffeescript">    gruntConfig.configureTask 'clean', 'truss-dox', [
       'mkdocs.yml'
-      'docs/source'
-      'docs/{hooks,packages,todos}.md'
+      'packages/truss-dox/docs/source'
+      'packages/truss-dox/docs/{hooks,packages,todos}.md'
       'gh-pages/*'
       '!gh-pages/.git'
       '!gh-pages/.gitignore'
@@ -617,7 +634,7 @@ markdown. This applies to coffee and yaml files.</p>
         <a href="../truss-frontend/client/require/" class="btn btn-neutral float-right" title="require.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="dynamic/processor/sources-to-markdown/" class="btn btn-neutral" title="sources-to-markdown.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="dynamic/processor/sources/to-markdown/" class="btn btn-neutral" title="to-markdown.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -645,7 +662,7 @@ markdown. This applies to coffee and yaml files.</p>
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="dynamic/processor/sources-to-markdown/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="dynamic/processor/sources/to-markdown/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../truss-frontend/client/require/" style="color: #fcfcfc">Next &raquo;</a></span>

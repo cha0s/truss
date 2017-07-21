@@ -85,6 +85,9 @@
                 <li class="toctree-l3"><a href="#middleware-hook-specification">Middleware hook specification</a></li>
                 
             
+                <li class="toctree-l3"><a href="#glob-patterns">Glob patterns</a></li>
+                
+            
             </ul>
         
     </li>
@@ -177,52 +180,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="../../source/packages/truss-dox/dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../../source/packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -480,6 +499,15 @@ is dispatched first, followed by the second, etc.</p>
 <p>See the
 <a href="../../source/src/middleware#defining-middleware">middleware module</a>
 for even more information about defining middleware.</p>
+<h1 id="glob-patterns">Glob patterns</h1>
+<p>Truss uses glob patterns to define path specifications for various purposes
+(see:
+<a href="../../source/packages/truss-dox#implements-hook-trussdoxsourcelist"><code>trussDoxSourceList</code></a>'s
+implementation for instance). Glob patterns can be as simple as e.g. <code>*.html</code>
+to match all HTML files.</p>
+<p>Read more about glob patterns and how they are used by <code>node-glob</code> &mdash; the
+module providing this API to Truss &mdash; here:
+<a href="https://github.com/isaacs/node-glob#glob-primer">https://github.com/isaacs/node-glob#glob-primer</a></p>
               
             </div>
           </div>

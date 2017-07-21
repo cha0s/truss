@@ -97,22 +97,16 @@
         
             <ul>
             
-                <li class="toctree-l3"><a href="#trussserverpackageconfig">trussServerPackageConfig</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussservergruntconfig">trussServerGruntConfig</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussservergruntconfigalter">trussServerGruntConfigAlter</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussdoxsources">trussDoxSources</a></li>
+                <li class="toctree-l3"><a href="#trussdoxsourcelist">trussDoxSourceList</a></li>
                 
             
                 <li class="toctree-l3"><a href="#trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</a></li>
                 
             
                 <li class="toctree-l3"><a href="#trussfrontendassetsmiddleware">trussFrontendAssetsMiddleware</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussfrontendpackagetasks">trussFrontendPackageTasks</a></li>
                 
             
                 <li class="toctree-l3"><a href="#trusshttpserverrequestmiddleware">trussHttpServerRequestMiddleware</a></li>
@@ -124,28 +118,25 @@
                 <li class="toctree-l3"><a href="#trussreplservercontext">trussReplServerContext</a></li>
                 
             
-                <li class="toctree-l3"><a href="#trussserverprocessexit">trussServerProcessExit</a></li>
+                <li class="toctree-l3"><a href="#trussserverbootstrapmiddleware">trussServerBootstrapMiddleware</a></li>
                 
             
-                <li class="toctree-l3"><a href="#trusstransmittableerrors">trussTransmittableErrors</a></li>
+                <li class="toctree-l3"><a href="#trussservergruntconfig">trussServerGruntConfig</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussservergruntconfigalter">trussServerGruntConfigAlter</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#trussserverpackageconfig">trussServerPackageConfig</a></li>
                 
             
                 <li class="toctree-l3"><a href="#trussserverprebootstrap">trussServerPreBootstrap</a></li>
                 
             
-                <li class="toctree-l3"><a href="#trussserverbootstrapmiddleware">trussServerBootstrapMiddleware</a></li>
+                <li class="toctree-l3"><a href="#trussserverprocessexit">trussServerProcessExit</a></li>
                 
             
-                <li class="toctree-l3"><a href="#trussdoxsourcelist">trussDoxSourceList</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussfrontendpackagetasks">trussFrontendPackageTasks</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussfrontendpackageconfig">trussFrontendPackageConfig</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#trussfrontendpackagelist">trussFrontendPackageList</a></li>
+                <li class="toctree-l3"><a href="#trusstransmittableerrors">trussTransmittableErrors</a></li>
                 
             
             </ul>
@@ -225,52 +216,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -497,153 +504,29 @@
               
                 <h1>Hook reference</h1>
 
-<h2 id="trussserverpackageconfig">trussServerPackageConfig</h2>
-<p><em>Define server-side configuration settings.</em></p>
-<p>Packages may use this hook to define default configuration for server-side
-functionality. These settings can be overridden in the settings file.</p>
+<h2 id="trussdoxsourcelist">trussDoxSourceList</h2>
+<p><em>Provide sources for documentation processing.</em></p>
+<p>This hook allows packages to define source files that will be processed into
+markdown during the documentation build process.</p>
+<p><strong>NOTE</strong>: All paths are relative from the directory containing
+<a href="../source/Gruntfile"><code>Gruntfile.coffee</code></a>.</p>
 <h3>Implementations must return</h3>
 
-<p>A recursive object which will be folded into the server configuration under
-the package name key. For instance, say we have a package <code>my-package</code> which
-defines the hook like:</p>
-<pre><code class="javascript">registrar.registerHook('trussConfigServer', function() {
-  return {
-    one: 68,
-    two: {
-      three: 419
-    }
-  };
-});
-</code></pre>
-
-<p>You would then find those values in the configuration at:</p>
-<pre><code class="javascript">config.get('packageSettings:my-package:one');
-config.get('packageSettings:my-package:two:three');
-</code></pre>
-
-<p>See <a href="../source/config/default.settings">the default configuration file</a> for
-an example of how settings may be overridden. This should always be preferred
-to actually changing the code in a given package's hook.</p>
+<p>An array of <a href="../guide/concepts#glob-patterns">glob patterns</a>.</p>
 <div class="admonition note">
-  <p class="admonition-title">3 implementations</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussserverpackageconfig">implementation</a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>
-        <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-http#implements-hook-trussserverpackageconfig">implementation</a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-repl">packages/truss-repl/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<div class="admonition note">
-  <p class="admonition-title">2 invocations</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/./Gruntfile#invoke-hook-trussserverpackageconfig">invocation</a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>
-        <a href="../source/src/main">src/main.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/src/main#invoke-hook-trussserverpackageconfig">invocation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussservergruntconfig">trussServerGruntConfig</h2>
-<p><em>Hook into the Grunt build process.</em></p>
-<p>This hook allows packages to define Grunt tasks, configure existing tasks, and
-load NPM tasks. This is achieved through the first implementation parameter
-which is an instance of the class
-<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The
-<code>grunt</code> object is passed in through the second parameter in case it's needed.</p>
-<p>One of the most common uses of this hook is to copy any asset files your
-package may include to the <code>app</code> directory, where they can be served to
-clients.</p>
-<div class="admonition note">
-  <p class="admonition-title">2 implementations</p>
+  <p class="admonition-title">1 implementation</p>
   <table>
     <tr class="even">
       <td>
         <a href="../source/packages/truss-dox">packages/truss-dox/index.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-dox#implements-hook-trussservergruntconfig">implementation</a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussservergruntconfig">implementation</a>
+        <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcelist">implementation</a>
       </td>
     </tr>
   </table>
 </div>
 
-<div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/./Gruntfile#invoke-hook-trussservergruntconfig">invocation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussservergruntconfigalter">trussServerGruntConfigAlter</h2>
-<p><em>Alter the Grunt build process.</em></p>
-<p>This hook allows packages to alter Grunt configuration specified through
-<a href="../hooks/#trussservergruntconfig"><code>trussServerGruntConfig</code></a>.</p>
-<p>The first implementation parameter is an instance of the class
-<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The <code>grunt</code>
-object is passed in through the second parameter in case it's needed.</p>
-<div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/./Gruntfile#invoke-hook-trussservergruntconfigalter">invocation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussdoxsources">trussDoxSources</h2>
 <div class="admonition note">
   <p class="admonition-title">1 invocation</p>
   <table>
@@ -652,13 +535,35 @@ object is passed in through the second parameter in case it's needed.</p>
         <a href="../source/packages/truss-dox/dynamic">packages/truss-dox/dynamic/index.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-dox/dynamic#invoke-hook-trussdoxsources">invocation</a>
+        <a href="../source/packages/truss-dox/dynamic#invoke-hook-trussdoxsourcelist">invocation</a>
       </td>
     </tr>
   </table>
 </div>
 
 <h2 id="trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</h2>
+<p><em>Provide Transform implementations to convert sources to markdown.</em></p>
+<p>This hook allows packages to define <code>Transform</code>s that will process sources into
+markdown during the documentation build process. A <code>Transform</code> is a subclass
+of
+<a href="https://nodejs.org/api/stream.html#stream_class_stream_transform"><code>stream.Transform</code></a>.</p>
+<h3>Implementations must return</h3>
+
+<p>An object containing the following keys:</p>
+<ul>
+<li><code>extensions</code>: A String Array of file extensions this <code>Transform</code> operates on
+  e.g. <code>['coffee', 'yml']</code>.</li>
+<li><code>Transform</code>: A subclassed
+  <a href="https://nodejs.org/api/stream.html#stream_class_stream_transform"><code>stream.Transform</code></a>
+  whose constructor is passed two arguments:<ul>
+<li><code>processor</code>: The
+  <a href="../source/packages/truss-dox/dynamic/processor/sources"><code>SourcesProcessor</code></a>
+  operating on the source.</li>
+<li><code>stream</code>: The source file
+  <a href="https://nodejs.org/api/stream.html#stream_stream"><code>stream</code></a>.</li>
+</ul>
+</li>
+</ul>
 <div class="admonition note">
   <p class="admonition-title">1 implementation</p>
   <table>
@@ -678,16 +583,49 @@ object is passed in through the second parameter in case it's needed.</p>
   <table>
     <tr class="even">
       <td>
-        <a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown">packages/truss-dox/dynamic/processor/sources-to-markdown.coffee</a>
+        <a href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown">packages/truss-dox/dynamic/processor/sources/to-markdown.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown#invoke-hook-trussdoxsourcemarkdowntransform">invocation</a>
+        <a href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown#invoke-hook-trussdoxsourcemarkdowntransform">invocation</a>
       </td>
     </tr>
   </table>
 </div>
 
 <h2 id="trussfrontendassetsmiddleware">trussFrontendAssetsMiddleware</h2>
+<p><em>Define assets to serve to the client application.</em></p>
+<p>Packages may come bundled with JavaScript or CSS assets. This hook is how you
+can provide them to the client application.</p>
+<p>Asset middleware takes <code>assets</code> as its first argument. This is an object with
+the following properties:</p>
+<ul>
+<li>((Object or String) Array) <code>scripts</code> - A list of script assets.</li>
+<li>((Object or String) Array) <code>stylesheets</code> - A list of sylesheet assets.</li>
+</ul>
+<p>Scripts and stylesheets may be specified in object form:</p>
+<ul>
+<li><code>type</code>: Either <code>remote</code> or <code>inline</code>.</li>
+<li><code>data</code>: If <code>type</code> is <code>remote</code>, then the <code>src</code>/<code>href</code> URL to find the
+  script/style sheet (respectively). If <code>type</code> is <code>inline</code>, then the actual
+  script/style sheet content.</li>
+</ul>
+<p>If a script or style sheet is specified as a string, then it is normalized
+to object form. <code>type</code> is assumed to be <code>remote</code>, and the string value becomes
+the value of <code>data</code> in the object.</p>
+<p><strong>NOTE</strong>: This hook lets you serve assets, but will not automatically copy
+them from your package to the <code>frontend</code> directory where they will be served.
+You'll need to implement the
+<a href="../hooks/#trussservergruntconfig"><code>trussServerGruntConfig</code></a> hook for that.</p>
+<h3>Implementations must return</h3>
+
+<p>A
+<a href="../guide/concepts#middleware-hook-specification">middleware hook specification</a>.
+The middleware have the following signature:</p>
+<pre><code class="javascript">function(req, assets, next) {
+  ...
+}
+</code></pre>
+
 <div class="admonition note">
   <p class="admonition-title">1 implementation</p>
   <table>
@@ -711,6 +649,35 @@ object is passed in through the second parameter in case it's needed.</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-frontend#invoke-hook-trussfrontendassetsmiddleware_1">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="trussfrontendpackagetasks">trussFrontendPackageTasks</h2>
+<p><em>Define Grunt tasks to run when building packages' frontends.</em></p>
+<p>Packages can implement this hook to define Grunt tasks to run when the
+package's frontend is built. All tasks are registered as subtasks of
+<code>truss-frontend-packages</code>.</p>
+<p>If this hook is not implemented, then two tasks are added for the package:</p>
+<ul>
+<li>Watch coffee files in <code>[package]/client</code> for changes, and rebuild the
+  frontend if any change.</li>
+<li>Compile coffee files in <code>[package]/client</code> and add them to the module
+  build path, making them accessible in the client.</li>
+</ul>
+<h3>Implementations must return</h3>
+
+<p>Either a String for a single task or a String Array for multiple tasks.</p>
+<div class="admonition note">
+  <p class="admonition-title">1 implementation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagetasks">implementation</a>
       </td>
     </tr>
   </table>
@@ -847,58 +814,197 @@ REPL context.</p>
   </table>
 </div>
 
-<h2 id="trussserverprocessexit">trussServerProcessExit</h2>
-<p><em>Final cleanups as the process is exiting.</em></p>
-<p>The application tries its hardest to always invoke this hook, even in the
-event of a raised signal or unhandled exception.</p>
-<p>You should not schedule asynchronous events, as they are not guaranteed to be
-dispatched. See
-<a href="http://nodejs.org/api/process.html#process_event_exit">the Node.js documentation</a>
-for more information.</p>
+<h2 id="trussserverbootstrapmiddleware">trussServerBootstrapMiddleware</h2>
+<p><em>Define middleware to run when the server application is bootstrapping.</em></p>
+<p>This hook is where most of the major initialization work happens on the
+server. You use this to spin up HTTP/sockets/database/whatever.</p>
+<h3>Implementations must return</h3>
+
+<p>A
+<a href="../guide/concepts/#middleware-hook-specification">middleware hook specification</a>.
+The middleware have the following signature:</p>
+<pre><code class="javascript">function(next) {
+  ...
+}
+</code></pre>
+
 <div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
+  <p class="admonition-title">2 implementations</p>
   <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trussserverbootstrapmiddleware">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../source/packages/truss-repl">packages/truss-repl/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-repl#implements-hook-trussserverbootstrapmiddleware">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="admonition note">
+  <p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/src/main">src/main.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/src/main#invoke-hook-trussserverbootstrapmiddleware">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="trussservergruntconfig">trussServerGruntConfig</h2>
+<p><em>Hook into the Grunt build process.</em></p>
+<p>This hook allows packages to define Grunt tasks, configure existing tasks, and
+load NPM tasks. This is achieved through the first implementation parameter
+which is an instance of the class
+<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The
+<code>grunt</code> object is passed in through the second parameter in case it's needed.</p>
+<p>One of the most common uses of this hook is to copy any asset files your
+package may include to the <code>app</code> directory, where they can be served to
+clients.</p>
+<div class="admonition note">
+  <p class="admonition-title">2 implementations</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-dox">packages/truss-dox/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-dox#implements-hook-trussservergruntconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussservergruntconfig">implementation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="admonition note">
+  <p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/./Gruntfile#invoke-hook-trussservergruntconfig">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="trussservergruntconfigalter">trussServerGruntConfigAlter</h2>
+<p><em>Alter the Grunt build process.</em></p>
+<p>This hook allows packages to alter Grunt configuration specified through
+<a href="../hooks/#trussservergruntconfig"><code>trussServerGruntConfig</code></a>.</p>
+<p>The first implementation parameter is an instance of the class
+<a href="../source/Gruntfile/#gruntconfiguration"><code>GruntConfiguration</code></a>. The <code>grunt</code>
+object is passed in through the second parameter in case it's needed.</p>
+<div class="admonition note">
+  <p class="admonition-title">1 invocation</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/./Gruntfile#invoke-hook-trussservergruntconfigalter">invocation</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h2 id="trussserverpackageconfig">trussServerPackageConfig</h2>
+<p><em>Define server-side configuration settings.</em></p>
+<p>Packages may use this hook to define default configuration for server-side
+functionality. These settings can be overridden in the settings file.</p>
+<h3>Implementations must return</h3>
+
+<p>A recursive object which will be folded into the server configuration under
+the package name key. For instance, say we have a package <code>my-package</code> which
+defines the hook like:</p>
+<pre><code class="javascript">registrar.registerHook('trussConfigServer', function() {
+  return {
+    one: 68,
+    two: {
+      three: 419
+    }
+  };
+});
+</code></pre>
+
+<p>You would then find those values in the configuration at:</p>
+<pre><code class="javascript">config.get('packageSettings:my-package:one');
+config.get('packageSettings:my-package:two:three');
+</code></pre>
+
+<p>See <a href="../source/config/default.settings">the default configuration file</a> for
+an example of how settings may be overridden. This should always be preferred
+to actually changing the code in a given package's hook.</p>
+<div class="admonition note">
+  <p class="admonition-title">3 implementations</p>
+  <table>
+    <tr class="even">
+      <td>
+        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-frontend#implements-hook-trussserverpackageconfig">implementation</a>
+      </td>
+    </tr>
+    <tr class="odd">
+      <td>
+        <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
+      </td>
+      <td align="right">
+        <a href="../source/packages/truss-http#implements-hook-trussserverpackageconfig">implementation</a>
+      </td>
+    </tr>
     <tr class="even">
       <td>
         <a href="../source/packages/truss-repl">packages/truss-repl/index.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-repl#implements-hook-trussserverprocessexit">implementation</a>
+        <a href="../source/packages/truss-repl#implements-hook-trussserverpackageconfig">implementation</a>
       </td>
     </tr>
   </table>
 </div>
 
 <div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
+  <p class="admonition-title">2 invocations</p>
   <table>
     <tr class="even">
       <td>
-        <a href="../source/./server">server.coffee</a>
+        <a href="../source/./Gruntfile">Gruntfile.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/./server#invoke-hook-trussserverprocessexit">invocation</a>
+        <a href="../source/./Gruntfile#invoke-hook-trussserverpackageconfig">invocation</a>
       </td>
     </tr>
-  </table>
-</div>
-
-<h2 id="trusstransmittableerrors">trussTransmittableErrors</h2>
-<p><em>Define errors that can be transmitted easily over the wire.</em></p>
-<p>See <a href="../guide/errors/">the documentation on errors</a> for more information.</p>
-<h3>Implementations must return</h3>
-
-<p>An array of subclasses of
-<a href="../source/src/errors/#transmittableerror">TransmittableError</a>.</p>
-<div class="admonition note">
-  <p class="admonition-title">1 invocation</p>
-  <table>
-    <tr class="even">
+    <tr class="odd">
       <td>
-        <a href="../source/src/errors">src/errors.coffee</a>
+        <a href="../source/src/main">src/main.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/src/errors#invoke-hook-trusstransmittableerrors">invocation</a>
+        <a href="../source/src/main#invoke-hook-trussserverpackageconfig">invocation</a>
       </td>
     </tr>
   </table>
@@ -953,37 +1059,23 @@ exports.pkgmanRegister = function(registrar) {
   </table>
 </div>
 
-<h2 id="trussserverbootstrapmiddleware">trussServerBootstrapMiddleware</h2>
-<p><em>Define middleware to run when the server application is bootstrapping.</em></p>
-<p>This hook is where most of the major initialization work happens on the
-server. You use this to spin up HTTP/sockets/database/whatever.</p>
-<h3>Implementations must return</h3>
-
-<p>A
-<a href="../guide/concepts/#middleware-hook-specification">middleware hook specification</a>.
-The middleware have the following signature:</p>
-<pre><code class="javascript">function(next) {
-  ...
-}
-</code></pre>
-
+<h2 id="trussserverprocessexit">trussServerProcessExit</h2>
+<p><em>Final cleanups as the process is exiting.</em></p>
+<p>The application tries its hardest to always invoke this hook, even in the
+event of a raised signal or unhandled exception.</p>
+<p>You should not schedule asynchronous events, as they are not guaranteed to be
+dispatched. See
+<a href="http://nodejs.org/api/process.html#process_event_exit">the Node.js documentation</a>
+for more information.</p>
 <div class="admonition note">
-  <p class="admonition-title">2 implementations</p>
+  <p class="admonition-title">1 implementation</p>
   <table>
     <tr class="even">
-      <td>
-        <a href="../source/packages/truss-http">packages/truss-http/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-http#implements-hook-trussserverbootstrapmiddleware">implementation</a>
-      </td>
-    </tr>
-    <tr class="odd">
       <td>
         <a href="../source/packages/truss-repl">packages/truss-repl/index.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-repl#implements-hook-trussserverbootstrapmiddleware">implementation</a>
+        <a href="../source/packages/truss-repl#implements-hook-trussserverprocessexit">implementation</a>
       </td>
     </tr>
   </table>
@@ -994,70 +1086,31 @@ The middleware have the following signature:</p>
   <table>
     <tr class="even">
       <td>
-        <a href="../source/src/main">src/main.coffee</a>
+        <a href="../source/./server">server.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/src/main#invoke-hook-trussserverbootstrapmiddleware">invocation</a>
+        <a href="../source/./server#invoke-hook-trussserverprocessexit">invocation</a>
       </td>
     </tr>
   </table>
 </div>
 
-<h2 id="trussdoxsourcelist">trussDoxSourceList</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-dox">packages/truss-dox/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcelist">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
+<h2 id="trusstransmittableerrors">trussTransmittableErrors</h2>
+<p><em>Define errors that can be transmitted easily over the wire.</em></p>
+<p>See <a href="../guide/errors/">the documentation on errors</a> for more information.</p>
+<h3>Implementations must return</h3>
 
-<h2 id="trussfrontendpackagetasks">trussFrontendPackageTasks</h2>
+<p>An array of subclasses of
+<a href="../source/src/errors/#transmittableerror">TransmittableError</a>.</p>
 <div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
+  <p class="admonition-title">1 invocation</p>
   <table>
     <tr class="even">
       <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
+        <a href="../source/src/errors">src/errors.coffee</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagetasks">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussfrontendpackageconfig">trussFrontendPackageConfig</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackageconfig">implementation</a>
-      </td>
-    </tr>
-  </table>
-</div>
-
-<h2 id="trussfrontendpackagelist">trussFrontendPackageList</h2>
-<div class="admonition note">
-  <p class="admonition-title">1 implementation</p>
-  <table>
-    <tr class="even">
-      <td>
-        <a href="../source/packages/truss-frontend">packages/truss-frontend/index.coffee</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagelist">implementation</a>
+        <a href="../source/src/errors#invoke-hook-trusstransmittableerrors">invocation</a>
       </td>
     </tr>
   </table>

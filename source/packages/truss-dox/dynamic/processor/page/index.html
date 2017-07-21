@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>sources-processor.coffee - Truss</title>
+  <title>index.coffee - Truss</title>
   
 
   <link rel="shortcut icon" href="../../../../../../img/favicon.ico">
@@ -21,7 +21,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "sources-processor.coffee";
+    var mkdocs_page_name = "index.coffee";
   </script>
   
   <script src="../../../../../../js/jquery-2.1.1.min.js"></script>
@@ -170,47 +170,24 @@
 
         
             
-    <li class="toctree-l1 ">
-        <a class="" href="../dox-page-hooks/">dox-page-hooks.coffee</a>
-        
-    </li>
+    <ul class="subnav">
+    <li><span>page</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../dox-page-packages/">dox-page-packages.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../dox-page-todos/">dox-page-todos.coffee</a>
-        
-    </li>
-
-        
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../dox-page/">dox-page.coffee</a>
+        <a class="" href="hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">sources-processor.coffee</a>
+        <a class="current" href="./">index.coffee</a>
         
             <ul>
             
-                <li class="toctree-l3"><a href="#abstract-sources-processor">Abstract sources processor</a></li>
+                <li class="toctree-l3"><a href="#abstract-documentation-page">Abstract documentation page</a></li>
                 
             
             </ul>
@@ -220,9 +197,48 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../sources-to-markdown/">sources-to-markdown.coffee</a>
+        <a class="" href="mkdocs/">mkdocs.coffee</a>
         
     </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="packages/">packages.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../sources/">index.coffee</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../sources/to-markdown/">to-markdown.coffee</a>
+        
+    </li>
+
+        
+    </ul>
 
         
     </ul>
@@ -429,11 +445,11 @@
     
       
         
-          <li>processor &raquo;</li>
+          <li>page &raquo;</li>
         
       
     
-    <li>sources-processor.coffee</li>
+    <li>index.coffee</li>
     <li class="wy-breadcrumbs-aside">
       
         
@@ -447,29 +463,86 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="abstract-sources-processor">Abstract sources processor</h1>
-<p><em>Abstract class to process the project sources, usually by transforming them
-to a new form.</em></p>
-<pre><code class="coffeescript">Promise = require 'bluebird'
+                <h1 id="abstract-documentation-page">Abstract documentation page</h1>
+<p><em>Abstract class to process a documentation page, using a template and
+generated information.</em></p>
+<pre><code class="coffeescript">path = require 'path'
+fs = require 'fs'
 
-module.exports = class SourcesProcessor
+Promise = require 'bluebird'
 
-  constructor: (@streams) -&gt;
+SourcesProcessor = require '../sources'
 
-  process: -&gt; throw new Error(
-    &quot;SourcesProcessor::process is a pure virtual method&quot;
-  )
+module.exports = class DoxPage extends SourcesProcessor
 
-  streamsToTransforms: -&gt;
-    for stream in @streams
-      Transform_ = @transformForStream stream
-      stream.pipe transformStream = new Transform_ this, stream
-      transformStream
+  constructor: (@streams, @template, @destination) -&gt;
+    super
 
-  transformForStream: -&gt; class NoTransform
-    constructor: -&gt; throw new Error(
-      &quot;SourceProcessor::Transform is a pure virtual class&quot;
-    )
+    @idMap = {}
+
+  process: -&gt;
+    self = this
+</code></pre>
+
+<p>Apply the transforms.</p>
+<pre><code class="coffeescript">    transforms = self.streamsToTransforms()
+</code></pre>
+
+<p>Load the template and wait until streaming is done.</p>
+<pre><code class="coffeescript">    new Promise (resolve, reject) =&gt;
+      fs.readFile @template, 'utf8',  (error, output) -&gt;
+        return reject error if error?
+</code></pre>
+
+<p>Append all of the transformed content.</p>
+<pre><code class="coffeescript">        Promise.cast(self.transformsOutput transforms).then (tOutput) -&gt;
+          output += tOutput
+</code></pre>
+
+<p>Write it as the final page.</p>
+<pre><code class="coffeescript">          fs.writeFile self.destination, output, (error) -&gt;
+            return reject error if error?
+            resolve()
+
+  transformsOutput: (transforms) -&gt;
+    output = (transform.output() for transform in transforms).join '\n'
+    output += '\n'
+
+  linkToSource: (file) -&gt;
+
+    link = path.dirname file
+    basename = path.basename file, path.extname file
+    link += &quot;/#{basename}&quot; if basename isnt 'index'
+
+    return link
+
+  uniqueId: (page, string) -&gt;
+    @idMap[page] ?= {}
+</code></pre>
+
+<p>Sanitize it.</p>
+<pre><code class="coffeescript">    id = string.replace(
+      /[/'']/g, ''
+    ).replace(
+      /\[(.*)\]\(.*\)/g, '$1'
+    ).replace(
+      /[^0-9A-Za-z-]+/g, '-'
+    ).replace(
+      /\-+/g, '-'
+    ).replace(
+      /^\-+|\-+$/g, ''
+    ).toLowerCase()
+</code></pre>
+
+<p>Keep track of ID usage and modify the location hash for
+subsequent uses.</p>
+<pre><code class="coffeescript">    if @idMap[page][id]?
+      @idMap[page][id] += 1
+      id += &quot;_#{@idMap[page][id]}&quot;
+    else
+      @idMap[page][id] = 0
+
+    return id
 </code></pre>
               
             </div>
@@ -478,10 +551,10 @@ module.exports = class SourcesProcessor
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../sources-to-markdown/" class="btn btn-neutral float-right" title="sources-to-markdown.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="mkdocs/" class="btn btn-neutral float-right" title="mkdocs.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../dox-page/" class="btn btn-neutral" title="dox-page.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="hooks/" class="btn btn-neutral" title="hooks.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -509,10 +582,10 @@ module.exports = class SourcesProcessor
           <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../dox-page/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="hooks/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../sources-to-markdown/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="mkdocs/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

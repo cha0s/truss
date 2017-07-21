@@ -9,7 +9,7 @@ extra_css:
 markdown_extensions:
 - admonition
 
-docs_dir: 'docs'
+docs_dir: 'packages/truss-dox/docs'
 site_dir: 'gh-pages'
 pages:
 - README: 'index.md'

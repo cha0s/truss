@@ -170,52 +170,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../truss-dox/dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="../truss-dox/dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -267,10 +283,6 @@
                     <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackagetasks">Implements hook trussFrontendPackageTasks</a></li>
                 
                     <li><a class="toctree-l4" href="#implements-hook-trussservergruntconfig">Implements hook trussServerGruntConfig</a></li>
-                
-                    <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackageconfig">Implements hook trussFrontendPackageConfig</a></li>
-                
-                    <li><a class="toctree-l4" href="#implements-hook-trussfrontendpackagelist">Implements hook trussFrontendPackageList</a></li>
                 
                     <li><a class="toctree-l4" href="#implements-hook-trusshttpserverroutes">Implements hook trussHttpServerRoutes</a></li>
                 
@@ -495,11 +507,6 @@ exports.pkgmanRegister = (registrar) -&gt;
 <pre><code class="coffeescript">        clientConfig = new Config()
 </code></pre>
 
-<p>Gather client-side packages</p>
-<pre><code class="coffeescript">        packagesLists = pkgman.invokeFlat 'trussFrontendPackageList', req
-        packageList = _.flatten packagesLists
-</code></pre>
-
 <p>Use package list to build client package configuration.</p>
 <pre><code class="coffeescript">        clientPackageConfig = new Config()
         for path in pkgman.packagesImplementing 'trussFrontendPackageConfig'
@@ -722,14 +729,6 @@ all module implementations.</p>
     ]
 </code></pre>
 
-<h4 id="implements-hook-trussfrontendpackageconfig">Implements hook <a href="../../../hooks#trussfrontendpackageconfig"><code>trussFrontendPackageConfig</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'trussFrontendPackageConfig', -&gt;
-</code></pre>
-
-<h4 id="implements-hook-trussfrontendpackagelist">Implements hook <a href="../../../hooks#trussfrontendpackagelist"><code>trussFrontendPackageList</code></a></h4>
-<pre><code class="coffeescript">  registrar.registerHook 'trussFrontendPackageList', (path) -&gt;
-</code></pre>
-
 <h4 id="implements-hook-trusshttpserverroutes">Implements hook <a href="../../../hooks#trusshttpserverroutes"><code>trussHttpServerRoutes</code></a></h4>
 <pre><code class="coffeescript">  registrar.registerHook 'config', 'trussHttpServerRoutes', -&gt; [
     path: '/frontend/modules.js'
@@ -783,26 +782,32 @@ all module implementations.</p>
 
 <p>Inject scripts.</p>
 <pre><code class="coffeescript">          for script in assets.scripts
-            script = type: 'src', data: script if _.isString script
+            if _.isString script
+              script = type: 'remote', data: script
 
-            switch script.type
+            $script = $('&lt;script&gt;').attr type: 'text/javascript'
 
-              when 'src'
-                body.append $('&lt;script&gt;').attr(
-                  'src', script.data
-                  type: 'text/javascript'
-                )
+            body.append switch script.type
+
+              when 'remote'
+                $script.attr src: script.data
 
               when 'inline'
-                body.append $('&lt;script&gt;').html script.data
+                $script.html script.data
 </code></pre>
 
 <p>Inject CSS.</p>
 <pre><code class="coffeescript">          for styleSheet in assets.styleSheets
-            body.append $('&lt;style&gt;').attr(
-              href: styleSheet
-              rel: 'stylesheet'
-            )
+            if _.isString styleSheet
+              styleSheet = type: 'remote', data: styleSheet
+
+            body.append switch styleSheet.type
+
+              when 'remote'
+                $('&lt;link&gt;').attr rel: 'stylesheet', href: styleSheet.data
+
+              when 'inline'
+                $('&lt;style&gt;').attr(type: 'text/css').html styleSheet.data
 </code></pre>
 
 <p>Build the HTML and serve it.</p>

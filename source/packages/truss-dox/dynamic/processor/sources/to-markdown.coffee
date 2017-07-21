@@ -13,7 +13,7 @@ Promise = require 'bluebird'
 
 pkgman = require 'pkgman'
 
-SourcesProcessor = require './sources-processor'
+SourcesProcessor = require '.'
 
 promiseForStream = (stream) ->
   new Promise (resolve, reject) ->
@@ -37,7 +37,9 @@ Build the directory tree.
     for {file} in @streams
       parts = file.split '/'
       for i in [0...parts.length]
-        pathMap["docs/source/#{parts.slice(0, i).join '/'}"] = true
+        pathMap["packages/truss-dox/docs/source/#{
+          parts.slice(0, i).join '/'
+        }"] = true
 ```
 
 This could be made async...
@@ -52,7 +54,7 @@ This could be made async...
   buildExtensionMap: ->
 ```
 
-#### Invoke hook [`trussDoxSourceMarkdownTransform`](../../../../../hooks#trussdoxsourcemarkdowntransform)
+#### Invoke hook [`trussDoxSourceMarkdownTransform`](../../../../../../hooks#trussdoxsourcemarkdowntransform)
 
 ```coffeescript
     @extensionMap = {}
@@ -68,7 +70,9 @@ Convert to markdown.
 ```coffeescript
     transforms = @streamsToTransforms @streams
     promises = for stream, i in @streams
-      destination = fs.createWriteStream "docs/source/#{stream.file}"
+      destination = fs.createWriteStream "packages/truss-dox/docs/source/#{
+        stream.file
+      }"
       transforms[i].pipe destination
       promiseForStream destination
 

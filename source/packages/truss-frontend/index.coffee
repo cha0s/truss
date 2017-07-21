@@ -35,13 +35,6 @@ Config script.
         clientConfig = new Config()
 ```
 
-Gather client-side packages
-
-```coffeescript
-        packagesLists = pkgman.invokeFlat 'trussFrontendPackageList', req
-        packageList = _.flatten packagesLists
-```
-
 Use package list to build client package configuration.
 
 ```coffeescript
@@ -302,18 +295,6 @@ Minimize the module sources.
     ]
 ```
 
-#### Implements hook [`trussFrontendPackageConfig`](../../hooks#trussfrontendpackageconfig)
-
-```coffeescript
-  registrar.registerHook 'trussFrontendPackageConfig', ->
-```
-
-#### Implements hook [`trussFrontendPackageList`](../../hooks#trussfrontendpackagelist)
-
-```coffeescript
-  registrar.registerHook 'trussFrontendPackageList', (path) ->
-```
-
 #### Implements hook [`trussHttpServerRoutes`](../../hooks#trusshttpserverroutes)
 
 ```coffeescript
@@ -379,28 +360,34 @@ Inject scripts.
 
 ```coffeescript
           for script in assets.scripts
-            script = type: 'src', data: script if _.isString script
+            if _.isString script
+              script = type: 'remote', data: script
 
-            switch script.type
+            $script = $('<script>').attr type: 'text/javascript'
 
-              when 'src'
-                body.append $('<script>').attr(
-                  'src', script.data
-                  type: 'text/javascript'
-                )
+            body.append switch script.type
+
+              when 'remote'
+                $script.attr src: script.data
 
               when 'inline'
-                body.append $('<script>').html script.data
+                $script.html script.data
 ```
 
 Inject CSS.
 
 ```coffeescript
           for styleSheet in assets.styleSheets
-            body.append $('<style>').attr(
-              href: styleSheet
-              rel: 'stylesheet'
-            )
+            if _.isString styleSheet
+              styleSheet = type: 'remote', data: styleSheet
+
+            body.append switch styleSheet.type
+
+              when 'remote'
+                $('<link>').attr rel: 'stylesheet', href: styleSheet.data
+
+              when 'inline'
+                $('<style>').attr(type: 'text/css').html styleSheet.data
 ```
 
 Build the HTML and serve it.

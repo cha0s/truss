@@ -186,52 +186,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -483,37 +499,37 @@ description of the functionality they provide.</p>
 <td><em>Generate all of the dynamic aspects of the project documentation.</em></td>
 </tr>
 <tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-hooks">dynamic/processor/dox-page-hooks.coffee</a></td>
+<td><a href="../source/packages/truss-dox/dynamic/processor/page/hooks">dynamic/processor/page/hooks.coffee</a></td>
 <td>Hooks page</td>
 <td><em>Generate the hooks page.</em></td>
 </tr>
 <tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-mkdocs">dynamic/processor/dox-page-mkdocs.coffee</a></td>
-<td>mkdocs "page"</td>
-<td><em>Generate the mkdocs.yml. Not technically a page, but fits well enough within the abstraction...</em></td>
-</tr>
-<tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-packages">dynamic/processor/dox-page-packages.coffee</a></td>
-<td>Packages page</td>
-<td><em>Generate the packages page.</em></td>
-</tr>
-<tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page-todos">dynamic/processor/dox-page-todos.coffee</a></td>
-<td>TODOs page</td>
-<td><em>Generate the TODOs page.</em></td>
-</tr>
-<tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/dox-page">dynamic/processor/dox-page.coffee</a></td>
+<td><a href="../source/packages/truss-dox/dynamic/processor/page">dynamic/processor/page/index.coffee</a></td>
 <td>Abstract documentation page</td>
 <td><em>Abstract class to process a documentation page, using a template and generated information.</em></td>
 </tr>
 <tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/sources-processor">dynamic/processor/sources-processor.coffee</a></td>
+<td><a href="../source/packages/truss-dox/dynamic/processor/page/mkdocs">dynamic/processor/page/mkdocs.coffee</a></td>
+<td>mkdocs "page"</td>
+<td><em>Generate the mkdocs.yml. Not technically a page, but fits well enough within the abstraction...</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/page/packages">dynamic/processor/page/packages.coffee</a></td>
+<td>Packages page</td>
+<td><em>Generate the packages page.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/page/todos">dynamic/processor/page/todos.coffee</a></td>
+<td>TODOs page</td>
+<td><em>Generate the TODOs page.</em></td>
+</tr>
+<tr>
+<td><a href="../source/packages/truss-dox/dynamic/processor/sources">dynamic/processor/sources/index.coffee</a></td>
 <td>Abstract sources processor</td>
 <td><em>Abstract class to process the project sources, usually by transforming them to a new form.</em></td>
 </tr>
 <tr>
-<td><a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown">dynamic/processor/sources-to-markdown.coffee</a></td>
+<td><a href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown">dynamic/processor/sources/to-markdown.coffee</a></td>
 <td>Markdown source pages</td>
 <td><em>Implementation of SourcesProcessor to convert source to markdown for easy reading.</em></td>
 </tr>
@@ -524,18 +540,18 @@ description of the functionality they provide.</p>
   <table>
     <tr class="odd">
       <td>
-        <a href="../hooks#trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</a>
+        <a href="../hooks#trussdoxsourcelist">trussDoxSourceList</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-dox/dynamic/processor/sources-to-markdown#invoke-hook-trussdoxsourcemarkdowntransform">invocation</a>
+        <a href="../source/packages/truss-dox/dynamic#invoke-hook-trussdoxsourcelist">invocation</a>
       </td>
     </tr>
     <tr class="odd">
       <td>
-        <a href="../hooks#trussdoxsources">trussDoxSources</a>
+        <a href="../hooks#trussdoxsourcemarkdowntransform">trussDoxSourceMarkdownTransform</a>
       </td>
       <td align="right">
-        <a href="../source/packages/truss-dox/dynamic#invoke-hook-trussdoxsources">invocation</a>
+        <a href="../source/packages/truss-dox/dynamic/processor/sources/to-markdown#invoke-hook-trussdoxsourcemarkdowntransform">invocation</a>
       </td>
     </tr>
   </table>
@@ -546,7 +562,7 @@ description of the functionality they provide.</p>
   <table>
     <tr class="odd">
       <td>
-        <a href="../hooks#trussdoxsourcelist">trussDoxSourceList</a>
+        <a href="../hooks#trussdoxsourcelist_1">trussDoxSourceList</a>
       </td>
       <td align="right">
         <a href="../source/packages/truss-dox#implements-hook-trussdoxsourcelist">implementation</a>
@@ -617,22 +633,6 @@ description of the functionality they provide.</p>
       </td>
       <td align="right">
         <a href="../source/packages/truss-frontend#implements-hook-trussfrontendassetsmiddleware_1">implementation</a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>
-        <a href="../hooks#trussfrontendpackageconfig">trussFrontendPackageConfig</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackageconfig">implementation</a>
-      </td>
-    </tr>
-    <tr class="even">
-      <td>
-        <a href="../hooks#trussfrontendpackagelist">trussFrontendPackageList</a>
-      </td>
-      <td align="right">
-        <a href="../source/packages/truss-frontend#implements-hook-trussfrontendpackagelist">implementation</a>
       </td>
     </tr>
     <tr class="even">

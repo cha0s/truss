@@ -165,7 +165,7 @@
             
                 <li class="toctree-l3"><a href="#dynamic-documentation">Dynamic documentation</a></li>
                 
-                    <li><a class="toctree-l4" href="#invoke-hook-trussdoxsources">Invoke hook trussDoxSources</a></li>
+                    <li><a class="toctree-l4" href="#invoke-hook-trussdoxsourcelist">Invoke hook trussDoxSourceList</a></li>
                 
             
             </ul>
@@ -179,52 +179,68 @@
 
         
             
+    <ul class="subnav">
+    <li><span>page</span></li>
+
+        
+            
     <li class="toctree-l1 ">
-        <a class="" href="processor/dox-page-hooks/">dox-page-hooks.coffee</a>
+        <a class="" href="processor/page/hooks/">hooks.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="processor/dox-page-mkdocs/">dox-page-mkdocs.coffee</a>
+        <a class="" href="processor/page/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="processor/dox-page-packages/">dox-page-packages.coffee</a>
+        <a class="" href="processor/page/mkdocs/">mkdocs.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="processor/dox-page-todos/">dox-page-todos.coffee</a>
+        <a class="" href="processor/page/packages/">packages.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="processor/dox-page/">dox-page.coffee</a>
+        <a class="" href="processor/page/todos/">todos.coffee</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <ul class="subnav">
+    <li><span>sources</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="processor/sources/">index.coffee</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="processor/sources-processor/">sources-processor.coffee</a>
+        <a class="" href="processor/sources/to-markdown/">to-markdown.coffee</a>
         
     </li>
 
         
-            
-    <li class="toctree-l1 ">
-        <a class="" href="processor/sources-to-markdown/">sources-to-markdown.coffee</a>
-        
-    </li>
+    </ul>
 
         
     </ul>
@@ -471,9 +487,16 @@ promiseForStream = (stream) -&gt;
 <pre><code class="coffeescript">sourceFilesPromise = new Promise (resolve, reject) -&gt;
 </code></pre>
 
-<h4 id="invoke-hook-trussdoxsources">Invoke hook <a href="../../../../hooks#trussdoxsources"><code>trussDoxSources</code></a></h4>
+<h4 id="invoke-hook-trussdoxsourcelist">Invoke hook <a href="../../../../hooks#trussdoxsourcelist"><code>trussDoxSourceList</code></a></h4>
 <pre><code class="coffeescript">  sourceFiles = _.flatten pkgman.invokeFlat 'trussDoxSourceList'
-  glob &quot;{#{sourceFiles.join ','}}&quot;, (error, files) -&gt;
+</code></pre>
+
+<h6 id="todo-worth-to-generalize-this">TODO: Worth to generalize this?</h6>
+<pre><code class="coffeescript">  positive = sourceFiles.filter (f) -&gt; f.charCodeAt(0) isnt '!'.charCodeAt(0)
+  negative = sourceFiles.filter (f) -&gt; f.charCodeAt(0) is '!'.charCodeAt(0)
+  negative = negative.map (f) -&gt; f.substr 1
+
+  glob &quot;{#{sourceFiles.join ','}}&quot;, ignore: negative, (error, files) -&gt;
     return reject error if error?
     resolve files
 </code></pre>
@@ -493,19 +516,30 @@ processorsPromise = sourceStreamsPromise.then (streams) -&gt;
 </code></pre>
 
 <h6 id="todo-this-should-be-dynamichook-based">TODO: This should be dynamic/hook-based</h6>
-<pre><code class="coffeescript">  SourcesToMarkdown = require './processor/sources-to-markdown'
+<pre><code class="coffeescript">  SourcesToMarkdown = require './processor/sources/to-markdown'
 
-  DoxPageTodos = require './processor/dox-page-todos'
-  DoxPageHooks = require './processor/dox-page-hooks'
-  DoxPagePackages = require './processor/dox-page-packages'
-  DoxPageMkdocs = require './processor/dox-page-mkdocs'
+  DoxPageTodos = require './processor/page/todos'
+  DoxPageHooks = require './processor/page/hooks'
+  DoxPagePackages = require './processor/page/packages'
+  DoxPageMkdocs = require './processor/page/mkdocs'
+
+  docs = 'packages/truss-dox/docs'
 
   processors = [
     new SourcesToMarkdown streams
-    new DoxPageTodos streams, 'docs/todos.template.md', 'docs/todos.md'
-    new DoxPageHooks streams, 'docs/hooks.template.md', 'docs/hooks.md'
-    new DoxPagePackages streams, 'docs/packages.template.md', 'docs/packages.md'
-    new DoxPageMkdocs streams, 'docs/mkdocs.template.yml', 'mkdocs.yml'
+
+    new DoxPageTodos(
+      streams, &quot;#{docs}/todos.template.md&quot;, &quot;#{docs}/todos.md&quot;
+    )
+    new DoxPageHooks(
+      streams, &quot;#{docs}/hooks.template.md&quot;, &quot;#{docs}/hooks.md&quot;
+    )
+    new DoxPagePackages(
+      streams, &quot;#{docs}/packages.template.md&quot;, &quot;#{docs}/packages.md&quot;
+    )
+    new DoxPageMkdocs(
+      streams, &quot;#{docs}/mkdocs.template.yml&quot;, 'mkdocs.yml'
+    )
   ]
 
   Promise.all(processor.process() for processor in processors)
@@ -519,7 +553,7 @@ exports.promise = processorsPromise
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="processor/dox-page-hooks/" class="btn btn-neutral float-right" title="dox-page-hooks.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="processor/page/hooks/" class="btn btn-neutral float-right" title="hooks.coffee"/>Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../../../Gruntfile/" class="btn btn-neutral" title="Gruntfile.coffee"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -553,7 +587,7 @@ exports.promise = processorsPromise
         <span><a href="../../../Gruntfile/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="processor/dox-page-hooks/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="processor/page/hooks/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
