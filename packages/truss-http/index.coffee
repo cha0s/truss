@@ -30,6 +30,23 @@ exports.pkgmanRegister = (registrar) ->
         Server = require module
         httpServer = new Server()
 
+        # Compute the hostname if it isn't explicitly set.
+        unless config.get 'packageConfig:truss-http:hostname'
+
+          listenTarget = config.get 'packageConfig:truss-http:listenTarget'
+          listenTarget = [listenTarget] unless Array.isArray listenTarget
+
+          if listenTarget.length is 1
+
+            hostname = listenTarget[0]
+            hostname = "localhost:#{hostname}" if _.isNumber hostname
+
+          else
+
+            hostname = "#{listenTarget[1]}:#{listenTarget[0]}"
+
+          config.set 'packageConfig:truss-http:hostname', hostname
+
         # Mark proxies as trusted addresses.
         httpServer.trustProxy(
           config.get 'packageConfig:truss-http:trustedProxies'
@@ -84,6 +101,9 @@ exports.pkgmanRegister = (registrar) ->
 
     # Module implementing the HTTP server.
     module: 'truss-http/stub/instance'
+
+    # The server hostname. Derived from `listenTarget` if not explicitly set.
+    hostname: ''
 
     # Middleware stack run for every request.
     requestMiddleware: []
