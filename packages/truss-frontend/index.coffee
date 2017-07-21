@@ -55,6 +55,11 @@ exports.pkgmanRegister = (registrar) ->
         else
           assets.scripts.push '/frontend/modules.js'
 
+        # Serve livereload script if we aren't running in production mode.
+        unless 'production' is config.get 'NODE_ENV'
+          [hostname] = config.get('packageConfig:truss-http:hostname').split ':'
+          assets.scripts.push "http://#{hostname}:35729/livereload.js"
+
         next()
 
     ]
