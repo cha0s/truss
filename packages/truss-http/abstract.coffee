@@ -103,8 +103,9 @@ module.exports = class TrussHttpServerAbstract
     httpMiddlewareDebug '- HTTP middleware loaded.'
 
   # Ensure any subclass implements these "pure virtual" methods.
-  this::[method] = (-> throw new ReferenceError(
-    "TrussHttpServerAbstract::#{method} is a pure virtual method!"
-  )) for method in [
-    'addRoute', 'listener', 'server', 'trustProxy'
-  ]
+  [
+    'listener', 'server', 'trustProxy'
+  ].forEach (method) -> TrussHttpServerAbstract::[method] = ->
+    throw new ReferenceError(
+      "TrussHttpServerAbstract::#{method} is a pure virtual method!"
+    )
